@@ -1,18 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Calendar from './components/Calendar'
-
-
-function App() {
-  const [count, setCount] = useState(0)
+import React from 'react';
+import Calendar from './components/Calendar';
+import DefaultLayout from './components/layout/Default';
+const App: React.FC = () => {
 
   return (
     <>
-      <Calendar/>
+    <DefaultLayout>
+      <Calendar />
+    </DefaultLayout>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
