@@ -14,7 +14,7 @@ export default function (props: any): React.ReactElement {
 
     return (
         <Layout>
-            <Header style={{ display: 'flex', alignItems: 'center' }}>
+            <Header style={{width: '100%', display: 'flex', alignItems: 'center' }}>
                 <div className="demo-logo" />
                 <HeaderMenu />
             </Header>

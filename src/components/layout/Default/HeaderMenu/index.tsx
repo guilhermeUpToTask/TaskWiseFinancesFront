@@ -9,6 +9,6 @@ export default function () : React.ReactElement{
     }));
 
     return (
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items} />
+        <Menu theme="dark" mode="horizontal" style={{ width: '100%' }} defaultSelectedKeys={['2']} items={items} />
     )
 }
