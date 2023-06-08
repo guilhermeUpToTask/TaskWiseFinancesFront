@@ -1,6 +1,6 @@
 import { Button, Form, Input, Select } from 'antd';
 import React from 'react';
-
+import AnotationTypeSelect from './AnotationTypeSelect';
 const { Option } = Select;
 
 const layout = {
@@ -42,13 +42,7 @@ export default function (): React.ReactElement {
             </Form.Item>
             
             <Form.Item name="anotation_type" label="Type of the Anotation" rules={[{ required: true }]}>
-                <Select
-                    placeholder="Select wich type the Anotation is"
-                    allowClear
-                >
-                    <Option value="incoming">Incoming</Option>
-                    <Option value="bill">Bill</Option>
-                </Select>
+            <AnotationTypeSelect/>
             </Form.Item>
             <Form.Item name="anotation_value" label="Value" rules={[{ required: true }]}>
                     <Input type='number'/>

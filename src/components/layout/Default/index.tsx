@@ -8,13 +8,13 @@ const { Header, Content, Footer, Sider } = Layout;
 
 export default function (props: any): React.ReactElement {
     const {
-        token: { colorBgContainer },
+        token: { colorBgContainer},
     } = theme.useToken();
 
 
     return (
         <Layout>
-            <Header style={{width: '100%', display: 'flex', alignItems: 'center' }}>
+            <Header style={{width: '100%', display: 'flex', alignItems: 'center', background:'transparent' }}>
                 <div className="demo-logo" />
                 <HeaderMenu />
             </Header>
