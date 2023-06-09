@@ -16,10 +16,15 @@ export default function (props: any) : React.ReactElement{
     status: 'pendent',
   }
 
+  interface anotationsBlock {
+    start: Date;
+    end: Date;
+  }
+
   return (
     <Modal
       title={
-        <Title level={3} style={{ textAlign: 'center' }}>
+        <Title level={2} style={{ textAlign: 'center' }}>
           {`Anotations of Day - ${props.date.format('YYYY-MM-DD')}`}
         </Title>
       }
