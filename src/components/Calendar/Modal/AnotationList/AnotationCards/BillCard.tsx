@@ -1,10 +1,16 @@
 import React from "react";
 import {Card, ConfigProvider, Typography  } from 'antd';
 import {EditButton, DeleteButton, PayButton} from "./CardsActions";
+import type { IAnotation } from "../../../../../lib/types";
+
 const { Meta } = Card;
 const { Title } = Typography;
 
-export default function (): React.ReactElement{
+interface BillCardProps {
+    anotation: IAnotation
+}
+
+export default function (props:BillCardProps): React.ReactElement{
     const onDelete = () => {
     }
     const onPay = () => {
@@ -31,11 +37,11 @@ export default function (): React.ReactElement{
                 <DeleteButton onClick={onDelete}/>,
             ]} >
             <Meta
-                title={<Title level={3} style={{ textAlign: 'center', color: 'red'}}>Energy Bill Anotation</Title>}
-                description="This is the description"
+                title={<Title level={3} style={{ textAlign: 'center', color: 'red'}}>{props.anotation.name}</Title>}
+                description={props.anotation.description}
             />
-            <Title level={4}>Current Bill: <span style={{color: 'red', fontWeight: 'bold'}}>$100</span></Title>
-            <Title level={4}>Current Status: <span style={{color: 'red', fontWeight: 'bold'}}>Expired</span></Title>
+            <Title level={4}>Current Bill: <span style={{color: 'red', fontWeight: 'bold'}}>${props.anotation.value}</span></Title>
+            <Title level={4}>Current Status: <span style={{color: 'red', fontWeight: 'bold'}}>{props.anotation.status}</span></Title>
         </Card>
     </ConfigProvider>
     )

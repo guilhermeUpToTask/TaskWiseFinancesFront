@@ -2,25 +2,27 @@ import React, { useState } from 'react';
 import { Modal, Typography, Collapse } from 'antd';
 import AnotationForm from './AnotationForm/';
 import AnotationList from './AnotationList';
+import type { IAnotation } from "../../../lib/types";
+
+import { Dayjs } from 'dayjs';
 const { Panel } = Collapse;
 const { Title } = Typography;
 
-export default function (props: any) : React.ReactElement{
-  interface structure {
-    name: 'Energy Bill',
-    description: '',
-    type: 'bills',
-    value: 0,
-    date: 'this date',
-    repeat: 'never' | 'daily' | 'weekly' | 'monthly' // on this we create a array if month create 12, if dayly create 31 or 30 if weakly create 4
-    status: 'pendent',
-  }
+interface modalProps {
+  open: boolean;
+  closeModal: () => void;
+  date: Dayjs;
+  anotations: IAnotation[] | undefined;
+}
 
-  interface anotationsBlock {
+export default function (props: modalProps) : React.ReactElement{
+
+  /*interface anotationsBlock {
     start: Date;
     end: Date;
-  }
+  }*/
 
+  //we should use react hooks to store the anotations from select date to not prop drill
   return (
     <Modal
       title={
@@ -33,7 +35,7 @@ export default function (props: any) : React.ReactElement{
       onOk={props.closeModal}
       width={1000}
     >
-      <AnotationList/>
+      <AnotationList anotations={props.anotations}/>
       <Collapse  size="large">
         <Panel header="Create new Anotation for this Date" key="1">
           <AnotationForm />

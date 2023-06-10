@@ -1,7 +1,6 @@
 import { Button, Form, Input, Select } from 'antd';
 import React from 'react';
 import AnotationTypeSelect from './AnotationTypeSelect';
-const { Option } = Select;
 
 const layout = {
     labelCol: { span: 8 },
