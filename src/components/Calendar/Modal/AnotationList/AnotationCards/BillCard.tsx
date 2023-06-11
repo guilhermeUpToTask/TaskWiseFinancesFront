@@ -2,6 +2,7 @@ import React from "react";
 import {Card, ConfigProvider, Typography  } from 'antd';
 import {EditButton, DeleteButton, PayButton} from "./CardsActions";
 import type { IAnotation } from "../../../../../lib/types";
+import EditAnotation from "../../AnotationForm/EditAnotation";
 
 const { Meta } = Card;
 const { Title } = Typography;
@@ -11,15 +12,26 @@ interface BillCardProps {
 }
 
 export default function (props:BillCardProps): React.ReactElement{
+    const [showEdit, setShowEdit] = React.useState(false);
+
+
     const onDelete = () => {
     }
     const onPay = () => {
     }
+
+    //we should have a click off target to close the edit form
+    //but we dont have time to implement it
     const onEdit = () => {
+        setShowEdit(!showEdit);
     }
 
 
-
+    const displayEditForm = () => {
+        return (showEdit ) ?
+        <EditAnotation anotation={props.anotation} />
+        : null;
+    }
 
     return (
         <ConfigProvider
@@ -43,6 +55,7 @@ export default function (props:BillCardProps): React.ReactElement{
             <Title level={4}>Current Bill: <span style={{color: 'red', fontWeight: 'bold'}}>${props.anotation.value}</span></Title>
             <Title level={4}>Current Status: <span style={{color: 'red', fontWeight: 'bold'}}>{props.anotation.status}</span></Title>
         </Card>
+        {displayEditForm()}
     </ConfigProvider>
     )
 }

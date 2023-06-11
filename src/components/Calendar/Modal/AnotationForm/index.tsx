@@ -1,4 +1,4 @@
-import { Button, Form, Input, Select } from 'antd';
+import { Button, Form, Input, InputNumber } from 'antd';
 import React from 'react';
 import AnotationTypeSelect from './AnotationTypeSelect';
 
@@ -11,27 +11,44 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
+interface IAnotationFormProps {
+    formName: string;
+    onFinish: (values: any) => void;
+    values?: {
+        name: string;
+        description: string;
+        type: string;
+        value: number;
+        id: number;
+    }
 
-export default function (): React.ReactElement {
+
+}
+
+
+export default function (props: IAnotationFormProps): React.ReactElement {
     const [form] = Form.useForm();
-
-
-    const onFinish = (values: any) => {
-        console.log(values);
-    };
 
     const onReset = () => {
         form.resetFields();
     };
-
+    console.log(props.values);
 
     return (
         <Form
             {...layout}
             form={form}
-            name="control-hooks"
-            onFinish={onFinish}
+            name={props.formName}
+            onFinish={props.onFinish}
             style={{ maxWidth: 600 }}
+            initialValues={{
+                anotation_name: (props.values) ? props.values.name : undefined,
+                anotation_description: (props.values) ? props.values.description : undefined,
+                anotation_type: (props.values) ? props.values.type : undefined,
+                anotation_value: (props.values) ? props.values.value : undefined,
+
+            }}
+
         >
             <Form.Item name="anotation_name" label="Anotation Name" rules={[{ required: true }]}>
                 <Input />
@@ -39,16 +56,16 @@ export default function (): React.ReactElement {
             <Form.Item name="anotation_description" label="Anotation Description" rules={[{ required: true }]}>
                 <Input />
             </Form.Item>
-            
+
             <Form.Item name="anotation_type" label="Type of the Anotation" rules={[{ required: true }]}>
-            <AnotationTypeSelect/>
+                <AnotationTypeSelect />
             </Form.Item>
             <Form.Item name="anotation_value" label="Value" rules={[{ required: true }]}>
-                    <Input type='number'/>
+                <InputNumber />
             </Form.Item>
             <Form.Item {...tailLayout}>
                 <Button type="primary" htmlType="submit">
-                    Create
+                    {(props.values) ? 'Update' : 'Create'}
                 </Button>
                 <Button htmlType="button" onClick={onReset}>
                     Reset

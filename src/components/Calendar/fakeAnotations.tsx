@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import type { IAnotation } from "../../lib/types";
   
 const data : IAnotation[] = [

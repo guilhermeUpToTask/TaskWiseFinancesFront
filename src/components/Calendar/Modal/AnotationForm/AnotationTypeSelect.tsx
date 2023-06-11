@@ -1,15 +1,20 @@
 import React from 'react';
 import { Select } from 'antd';
 const { Option } = Select;
-export default function (): React.ReactElement {
+
+interface IAnotationTypeSelectProps {
+    value?: string;
+}
+export default function (props : IAnotationTypeSelectProps): React.ReactElement {
 
     return(
         <Select
         placeholder="Select wich type the Anotation is"
         allowClear
+        value={(props.value) ? (props.value) : ''}
     >
         <Option value="incoming">Incoming</Option>
-        <Option value="bill">Bill</Option>
+        <Option value="bills">Bill</Option>
     </Select>
     )
 }

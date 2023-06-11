@@ -2,6 +2,9 @@ import React from 'react';
 import Calendar from './components/Calendar';
 import DefaultLayout from './components/layout/Default';
 import { ConfigProvider } from 'antd';
+import { QueryClient, QueryClientProvider } from 'react-query';
+const queryClient = new QueryClient();
+
 const App: React.FC = () => {
 
   return (
@@ -13,9 +16,13 @@ const App: React.FC = () => {
           },
         }}
       >
-        <DefaultLayout>
-          <Calendar />
-        </DefaultLayout>
+        <QueryClientProvider client={queryClient}>
+
+          <DefaultLayout>
+            <Calendar />
+          </DefaultLayout>
+          
+        </QueryClientProvider>
       </ConfigProvider>
     </>
   );
