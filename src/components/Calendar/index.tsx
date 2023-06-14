@@ -74,7 +74,6 @@ export default function (): React.ReactElement {
     if (isLoading || !data)
       return ('Loading...');
 
-
       // one solution to not filther all the time is to create a object that each day on the month has a key or
       // get from the server the anotations for that date alread filthered, as a object with the key as the date
       // and the value as the anotations for that day.
