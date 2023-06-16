@@ -1,13 +1,14 @@
 import dayjs from "dayjs";
 import type { IAnotation } from "../../lib/types";
-  
+import { BILL_TYPE, INCOMING_TYPE } from "../../lib/constants/annotations";
+
 const data : IAnotation[] = [
     {
         name: 'Energy Bill',
         id:1,
         color:'red',
         description: '',
-        type: 'bills',
+        type: BILL_TYPE,
         value: 100.00,
         date: dayjs('2023-06-01'),
         repeat: 'never',
@@ -18,7 +19,7 @@ const data : IAnotation[] = [
       id:2,
       color:'green',
       description: '',
-      type: 'income',
+      type: INCOMING_TYPE,
       value: 90.00,
       date: dayjs('2023-06-01'),
       repeat: 'never',
@@ -29,7 +30,7 @@ const data : IAnotation[] = [
     id:3,
     color:'red',
     description: '',
-    type: 'bills',
+    type: BILL_TYPE,
     value: 110.00,
     date: dayjs('2023-06-12'),
     repeat: 'never',
@@ -40,7 +41,7 @@ const data : IAnotation[] = [
   color:'red',
   id:4,
   description: '',
-  type: 'bills',
+  type: BILL_TYPE,
   value: 70,
   date: dayjs('2023-06-25'),
   repeat: 'never',

@@ -40,7 +40,7 @@ export default function (props: AnotationListProps): React.ReactElement {
         if (filtheredAnotations.length > 0) {
 
             return filtheredAnotations.map(anotation => {
-                if (anotation.type === 'bills') {
+                if (anotation.type === 'BILL') {
                     return getBillCard(anotation);
                 } else {
                     return getIncomingCard(anotation);

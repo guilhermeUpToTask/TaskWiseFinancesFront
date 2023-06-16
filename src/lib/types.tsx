@@ -1,10 +1,12 @@
 import { Dayjs } from "dayjs";
+import { BILL_TYPE, INCOMING_TYPE, EXPANSE_TYPE } from "./constants/annotations";
+
 
 export interface IAnotation {
     name: string,
     id: number,
     description: string,
-    type: 'bills' | 'income' | 'expenses',
+    type: typeof BILL_TYPE | typeof INCOMING_TYPE | typeof EXPANSE_TYPE,
     color:string,
     value: number,
     date: Dayjs,

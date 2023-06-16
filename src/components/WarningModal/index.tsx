@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Modal, message } from 'antd';
 import { useQuery } from 'react-query';
 import type { IAnotation } from '../../lib/types';
+import fetchWarnings from './fetchWarnings';
+import WarningAnnotations from './WarningAnnotations';
 
 const { Title } = Typography;
-const fetchWarnings = async (): Promise<IAnotation[] > => {
- return [];
-}
 
 export default function (): React.ReactElement {
     const { data: warningList, isLoading, error } = useQuery<IAnotation[]>('warnings', fetchWarnings);
@@ -14,12 +13,13 @@ export default function (): React.ReactElement {
 
     useEffect(() => {
         if (warningList && warningList.length > 0 && !open) {
+            console.log(warningList);
             setOpen(true);
         }
-    }, []);
+    }, [isLoading]);
 
     const closeModal = () => {
-
+        setOpen(false);
     }
 
     if (isLoading) {
@@ -37,6 +37,7 @@ export default function (): React.ReactElement {
             </Title>
         }
         open={true}
+        onCancel={closeModal}
         width={1000}
     >
     </Modal>)
@@ -58,6 +59,7 @@ export default function (): React.ReactElement {
                 <Title level={3} style={{ textAlign: 'center' }}>
                     These Annotations require your attention!
                 </Title>
+                <WarningAnnotations warningList={(warningList) ? warningList : []}/>
         </Modal>
     )
 }
