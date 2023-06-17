@@ -29,12 +29,11 @@ export default function (props: IWarningAnnotations): React.ReactElement {
 
     return (
         <>
-        <Carousel ref={carouselRef}  arrows={false} autoplay={false} className="warning-annotations">
+        <Carousel ref={carouselRef}  dots={false} autoplay={false} className="warning-annotations">
             {props.warningList.map((annotation) => (
                 <WarningAnnotation annotation={annotation} prev={prev} next={next} key={annotation.id} />
             ))}
         </Carousel>
-        <LeftOutlined  onClick={prev} />
         </>
 
     );

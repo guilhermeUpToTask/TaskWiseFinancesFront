@@ -1,6 +1,8 @@
 import React from "react";
 import {Card, ConfigProvider, Typography  } from 'antd';
-import {EditButton, DeleteButton, PayButton} from "./CardsActions";
+import {EditButton, DeleteButton} from "./CardsActions";
+import AnnotationBttn from "../../../../commun/UI/Annotation/AnnotationBttn";
+import AnnotationStatus from "../../../../commun/UI/Annotation/AnnotationStatus";
 import type { IAnotation } from "../../../../../lib/types";
 import EditAnotation from "../../AnotationForm/EditAnotation";
 const { Meta } = Card;
@@ -40,7 +42,7 @@ export default function (props: IncomingCardProps): React.ReactElement{
         
         actions={
         [    < EditButton onClick={onEdit}/>,
-        <PayButton onClick={onPay}/>,
+        <AnnotationBttn onClick={onPay} type={props.anotation.type}/>,
             <DeleteButton onClick={onDelete}/>,
         ]} >
         <Meta
@@ -48,7 +50,7 @@ export default function (props: IncomingCardProps): React.ReactElement{
             description={props.anotation.description}
         />
         <Title level={4}>Current Bill: <span style={{color: 'green', fontWeight: 'bold'}}>${props.anotation.value}</span></Title>
-        <Title level={4}>Current Status: <span style={{color: 'yellow', fontWeight: 'bold'}}>{props.anotation.status}</span></Title>
+        <Title level={4}>Current Status: <AnnotationStatus status={props.anotation.status} /></Title>
     </Card>
     {displayEditForm()}
     </ConfigProvider>

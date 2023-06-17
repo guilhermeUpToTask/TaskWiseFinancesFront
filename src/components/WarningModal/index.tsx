@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Modal, message } from 'antd';
+import { Typography, Modal, message, Button } from 'antd';
+import { ArrowRightOutlined } from '@ant-design/icons';
 import { useQuery } from 'react-query';
 import type { IAnotation } from '../../lib/types';
 import fetchWarnings from './fetchWarnings';
@@ -39,6 +40,7 @@ export default function (): React.ReactElement {
         open={true}
         onCancel={closeModal}
         width={1000}
+        
     >
     </Modal>)
     }
@@ -55,6 +57,7 @@ export default function (): React.ReactElement {
             onCancel={closeModal}
             onOk={closeModal}
             width={1000}
+            footer={<Button size='large' shape='round' onClick={closeModal} icon={<ArrowRightOutlined />}>Skip</Button>}
         >
                 <Title level={3} style={{ textAlign: 'center' }}>
                     These Annotations require your attention!
