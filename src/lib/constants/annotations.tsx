@@ -9,11 +9,12 @@ export const ANN_STATUS_LIST = {
 }
 
 export const BILL_TYPE = 'BILL';
-export const INCOMING_TYPE = 'PAYMENT';
+export const PAYMENT_TYPE = 'PAYMENT';
+export const INCOME_TYPE = 'INCOME';
 export const EXPANSE_TYPE = 'EXPANSE';
 
 export const ANN_TYPES_LIST  = {
-    BILL_TYPE, INCOMING_TYPE,EXPANSE_TYPE
+    BILL_TYPE, INCOME_TYPE,EXPANSE_TYPE, PAYMENT_TYPE
 }
 
 const BILL_COLOR = 'red';
@@ -25,5 +26,5 @@ export const ANNOTATION_COLORS = {
 
 export const BTN_TABLE = {
     [BILL_TYPE]: 'Pay Bill',
-    [INCOMING_TYPE]: 'Receive Payment'
+    [PAYMENT_TYPE]: 'Receive Payment'
   };

@@ -18,7 +18,7 @@ const data : IAnotation[] = [
       id:2,
       color:'green',
       description: '',
-      type: ANN_CONSTANTS.INCOMING_TYPE,
+      type: ANN_CONSTANTS.PAYMENT_TYPE,
       value: 90.00,
       date: dayjs('2023-06-01'),
       repeat: 'never',

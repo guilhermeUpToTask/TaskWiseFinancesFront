@@ -13,7 +13,7 @@ export default function (props : IAnotationTypeSelectProps): React.ReactElement 
         allowClear
         value={(props.value) ? (props.value) : ''}
     >
-        <Option value="incoming">Incoming</Option>
+        <Option value="payment">Payment</Option>
         <Option value="bills">Bill</Option>
     </Select>
     )

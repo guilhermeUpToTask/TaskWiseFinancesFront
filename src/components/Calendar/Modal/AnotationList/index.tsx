@@ -1,6 +1,6 @@
 import React from 'react';
 import BillCard from './AnotationCards/BillCard';
-import IncomingCard from './AnotationCards/IncomingCard';
+import PaymentCard from './AnotationCards/PaymentCard';
 import type { IAnotation } from "../../../../lib/types";
 import { Dayjs } from 'dayjs';
 import { useQuery } from 'react-query';
@@ -21,7 +21,7 @@ export default function (props: AnotationListProps): React.ReactElement {
         <BillCard anotation={anotation} key={anotation.id} />
     )
     const getIncomingCard = (anotation: IAnotation) => (
-        <IncomingCard anotation={anotation} key={anotation.id} />
+        <PaymentCard anotation={anotation} key={anotation.id} />
     )
 
 

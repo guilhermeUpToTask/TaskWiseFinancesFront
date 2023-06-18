@@ -1,8 +1,8 @@
 import { Dayjs } from "dayjs";
 import * as ANN_CONSTANTS from "./constants/annotations";
 
-export type AnnotationType = typeof ANN_CONSTANTS.BILL_TYPE | typeof ANN_CONSTANTS.INCOMING_TYPE |
-    typeof ANN_CONSTANTS.EXPANSE_TYPE;
+export type AnnotationType = typeof ANN_CONSTANTS.BILL_TYPE | typeof ANN_CONSTANTS.PAYMENT_TYPE |
+    typeof ANN_CONSTANTS.EXPANSE_TYPE | typeof ANN_CONSTANTS.INCOME_TYPE;
 
 export type AnnotationStatus = typeof ANN_CONSTANTS.PENDENT_STATUS | typeof ANN_CONSTANTS.EXPIRED_STATUS |
     typeof ANN_CONSTANTS.PAYED_STATUS | typeof ANN_CONSTANTS.RECIVED_STATUS;
