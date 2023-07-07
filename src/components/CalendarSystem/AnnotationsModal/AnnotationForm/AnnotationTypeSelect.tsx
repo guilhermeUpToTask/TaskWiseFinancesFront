@@ -2,10 +2,10 @@ import React from 'react';
 import { Select } from 'antd';
 const { Option } = Select;
 
-interface IAnotationTypeSelectProps {
+interface IAnnotationTypeSelectProps {
     value?: string;
 }
-export default function (props : IAnotationTypeSelectProps): React.ReactElement {
+export default function AnnotationTypeSelect (props : IAnnotationTypeSelectProps): React.ReactElement {
 
     return(
         <Select

@@ -3,23 +3,20 @@ import type { MenuProps } from 'antd';
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 
-export default function () : React.ReactElement{
-    const items: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
-        (icon, index) => {
-          const key = String(index + 1);
-      
+export default function  SiderMenu() : React.ReactElement{
+
+  const iconMap: { [key: string]: React.ElementType } = {
+    User: UserOutlined,
+    LapTop: LaptopOutlined,
+    Notification: NotificationOutlined,
+  };
+
+    const items: MenuProps['items'] = ['User', 'LapTop', 'Notification'].map(
+        (item, index) => {
           return {
-            key: `sub${key}`,
-            icon: React.createElement(icon),
-            label: `subnav ${key}`,
-      
-            children: new Array(4).fill(null).map((_, j) => {
-              const subKey = index * 4 + j + 1;
-              return {
-                key: subKey,
-                label: `option${subKey}`,
-              };
-            }),
+            key: index+1,
+            icon: React.createElement(iconMap[item]),
+            label: item,
           };
         },
       );

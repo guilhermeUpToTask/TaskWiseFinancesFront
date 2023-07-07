@@ -9,19 +9,20 @@ import { filtherAnotations } from '../../../../lib/functions';
 
 
 
-interface AnotationListProps {
+interface IAnnotationListProps {
     selectedDate: Dayjs;
 }
 
-export default function (props: AnotationListProps): React.ReactElement {
+export default function AnnotationList (props: IAnnotationListProps): React.ReactElement 
+{
     const { data: anotations, isLoading, error } = useQuery<IAnotation[]>('anotations');
 
 
     const getBillCard = (anotation: IAnotation) => (
-        <BillCard anotation={anotation} key={anotation.id} />
+        <BillCard annotation={anotation} key={anotation.id} />
     )
     const getIncomingCard = (anotation: IAnotation) => (
-        <PaymentCard anotation={anotation} key={anotation.id} />
+        <PaymentCard annotation={anotation} key={anotation.id} />
     )
 
 
@@ -54,4 +55,4 @@ export default function (props: AnotationListProps): React.ReactElement {
             {displayAnotations()}
         </>
     );
-};
+}

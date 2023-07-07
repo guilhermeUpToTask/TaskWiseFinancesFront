@@ -13,7 +13,7 @@ interface IWarningAnnotation {
     next: () => void;
 }
 
-export default function (props: IWarningAnnotation): React.ReactElement {
+export default function WarningAnnotation(props: IWarningAnnotation): React.ReactElement {
     const arrowStyle = {
         margin: '0px 1rem',
     }

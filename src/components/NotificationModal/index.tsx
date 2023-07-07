@@ -8,7 +8,7 @@ import WarningAnnotations from './WarningAnnotations';
 
 const { Title } = Typography;
 
-export default function (): React.ReactElement {
+export default function NotificationModal (): React.ReactElement {
     const { data: warningList, isLoading, error } = useQuery<IAnotation[]>('warnings', fetchWarnings);
     const [open, setOpen] = useState(false);
 

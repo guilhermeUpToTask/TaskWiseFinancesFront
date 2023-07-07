@@ -1,15 +1,15 @@
 import React from 'react';
 
-interface IAnotationsProps {
+interface ICellEventsProps {
     items: {
         type: string,
         color: string,
         name: string,
     }[],
-    onAnotationsClick: () => void
+    onCellClick: () => void
 }
 
-export default function (props: IAnotationsProps): React.ReactElement {
+export default function CellEvents(props: ICellEventsProps): React.ReactElement {
     const { items } = props;
 
     const renderItems = () => {
@@ -23,7 +23,7 @@ export default function (props: IAnotationsProps): React.ReactElement {
     }
 
     return (
-        <section onClick={props.onAnotationsClick} style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+        <section onClick={props.onCellClick} style={{width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
             {renderItems()}
         </section>
     )

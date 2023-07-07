@@ -10,7 +10,7 @@ interface IAnnotationBttnProps  {
     onClick?: () => void
 }
 
-export default (props: IAnnotationBttnProps) :React.ReactElement => {
+export default function AnnotationBttn(props: IAnnotationBttnProps) :React.ReactElement {
     const BtnTypeMap = {
         [ANN_TYPES_LIST.BILL_TYPE]: 
         <Button type="primary" shape="round" size="large" style={props.style} onClick={props.onClick} icon={<CheckOutlined />}>Pay</Button>,

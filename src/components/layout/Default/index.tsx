@@ -1,13 +1,13 @@
 import React from 'react';
 import { Layout, theme } from 'antd';
 import SiderMenu from './SiderMenu';
-import UserAvatar from '../../UserAvatar';
+import UserAvatar from '../../User/UserAvatar';
 import Wallet from '../../Wallet';
 import { ConfigProvider } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-export default function (props: any): React.ReactElement {
+export default function DefaultLayout(props: any): React.ReactElement {
     const {
         token: { colorBgContainer },
     } = theme.useToken();

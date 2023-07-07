@@ -1,7 +1,7 @@
 import React from 'react';
 import AnotationForm from '.';
 
- export default function () : React.ReactElement
+ export default  function CreateAnnotation() : React.ReactElement
  {
     const onFinish = (values: any) => {
         console.log('Success:', values);

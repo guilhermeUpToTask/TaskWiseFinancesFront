@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Typography, Collapse } from 'antd';
-import CreateAnotation from './AnotationForm/CreateAnotation';
-import EditAnotation from './AnotationForm/EditAnotation';
+import CreateAnotation from './AnnotationForm/CreateAnnotation';
 import AnotationList from './AnotationList';
-import type { IAnotation } from "../../../lib/types";
 
 import { Dayjs } from 'dayjs';
 const { Panel } = Collapse;
 const { Title } = Typography;
 
-interface modalProps {
+interface IAnnotationModalProps {
   open: boolean;
   closeModal: () => void;
   selectedDate: Dayjs;
 }
 
-export default function (props: modalProps) : React.ReactElement{
+export default function AnnotationModal (props: IAnnotationModalProps) : React.ReactElement{
 
   /*interface anotationsBlock {
     start: Date;

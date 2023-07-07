@@ -1,6 +1,6 @@
 import { Button, Form, Input, InputNumber } from 'antd';
 import React from 'react';
-import AnotationTypeSelect from './AnotationTypeSelect';
+import AnnotationTypeSelect from './AnnotationTypeSelect';
 
 const layout = {
     labelCol: { span: 8 },
@@ -26,7 +26,7 @@ interface IAnotationFormProps {
 }
 
 
-export default function (props: IAnotationFormProps): React.ReactElement {
+export default function AnnotationForm (props: IAnotationFormProps): React.ReactElement {
     const [form] = Form.useForm();
 
     const onReset = () => {
@@ -58,7 +58,7 @@ export default function (props: IAnotationFormProps): React.ReactElement {
             </Form.Item>
 
             <Form.Item name="anotation_type" label="Type of the Anotation" rules={[{ required: true }]}>
-                <AnotationTypeSelect />
+                <AnnotationTypeSelect />
             </Form.Item>
             <Form.Item name="anotation_value" label="Value" rules={[{ required: true }]}>
                 <InputNumber />
@@ -73,5 +73,5 @@ export default function (props: IAnotationFormProps): React.ReactElement {
             </Form.Item>
         </Form>
     );
-};
+}
 

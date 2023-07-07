@@ -1,9 +1,8 @@
 import React from 'react';
-import Calendar from './components/Calendar';
+import CalendarSystem from './components/CalendarSystem';
 import DefaultLayout from './components/layout/Default';
-import { ConfigProvider } from 'antd';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import WarningModal from './components/WarningModal';
+import NotificationModal from './components/NotificationModal';
 const queryClient = new QueryClient();
 
 const App: React.FC = () => {
@@ -12,8 +11,8 @@ const App: React.FC = () => {
     <>
         <QueryClientProvider client={queryClient}>
           <DefaultLayout>
-            <WarningModal/>
-            <Calendar />
+            <NotificationModal/>   
+            <CalendarSystem />
           </DefaultLayout>
           
         </QueryClientProvider>

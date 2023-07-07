@@ -3,7 +3,6 @@ import { Carousel } from 'antd';
 import { CarouselRef } from 'antd/es/carousel';
 import type { IAnotation } from '../../lib/types';
 import WarningAnnotation from './WarningAnnotation';
-import { LeftOutlined } from '@ant-design/icons';
 
 
 
@@ -12,7 +11,7 @@ interface IWarningAnnotations {
     warningList: IAnotation[];
 }
 
-export default function (props: IWarningAnnotations): React.ReactElement {
+export default function WarningAnnotations(props: IWarningAnnotations): React.ReactElement {
 
     const carouselRef = useRef<CarouselRef | null>(null);
 

@@ -8,7 +8,7 @@ interface MinusButtonProps {
     onClick: () => void;
 }
 
-export default function (props: MinusButtonProps) : React.ReactElement {
+export default function MinusButton(props: MinusButtonProps) : React.ReactElement {
  return (
     <Tooltip title="Create new Expanse" color='red' placement='bottom'>
      <Button type="primary" shape='circle' size='large' onClick={props.onClick} icon={<MinusOutlined style={{color:PresetColors[RED]}} />}/>

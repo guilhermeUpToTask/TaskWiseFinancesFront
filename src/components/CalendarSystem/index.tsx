@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Calendar } from 'antd';
 import { CellRenderInfo } from 'rc-picker/lib/interface';
 import dayjs, { Dayjs } from 'dayjs';
-import Modal from './Modal';
-import Anotations from './Anotations';
+import AnnotationsModal from './AnnotationsModal';
+import Anotations from './CellEvents';
 import anotationsData from './fakeAnotations';
 import type { IAnotation } from "../../lib/types";
 import { filtherAnotations } from "../../lib/functions";
@@ -25,7 +25,7 @@ const fetchAnotations = async (): Promise<IAnotation[]> => {
 }
 
 
-export default function (): React.ReactElement {
+export default function CalendarSystem(): React.ReactElement {
 
   const [open, setOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(dayjs('2022-01-01'));
@@ -86,7 +86,7 @@ export default function (): React.ReactElement {
     const items = getItemsForCellRender(cellAnotations);
 
     return (
-      <Anotations items={items} onAnotationsClick={() => onCellClickHandler(date)} />
+      <Anotations items={items} onCellClick={() => onCellClickHandler(date)} />
     );
   };
 
@@ -95,7 +95,7 @@ export default function (): React.ReactElement {
     <>
       <Calendar style={{ maxWidth: '800px' }} mode='month' onPanelChange={onPanelChange}
         cellRender={cellRender} />
-      <Modal selectedDate={selectedDate} open={open} closeModal={closeModal} />
+      <AnnotationsModal selectedDate={selectedDate} open={open} closeModal={closeModal} />
     </>
   )
 }

@@ -5,12 +5,12 @@ import { Typography } from 'antd';
 import { WalletOutlined } from '@ant-design/icons';
 import MinusButton from './MinusButton';
 import PlusButton from './PlusButton';
-import WalletModal from './WalletModal';
+import WalletModal from './MovementModal';
 
 const { Title } = Typography;
 
 
-export default function (): React.ReactElement {
+export default function Wallet(): React.ReactElement {
     const [showModal, setShowModal] = useState(false);
     const [movementType, setMovementType] = useState<'expense' | 'income'>('income');
 
