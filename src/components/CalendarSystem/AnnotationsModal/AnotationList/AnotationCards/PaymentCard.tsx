@@ -3,13 +3,13 @@ import {Card, ConfigProvider, Typography  } from 'antd';
 import {EditButton, DeleteButton} from "./CardsActions";
 import AnnotationBttn from "../../../../commun/UI/Annotation/AnnotationBttn";
 import AnnotationStatus from "../../../../commun/UI/Annotation/AnnotationStatus";
-import type { IAnotation } from "../../../../../lib/types";
+import type { Annotation } from "../../../../../lib/types";
 import EditAnotation from "../../AnnotationForm/EditAnnotation";
 const { Meta } = Card;
 const { Title } = Typography;
 
 interface IPaymentCardProps {
-    annotation: IAnotation
+    annotation: Annotation
 }
 
 export default function PaymentCard(props: IPaymentCardProps): React.ReactElement{

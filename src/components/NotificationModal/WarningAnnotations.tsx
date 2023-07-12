@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
 import { Carousel } from 'antd';
 import { CarouselRef } from 'antd/es/carousel';
-import type { IAnotation } from '../../lib/types';
+import type { Annotation } from '../../lib/types';
 import WarningAnnotation from './WarningAnnotation';
 
 
 
 
 interface IWarningAnnotations {
-    warningList: IAnotation[];
+    warningList: Annotation[];
 }
 
 export default function WarningAnnotations(props: IWarningAnnotations): React.ReactElement {

@@ -1,9 +1,9 @@
 import React from 'react';
 import AnotationForm from '.';
-import type { IAnotation } from '../../../../lib/types';
+import type { Annotation } from '../../../../lib/types';
 
 interface IEditAnnotation {
-    annotation: IAnotation;
+    annotation: Annotation;
 }
 
  export default function EditAnnotation(props: IEditAnnotation) : React.ReactElement

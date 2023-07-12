@@ -1,5 +1,5 @@
 import React from 'react';
-import type { IAnotation } from '../../../lib/types';
+import type { Annotation } from '../../../lib/types';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, Typography } from 'antd';
 import { ConfigProvider } from 'antd';
@@ -8,7 +8,7 @@ import AnnotationStatus from '../../commun/UI/Annotation/AnnotationStatus';
 const { Title, Paragraph } = Typography;
 
 interface IWarningAnnotation {
-    annotation: IAnotation;
+    annotation: Annotation;
     prev: () => void;
     next: () => void;
 }

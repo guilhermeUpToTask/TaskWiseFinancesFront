@@ -1,7 +1,9 @@
 import dayjs from "dayjs";
-import type { IAnotation } from "../../lib/types";
-import * as ANN_CONSTANTS from  "../../lib/constants/annotations";
-const data : IAnotation[] = [
+import { Annotation} from "../../lib/types";
+import * as ANN_CONSTANTS from "../../lib/constants/annotations";[
+
+]
+const data : Annotation[] = [
     {
         name: 'Energy Bill',
         id:1,

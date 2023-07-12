@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Modal, message, Button } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useQuery } from 'react-query';
-import type { IAnotation } from '../../lib/types';
+import type { Annotation } from '../../lib/types';
 import fetchWarnings from './fetchWarnings';
 import WarningAnnotations from './WarningAnnotations';
 
 const { Title } = Typography;
 
 export default function NotificationModal (): React.ReactElement {
-    const { data: warningList, isLoading, error } = useQuery<IAnotation[]>('warnings', fetchWarnings);
+    const { data: warningList, isLoading, error } = useQuery<Annotation[]>('warnings', fetchWarnings);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {

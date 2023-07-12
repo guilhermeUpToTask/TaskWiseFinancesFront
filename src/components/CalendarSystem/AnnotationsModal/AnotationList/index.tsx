@@ -1,12 +1,12 @@
 import React from 'react';
 import BillCard from './AnotationCards/BillCard';
 import PaymentCard from './AnotationCards/PaymentCard';
-import type { IAnotation } from "../../../../lib/types";
+import type { Annotation } from "../../../../lib/types";
 import { Dayjs } from 'dayjs';
 import { useQuery } from 'react-query';
-import { filtherAnotations } from '../../../../lib/functions';
+import { Typography } from 'antd';
 
-
+const { Title } = Typography;
 
 
 interface IAnnotationListProps {
@@ -15,13 +15,13 @@ interface IAnnotationListProps {
 
 export default function AnnotationList (props: IAnnotationListProps): React.ReactElement 
 {
-    const { data: anotations, isLoading, error } = useQuery<IAnotation[]>('anotations');
+    const { data: anotations, isLoading, error } = useQuery<Annotation[]>('anotations');
 
 
-    const getBillCard = (anotation: IAnotation) => (
+    const getBillCard = (anotation: Annotation) => (
         <BillCard annotation={anotation} key={anotation.id} />
     )
-    const getIncomingCard = (anotation: IAnotation) => (
+    const getIncomingCard = (anotation: Annotation) => (
         <PaymentCard annotation={anotation} key={anotation.id} />
     )
 
@@ -33,7 +33,9 @@ export default function AnnotationList (props: IAnnotationListProps): React.Reac
         if (error) {
             return <div>Error...</div>
         }
-        const filtheredAnotations = filtherAnotations(anotations, props.selectedDate);
+        const filtheredAnotations =  (anotations && props.selectedDate) ? 
+        anotations.filter(annotation => annotation.date.isSame(props.selectedDate, 'day')) :
+        [];
 
         if (!filtheredAnotations || filtheredAnotations.length === 0) {
             return <div>No Anotations</div>
@@ -52,6 +54,7 @@ export default function AnnotationList (props: IAnnotationListProps): React.Reac
 
     return (
         <>
+        <Title level={2}> Annotations</Title>
             {displayAnotations()}
         </>
     );
