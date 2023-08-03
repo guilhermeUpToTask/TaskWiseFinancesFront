@@ -1,32 +1,32 @@
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import * as ANN_CONSTANTS from "./constants/annotations";
 import * as OPERATION_CONSTANTS from "./constants/walletOperations";
 
-export type AnnotationType = typeof ANN_CONSTANTS.BILL_TYPE | typeof ANN_CONSTANTS.PAYMENT_TYPE;
-
 export type OperationType = typeof OPERATION_CONSTANTS.INCOME_TYPE | typeof OPERATION_CONSTANTS.EXPANSE_TYPE;
 
-export type AnnotationStatus = typeof ANN_CONSTANTS.PENDENT_STATUS | typeof ANN_CONSTANTS.EXPIRED_STATUS |
-    typeof ANN_CONSTANTS.PAYED_STATUS | typeof ANN_CONSTANTS.RECIVED_STATUS;
+export type AnnotationType = 'bill' | 'payment';
+export type AnnotationStatus = 'pendent' | 'expired' | 'payed' | 'recived';
+export type AnnotationRepeat = 'never' | 'daily' | 'weekly' | 'monthly';
 
 export type Annotation = {
-    name: string,
     id: number,
+    name: string,
     description: string,
-    type: AnnotationType,
-    color: string,
     value: number,
-    date: Dayjs,
-    repeat: 'never' | 'daily' | 'weekly' | 'monthly' // on this we create a array if month create 12, if dayly create 31 or 30 if weakly create 4
+    date: string,
+    repeat: AnnotationRepeat, // on this we create a array if month create 12, if dayly create 31 or 30 if weakly create 4
     status: AnnotationStatus,
+    annon_type: AnnotationType,
+    annon_type_id?: number,
 }
 
 
 export type WalletOperation = {
-    id : number
-    type : OperationType
-    name : string 
-    value : number 
-    description : string 
-    date :  Dayjs
+    id: number,
+    name: string,
+    value: number,
+    description: string,
+    date: string,
+    operation_type: OperationType,
+    operation_type_id?: number,
 }

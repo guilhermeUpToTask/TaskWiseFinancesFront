@@ -11,7 +11,7 @@ import AuthRoute from './components/AuthRoute';
 import LandingPage from './components/LandingPage';
 import Layouts from './components/Layouts';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Route, createBrowserRouter, createRoutesFromElements, Navigate, RouterProvider } from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 
 
 const queryClient = new QueryClient();

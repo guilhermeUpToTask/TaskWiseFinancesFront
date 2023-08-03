@@ -8,10 +8,10 @@ export const SECUNDARY_GREEN = '#2DBD0F';
 
 
 
-export const COLORS_TABLE = {
-    ['EXPANSE'] : SECUNDARY_RED,
-    ['INCOME'] : SECUNDARY_GREEN,
-    ['PAYMENT'] : GREEN,
-    ['BILL'] : RED
+export const COLORS_TABLE: {[key: string]: string} = {
+    ['expanse'] : SECUNDARY_RED,
+    ['income'] : SECUNDARY_GREEN,
+    ['payment'] : GREEN,
+    ['bill'] : RED
 
 }

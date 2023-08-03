@@ -1,3 +1,3 @@
 
-export const INCOME_TYPE = 'INCOME';
-export const EXPANSE_TYPE = 'EXPANSE';
+export const INCOME_TYPE = 'income';
+export const EXPANSE_TYPE = 'expanse';

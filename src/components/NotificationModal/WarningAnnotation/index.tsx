@@ -1,10 +1,12 @@
 import React from 'react';
-import type { Annotation } from '../../../lib/types';
+import  { Annotation } from '../../../lib/types';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, Typography } from 'antd';
 import { ConfigProvider } from 'antd';
 import AnnotationBtn from '../../commun/UI/Annotation/AnnotationBttn';
 import AnnotationStatus from '../../commun/UI/Annotation/AnnotationStatus';
+import { COLORS_TABLE } from '../../../lib/constants/colors';
+import dayjs from 'dayjs';
 const { Title, Paragraph } = Typography;
 
 interface IWarningAnnotation {
@@ -23,29 +25,29 @@ export default function WarningAnnotation(props: IWarningAnnotation): React.Reac
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: props.annotation.color,
+                    colorPrimary: COLORS_TABLE[props.annotation.annon_type],
                 },
             }}
         >
             <article style={{
-                border: '1px solid', borderColor: props.annotation.color, padding: '10px'
+                border: '1px solid', borderColor: COLORS_TABLE[props.annotation.annon_type], padding: '10px'
             }}>
-                <Title style={{ textAlign: 'center', color: props.annotation.color }} level={3} >{props.annotation.name}</Title>
+                <Title style={{ textAlign: 'center', color: COLORS_TABLE[props.annotation.annon_type] }} level={3} >{props.annotation.name}</Title>
                 <Paragraph>{props.annotation.description}</Paragraph>
-                <Title level={4} style={{ color: props.annotation.color }} >
-                    Date: {props.annotation.date.format('YYYY-MM-DD')}
+                <Title level={4} style={{ color: COLORS_TABLE[props.annotation.annon_type] }} >
+                    Date: {dayjs(props.annotation.date).format('DD/MM/YYYY')}
                     </Title>
-                <Title level={4} style={{ color: props.annotation.color }} >
+                <Title level={4} style={{ color: COLORS_TABLE[props.annotation.annon_type] }} >
                     Status: <AnnotationStatus status={props.annotation.status} />
                 </Title>
-                <Title level={4} style={{ color: props.annotation.color }} >
+                <Title level={4} style={{ color: COLORS_TABLE[props.annotation.annon_type] }} >
                     Value: ${props.annotation.value}
                     </Title>
 
 
                 <section style={{ textAlign: 'center' }}>
                     <Button onClick={props.prev} size='large' icon={<LeftOutlined />} style={arrowStyle} shape='circle' />
-                    <AnnotationBtn type={props.annotation.type} />
+                    <AnnotationBtn type={props.annotation.annon_type} />
                     <Button onClick={props.next} size='large' icon={<RightOutlined />} style={arrowStyle} shape='circle' />
                 </section>
             </article>

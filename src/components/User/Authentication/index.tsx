@@ -2,8 +2,8 @@ import React from 'react';
 import supabase from '../../../supabaseClient';
 import { Button } from 'antd';
 
-export default function Authentication(): React.ReactElement {
 
+export default function Authentication(): React.ReactElement {
 
     const loginWithGoogle = async () => {
 

@@ -24,7 +24,7 @@ export default function AnnotationModal(props: IAnnotationModalProps): React.Rea
     <Modal
       title={
         <Title style={{ textAlign: 'center' }}>
-          {`Events of Day - ${props.selectedDate.format('YYYY-MM-DD')}`}
+          {`Events of Day - ${props?.selectedDate.format('YYYY-MM-DD')}`}
         </Title>
       }
       open={props.open}
@@ -32,7 +32,7 @@ export default function AnnotationModal(props: IAnnotationModalProps): React.Rea
       onOk={props.closeModal}
       width={1000}
     >
-      <AnotationList selectedDate={props.selectedDate} />
+      <AnotationList selectedDate={props?.selectedDate} />
       <Collapse size="large">
         <Panel header="Create new Anotation for this Date" key="1">
           <CreateAnotation />

@@ -32,7 +32,6 @@ export default function AnnotationForm (props: IAnotationFormProps): React.React
     const onReset = () => {
         form.resetFields();
     };
-    console.log(props.values);
 
     return (
         <Form

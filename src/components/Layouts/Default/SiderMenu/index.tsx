@@ -10,17 +10,17 @@ export default function  SiderMenu() : React.ReactElement{
       {
         key: 'calendar',
         icon: <CalendarOutlined />,
-        label: <NavLink to={'/calendar'}>Calendar</NavLink>,
+        label: <NavLink to={'/dashboard/calendar'}>Calendar</NavLink>,
       },
       {
         key: 'bills',
         icon:<ProfileOutlined />,
-        label: <NavLink to={'/bills'}>Bills</NavLink>,
+        label: <NavLink to={'/dashboard/bills'}>Bills</NavLink>,
       },
       {
         key: 'Relatory',
         icon: <BarChartOutlined />,
-        label: <NavLink to={'/relatory'}>Relatory</NavLink>,
+        label: <NavLink to={'/dashboard/relatory'}>Relatory</NavLink>,
       }
     ]
 

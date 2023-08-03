@@ -1,9 +1,10 @@
 import React from 'react';
 import type { WalletOperation } from '../../../../lib/types';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { useQuery } from 'react-query';
-import OperationCard from './operationCard';
+import OperationCard from './OperationCard';
 import { Typography } from 'antd';
+import fetchWalletOperationsByMonth from '../../fetchWalletOperationsByMonth';
 
 const { Title } = Typography;
 
@@ -13,7 +14,14 @@ interface OperationListProps {
 }
 
 export default function OperationList(props: OperationListProps): React.ReactElement {
-    const { data: operations, isLoading, error } = useQuery<WalletOperation[]>('walletOperations');
+    const year = props.seletectedDate.year();
+    const month = props.seletectedDate.month() + 1;
+
+    const { data: operations, isLoading, error } = useQuery<WalletOperation[]>({
+        queryKey: ['operations', year, month],
+        queryFn: () => fetchWalletOperationsByMonth(year, month),
+      });
+
 
 
     const displayOperations = () => {
@@ -22,7 +30,7 @@ export default function OperationList(props: OperationListProps): React.ReactEle
         if (!operations || operations.length <= 0) return <div>No operations found</div>
 
         const filtheredOperations = operations.filter((operation) => {
-            return operation.date.isSame(props.seletectedDate, 'day')
+            return dayjs(operation.date).isSame(props.seletectedDate, 'day')
         })
 
         if (!filtheredOperations || filtheredOperations.length === 0) {
