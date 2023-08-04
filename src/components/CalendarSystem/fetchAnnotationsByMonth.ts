@@ -1,7 +1,7 @@
 import axiosInstance from '../../axiosInstance';
 import { Annotation } from '../../lib/types';
 
-export default async function fetchAnotationsByMonth (year: number, month: number): Promise<Annotation[]> {
+export default async function fetchAnnotationsByMonth (year: number, month: number): Promise<Annotation[]> {
     try {
       const {data:{data, error, message}} = await axiosInstance
       .get(`/annotation/get_all_from_month?year=${year}&month=${month}`);

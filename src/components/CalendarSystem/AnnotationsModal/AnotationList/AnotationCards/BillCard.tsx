@@ -4,7 +4,7 @@ import { EditButton, DeleteButton } from "./CardsActions";
 import AnnotationBttn from "../../../../commun/UI/Annotation/AnnotationBttn";
 import AnnotationStatus from "../../../../commun/UI/Annotation/AnnotationStatus";
 import type { Annotation } from "../../../../../lib/types";
-import EditAnotation from "../../AnnotationForm/EditAnnotation";
+import ConnectEditAnnotation from "../../AnnotationForm/ConnectEditAnnotation";
 
 const { Meta } = Card;
 const { Title } = Typography;
@@ -33,7 +33,7 @@ export default function BillCard(props: BillCardProps): React.ReactElement {
 
     const displayEditForm = () => {
         return (showEdit) ?
-            <EditAnotation annotation={props.annotation} />
+            <ConnectEditAnnotation annotation={props.annotation} toggleEditForm={onEdit} />
             : null;
     }
 
@@ -49,7 +49,7 @@ export default function BillCard(props: BillCardProps): React.ReactElement {
 
                 actions={
                     [< EditButton onClick={onEdit} />,
-                    <AnnotationBttn onClick={onPay} type={props.annotation.type}/>,
+                    <AnnotationBttn onClick={onPay} type={props.annotation.annon_type} />,
                     <DeleteButton onClick={onDelete} />,
                     ]} >
                 <Meta

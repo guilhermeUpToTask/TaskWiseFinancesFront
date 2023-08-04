@@ -1,10 +1,11 @@
 import React from 'react';
-import { Modal, Typography, Collapse } from 'antd';
-import CreateAnotation from './AnnotationForm/CreateAnnotation';
+import { Modal, Typography } from 'antd';
+import CreateAnnotation from './AnnotationForm/CreateAnnotation';
 import AnotationList from './AnotationList';
 import OperationList from './OperationList';
 import { Dayjs } from 'dayjs';
-const { Panel } = Collapse;
+import CreateAnnotationPanel from './CreateAnnotationPanel';
+
 const { Title } = Typography;
 
 interface IAnnotationModalProps {
@@ -33,11 +34,7 @@ export default function AnnotationModal(props: IAnnotationModalProps): React.Rea
       width={1000}
     >
       <AnotationList selectedDate={props?.selectedDate} />
-      <Collapse size="large">
-        <Panel header="Create new Anotation for this Date" key="1">
-          <CreateAnotation />
-        </Panel>
-      </Collapse>
+      <CreateAnnotationPanel selectedDate={props?.selectedDate} />
       <OperationList seletectedDate={props.selectedDate} />
 
     </Modal>

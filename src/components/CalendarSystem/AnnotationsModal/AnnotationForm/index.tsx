@@ -1,6 +1,5 @@
-import { Button, Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input, InputNumber, Select } from 'antd';
 import React from 'react';
-import AnnotationTypeSelect from './AnnotationTypeSelect';
 
 const layout = {
     labelCol: { span: 8 },
@@ -17,7 +16,7 @@ interface IAnotationFormProps {
     values?: {
         name: string;
         description: string;
-        type: string;
+        annon_type: string;
         value: number;
         id: number;
     }
@@ -26,7 +25,7 @@ interface IAnotationFormProps {
 }
 
 
-export default function AnnotationForm (props: IAnotationFormProps): React.ReactElement {
+export default function AnnotationForm(props: IAnotationFormProps): React.ReactElement {
     const [form] = Form.useForm();
 
     const onReset = () => {
@@ -41,25 +40,30 @@ export default function AnnotationForm (props: IAnotationFormProps): React.React
             onFinish={props.onFinish}
             style={{ maxWidth: 600 }}
             initialValues={{
-                anotation_name: (props.values) ? props.values.name : undefined,
-                anotation_description: (props.values) ? props.values.description : undefined,
-                anotation_type: (props.values) ? props.values.type : undefined,
-                anotation_value: (props.values) ? props.values.value : undefined,
+                annotation_name: (props.values) ? props.values.name : undefined,
+                annotation_description: (props.values) ? props.values.description : undefined,
+                annotation_type: (props.values) ? props.values.annon_type : undefined,
+                annotation_value: (props.values) ? props.values.value : undefined,
 
             }}
 
         >
-            <Form.Item name="anotation_name" label="Anotation Name" rules={[{ required: true }]}>
+            <Form.Item name="annotation_name" label="Anotation Name" rules={[{ required: true }]}>
                 <Input />
             </Form.Item>
-            <Form.Item name="anotation_description" label="Anotation Description" rules={[{ required: true }]}>
+            <Form.Item name="annotation_description" label="Anotation Description" rules={[{ required: true }]}>
                 <Input />
             </Form.Item>
 
-            <Form.Item name="anotation_type" label="Type of the Anotation" rules={[{ required: true }]}>
-                <AnnotationTypeSelect />
+            <Form.Item name="annotation_type" label="Type of the Anotation" rules={[{ required: true }]}>
+                <Select
+                    placeholder="Select wich type the Annotation is"
+                    options={[
+                        { label: 'Payment', value: 'payment' },
+                        { label: 'Bill', value: 'bill' },
+                    ]} />
             </Form.Item>
-            <Form.Item name="anotation_value" label="Value" rules={[{ required: true }]}>
+            <Form.Item name="annotation_value" label="Value" rules={[{ required: true }]}>
                 <InputNumber />
             </Form.Item>
             <Form.Item {...tailLayout}>

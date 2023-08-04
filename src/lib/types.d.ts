@@ -8,6 +8,8 @@ export type AnnotationType = 'bill' | 'payment';
 export type AnnotationStatus = 'pendent' | 'expired' | 'payed' | 'recived';
 export type AnnotationRepeat = 'never' | 'daily' | 'weekly' | 'monthly';
 
+
+//need to find a way to optionaly have id without have conflicts
 export type Annotation = {
     id: number,
     name: string,
@@ -19,10 +21,20 @@ export type Annotation = {
     annon_type: AnnotationType,
     annon_type_id?: number,
 }
+export type NewAnnotation ={
+    name: string;
+    description: string;
+    annon_type: string;
+    value: number;
+    status: string;
+    date: string;
+    repeat: string;
+}
+
 
 
 export type WalletOperation = {
-    id: number,
+    id?: number,
     name: string,
     value: number,
     description: string,
