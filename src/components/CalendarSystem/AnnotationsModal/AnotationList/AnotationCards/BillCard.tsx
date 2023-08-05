@@ -10,7 +10,8 @@ const { Meta } = Card;
 const { Title } = Typography;
 
 interface BillCardProps {
-    annotation: Annotation
+    annotation: Annotation,
+    onPay: () => Promise<void>
 }
 
 export default function BillCard(props: BillCardProps): React.ReactElement {
@@ -21,6 +22,7 @@ export default function BillCard(props: BillCardProps): React.ReactElement {
         console.log('delete', props.annotation.id);
     }
     const onPay = () => {
+        props.onPay();
         console.log('payed', props.annotation.id);
     }
 
@@ -49,7 +51,10 @@ export default function BillCard(props: BillCardProps): React.ReactElement {
 
                 actions={
                     [< EditButton onClick={onEdit} />,
-                    <AnnotationBttn onClick={onPay} type={props.annotation.annon_type} />,
+                    <AnnotationBttn onClick={onPay} 
+                    type={props.annotation.annon_type} 
+                    disabled={(props.annotation.status === 'payed')}
+                    />,
                     <DeleteButton onClick={onDelete} />,
                     ]} >
                 <Meta

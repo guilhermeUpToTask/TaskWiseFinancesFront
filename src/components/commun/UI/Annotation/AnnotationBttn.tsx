@@ -4,23 +4,42 @@ import * as ANN_CONSTANTS from '../../../../lib/constants/annotations'
 import { Button } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 
-interface IAnnotationBttnProps  {
+interface IAnnotationBttnProps {
     type: AnnotationType,
     style?: React.CSSProperties,
-    onClick?: () => void
+    onClick?: () => void,
+    disabled: boolean
 }
 
-export default function AnnotationBttn(props: IAnnotationBttnProps) :React.ReactElement {
+export default function AnnotationBttn(props: IAnnotationBttnProps): React.ReactElement {
     const BtnTypeMap = {
-        [ANN_CONSTANTS.BILL_TYPE]: 
-        <Button type="primary" shape="round" size="large" style={props.style} onClick={props.onClick} icon={<CheckOutlined />}>Pay</Button>,
-        [ANN_CONSTANTS.PAYMENT_TYPE]: 
-        <Button type="primary" shape="round" size="large" style={props.style} onClick={props.onClick} icon={'$'}>Recive</Button>,
+        [ANN_CONSTANTS.BILL_TYPE]:
+            <Button
+                type="primary"
+                shape="round"
+                size="large"
+                style={props.style}
+                onClick={props.onClick}
+                disabled={props.disabled} icon={<CheckOutlined />}>
+
+                {props.disabled ? 'Payed' : 'Pay'}
+
+            </Button>,
+        [ANN_CONSTANTS.PAYMENT_TYPE]:
+            <Button 
+            type="primary" 
+            shape="round" 
+            size="large" 
+            style={props.style} 
+            onClick={props.onClick} 
+            disabled={props.disabled}
+            icon={'$'} >
+                {props.disabled ? 'Recived' : 'Recive'}
+            </Button>,
     }
 
-
     return (
-    <>
-    {BtnTypeMap[props.type]	}
-    </>)
+        <>
+            {BtnTypeMap[props.type]}
+        </>)
 }

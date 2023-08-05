@@ -1,28 +1,23 @@
 import React from 'react';
 import { Modal, Typography, Button, ConfigProvider } from 'antd';
-import ConnectMovForm from './Form/ConnectedMovForm';
+import ConnectedOperationForm from './Form/ConnectOperationForm';
+import { OperationType } from '../../../lib/types';
 
 const { Title } = Typography;
 
 interface IWalletModalProps {
     open: boolean;
     closeModal: () => void;
-    movementType: 'expense' | 'income';
+    operationType: OperationType
 }
 
 const colorMap = {
-    ['expense']: 'red',
+    ['expanse']: 'red',
     ['income']: 'green'
 }
 
 export default function WalletModal(props: IWalletModalProps): React.ReactElement {
 
-    const onOkhandler = () => {
-        //create a new anotation here
-        //NEED To create consts for expanse and income
-        props.closeModal();
-
-    }
 
     const onCancelHandler = () => {
         props.closeModal();
@@ -32,23 +27,22 @@ export default function WalletModal(props: IWalletModalProps): React.ReactElemen
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: colorMap[props.movementType],
+                    colorPrimary: colorMap[props.operationType],
                 },
             }}
         >
             <Modal
                 title={
                     <Title level={2} style={{ textAlign: 'center' }}>
-                        Create New {props.movementType}
+                        Create New {props.operationType}
                     </Title>
                 }
                 open={props.open}
                 onCancel={onCancelHandler}
-                onOk={onOkhandler}
                 width={800}
                 footer={<></>}
             >
-                <ConnectMovForm movementType={props.movementType} />
+                <ConnectedOperationForm operationType={props.operationType} closeModal= {onCancelHandler} />
             </Modal>
 
         </ConfigProvider>

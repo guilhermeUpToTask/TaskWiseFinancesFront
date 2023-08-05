@@ -9,7 +9,8 @@ const { Meta } = Card;
 const { Title } = Typography;
 
 interface IPaymentCardProps {
-    annotation: Annotation
+    annotation: Annotation,
+    onRecived: () => Promise<void>
 }
 
 export default function PaymentCard(props: IPaymentCardProps): React.ReactElement {
@@ -18,7 +19,9 @@ export default function PaymentCard(props: IPaymentCardProps): React.ReactElemen
     const onDelete = () => {
         console.log('delete', props.annotation.id);
     }
-    const onPay = () => {
+    const onRecived = () => {
+        props.onRecived();
+
         console.log('payed', props.annotation.id);
     }
 
@@ -44,7 +47,11 @@ export default function PaymentCard(props: IPaymentCardProps): React.ReactElemen
 
                 actions={
                     [< EditButton onClick={onEdit} />,
-                    <AnnotationBttn onClick={onPay} type={props.annotation.annon_type} />,
+                    <AnnotationBttn 
+                    onClick={onRecived}
+                     type={props.annotation.annon_type} 
+                     disabled={(props.annotation.status === 'recived')}
+                     />,
                     <DeleteButton onClick={onDelete} />,
                     ]} >
                 <Meta

@@ -6,6 +6,8 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useQuery } from 'react-query';
 import { Typography } from 'antd';
 import fetchAnnotations from '../../fetchAnnotationsByMonth';
+import ConnectAnnotationCard from './AnotationCards/ConnectAnnotationCard';
+
 
 const { Title } = Typography;
 
@@ -25,14 +27,6 @@ export default function AnnotationList(props: IAnnotationListProps): React.React
 
 
 
-    const getBillCard = (anotation: Annotation) => (
-        <BillCard annotation={anotation} key={anotation.id} />
-    )
-    const getIncomingCard = (anotation: Annotation) => (
-        <PaymentCard annotation={anotation} key={anotation.id} />
-    )
-
-
     const displayAnotations = () => {
         if (isLoading) {
             return <div>Loading...</div>
@@ -41,21 +35,21 @@ export default function AnnotationList(props: IAnnotationListProps): React.React
             console.error(error);
             return <div>Error...</div>
         }
-        const filtheredAnotations = (anotations && props.selectedDate) ?
+        const filtheredAnnotations = (anotations && props.selectedDate) ?
             anotations.filter(annotation => dayjs(annotation.date).isSame(props.selectedDate, 'day')) :
             [];
 
-        if (!filtheredAnotations || filtheredAnotations.length === 0) {
-            return <div>No Anotations</div>
+        if (!filtheredAnnotations || filtheredAnnotations.length === 0) {
+            return <div>No Annotations</div>
         }
-        if (filtheredAnotations.length > 0) {
+        if (filtheredAnnotations.length > 0) {
+            return filtheredAnnotations.map(annotation => {
 
-            return filtheredAnotations.map(anotation => {
-                if (anotation.annon_type === 'bill') {
-                    return getBillCard(anotation);
-                } else {
-                    return getIncomingCard(anotation);
-                }
+                return <ConnectAnnotationCard
+                    annotation={annotation}
+                    key={annotation.id}
+                    annon_type={annotation.annon_type}
+                />
             })
         }
     }

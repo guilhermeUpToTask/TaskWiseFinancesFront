@@ -26,7 +26,6 @@ export default function ConnectEditAnnotation(props: IConnectCreateAnnotation): 
 
     async function connect(updatedAnnotation: Annotation) {
         try {
-            console.log("Annotation to be edited", updatedAnnotation);
             const { data: { error } } = await axiosInstance.put("/annotation/update", updatedAnnotation);
             if (error) throw new Error(error);
             console.log("Annotation edited");

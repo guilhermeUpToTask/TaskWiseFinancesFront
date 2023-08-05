@@ -21,7 +21,7 @@ export type Annotation = {
     annon_type: AnnotationType,
     annon_type_id?: number,
 }
-export type NewAnnotation ={
+export type NewAnnotation = {
     name: string;
     description: string;
     annon_type: string;
@@ -32,9 +32,16 @@ export type NewAnnotation ={
 }
 
 
+export type NewWalletOperation = {
+    name: string,
+    value: number,
+    description: string,
+    operation_type: OperationType,
+    operation_type_id?: number,
+}
 
 export type WalletOperation = {
-    id?: number,
+    id: number,
     name: string,
     value: number,
     description: string,

@@ -1,6 +1,14 @@
+import axiosInstance from "../../axiosInstance";
 
-const value = 100;
+export default async function fetchWallet(): Promise<number> {
+    try {
+        const {data:{data, error, message}} = await axiosInstance.get('/wallet');
+        if (error) throw new Error(message);
+        return data.value;
 
-export default async function fetchWallet() : Promise<number> {
-    return value
+    } catch (e) {
+        console.error(e);
+        return 0;
+    }
+
 }
