@@ -8,13 +8,13 @@ import WarningAnnotations from './WarningAnnotations';
 
 const { Title } = Typography;
 
-export default function NotificationModal (): React.ReactElement {
+export default function NotificationModal(): React.ReactElement {
     const { data: warningList, isLoading, error } = useQuery<Annotation[]>('warnings', fetchWarnings);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        if (warningList && warningList.length > 0 && !open) {
-            console.log(warningList);
+        console.log(warningList, 'list');
+        if (warningList && warningList.length > 0 && !open && !isLoading) {
             setOpen(true);
         }
     }, [isLoading]);
@@ -26,24 +26,48 @@ export default function NotificationModal (): React.ReactElement {
     if (isLoading) {
         return <></>;
     }
+
+    if (!warningList || warningList.length === 0) {
+
+        return (
+            <Modal
+                title={
+                    <Title level={2} style={{ textAlign: 'center' }}>
+                        NO WARNINGS FOR NOW!
+                    </Title>
+                }
+                open={open}
+                onCancel={closeModal}
+                width={1000}
+
+            >
+            </Modal>
+        )
+    }
+
     if (error) {
         console.error(error);
 
-        // we should return a message error
-        return(
-        <Modal
-        title={
-            <Title level={2} style={{ textAlign: 'center' }}>
-                ERROR WHILE LOADING THE WARNINGS!
-            </Title>
-        }
-        open={true}
-        onCancel={closeModal}
-        width={1000}
-        
-    >
-    </Modal>)
+        return (
+            <Modal
+                title={
+                    <Title level={2} style={{ textAlign: 'center' }}>
+                        ERROR WHILE LOADING THE WARNINGS!
+                    </Title>
+                }
+                open={open}
+                onCancel={closeModal}
+                onOk={closeModal}
+                width={1000}
+                footer={
+                    <Button size='large' shape='round' onClick={closeModal} icon={<ArrowRightOutlined />}>
+                        Skip
+                    </Button>
+                }
+            >
+            </Modal>)
     }
+
 
 
     return (
@@ -59,10 +83,10 @@ export default function NotificationModal (): React.ReactElement {
             width={1000}
             footer={<Button size='large' shape='round' onClick={closeModal} icon={<ArrowRightOutlined />}>Skip</Button>}
         >
-                <Title level={3} style={{ textAlign: 'center' }}>
-                    These Annotations require your attention!
-                </Title>
-                <WarningAnnotations warningList={(warningList) ? warningList : []}/>
+            <Title level={3} style={{ textAlign: 'center' }}>
+                These Annotations require your attention!
+            </Title>
+            <WarningAnnotations warningList={(warningList) ? warningList : []} />
         </Modal>
     )
 }

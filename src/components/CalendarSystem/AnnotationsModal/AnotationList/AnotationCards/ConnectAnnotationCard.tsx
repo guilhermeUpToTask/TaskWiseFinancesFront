@@ -36,6 +36,11 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
         });
 
 
+    const refetchAll = (): void => {
+        AnnotationsRefetch();
+        operationsRefetch();
+        walletRefetch();
+    }
 
     const onConfirmStatusHandler = async (): Promise<void> => {
         try {
@@ -52,9 +57,23 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
             if (error) throw new Error(message);
 
             console.log('Successful status confirmed: ', data, message);
-            AnnotationsRefetch();
-            operationsRefetch();
-            walletRefetch();
+            refetchAll();
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const onDeleteAnnotationHandler = async (): Promise<void> => {
+        try {
+
+            const { data: { data, error, message } } =
+                await axiosInstance.delete(`/annotation/delete?annotation_id=${props.annotation.id}`);
+           
+                if (error) throw new Error(message);
+
+            console.log('Successful annotation deleted: ', data, message);
+            refetchAll();
 
         } catch (error) {
             console.log(error);
@@ -62,9 +81,17 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
     }
 
     if (props.annon_type === 'bill') {
-        return (<BillCard annotation={props.annotation} onPay={onConfirmStatusHandler} />);
+        return (<BillCard 
+            annotation={props.annotation}
+             onPay={onConfirmStatusHandler}
+             onDelete={onDeleteAnnotationHandler}
+             />);
     }
     else {
-        return (<PaymentCard annotation={props.annotation} onRecived={onConfirmStatusHandler} />);
+        return (<PaymentCard 
+            annotation={props.annotation} 
+            onRecived={onConfirmStatusHandler} 
+            onDelete={onDeleteAnnotationHandler}
+            />);
     }
 }

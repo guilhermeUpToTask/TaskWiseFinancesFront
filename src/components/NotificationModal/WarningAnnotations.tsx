@@ -2,7 +2,8 @@ import React, { useRef } from 'react';
 import { Carousel } from 'antd';
 import { CarouselRef } from 'antd/es/carousel';
 import type { Annotation } from '../../lib/types';
-import WarningAnnotation from './WarningAnnotation';
+import ConnectWarningAnnotation from './WarningAnnotation/ConnectWarningAnnotation';
+
 
 
 
@@ -30,7 +31,7 @@ export default function WarningAnnotations(props: IWarningAnnotations): React.Re
         <>
         <Carousel ref={carouselRef}  dots={false} autoplay={false} className="warning-annotations">
             {props.warningList.map((annotation) => (
-                <WarningAnnotation annotation={annotation} prev={prev} next={next} key={annotation.id} />
+                <ConnectWarningAnnotation annotation={annotation} prev={prev} next={next} key={annotation.id} />
             ))}
         </Carousel>
         </>

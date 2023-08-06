@@ -12,6 +12,7 @@ const { Title } = Typography;
 interface BillCardProps {
     annotation: Annotation,
     onPay: () => Promise<void>
+    onDelete: () => Promise<void>
 }
 
 export default function BillCard(props: BillCardProps): React.ReactElement {
@@ -19,6 +20,7 @@ export default function BillCard(props: BillCardProps): React.ReactElement {
 
 
     const onDelete = () => {
+        props.onDelete();
         console.log('delete', props.annotation.id);
     }
     const onPay = () => {

@@ -1,1 +1,1 @@
-export const WARNING_DAYS = 3;
+export const WARNING_TIME_INTERVAL = 3;

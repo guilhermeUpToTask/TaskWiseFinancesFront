@@ -11,6 +11,7 @@ export default async function fetchWalletOperationsByMonth (year: number, month:
       return data;
     }
     catch (e) {
+      console.error(e);
       return [];
     }
   }

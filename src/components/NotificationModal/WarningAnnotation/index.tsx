@@ -1,5 +1,5 @@
 import React from 'react';
-import  { Annotation } from '../../../lib/types';
+import { Annotation } from '../../../lib/types';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, Typography } from 'antd';
 import { ConfigProvider } from 'antd';
@@ -10,9 +10,10 @@ import dayjs from 'dayjs';
 const { Title, Paragraph } = Typography;
 
 interface IWarningAnnotation {
-    annotation: Annotation;
-    prev: () => void;
-    next: () => void;
+    annotation: Annotation,
+    prev: () => void,
+    next: () => void,
+    onConfirmStatus: () => void,
 }
 
 export default function WarningAnnotation(props: IWarningAnnotation): React.ReactElement {
@@ -36,18 +37,22 @@ export default function WarningAnnotation(props: IWarningAnnotation): React.Reac
                 <Paragraph>{props.annotation.description}</Paragraph>
                 <Title level={4} style={{ color: COLORS_TABLE[props.annotation.annon_type] }} >
                     Date: {dayjs(props.annotation.date).format('DD/MM/YYYY')}
-                    </Title>
+                </Title>
                 <Title level={4} style={{ color: COLORS_TABLE[props.annotation.annon_type] }} >
                     Status: <AnnotationStatus status={props.annotation.status} />
                 </Title>
                 <Title level={4} style={{ color: COLORS_TABLE[props.annotation.annon_type] }} >
                     Value: ${props.annotation.value}
-                    </Title>
+                </Title>
 
 
                 <section style={{ textAlign: 'center' }}>
                     <Button onClick={props.prev} size='large' icon={<LeftOutlined />} style={arrowStyle} shape='circle' />
-                    <AnnotationBtn type={props.annotation.annon_type} />
+                    <AnnotationBtn
+                        type={props.annotation.annon_type}
+                        disabled={(props.annotation.status === 'recived' || props.annotation.status === 'payed')}
+                        onClick={props.onConfirmStatus}
+                    />
                     <Button onClick={props.next} size='large' icon={<RightOutlined />} style={arrowStyle} shape='circle' />
                 </section>
             </article>

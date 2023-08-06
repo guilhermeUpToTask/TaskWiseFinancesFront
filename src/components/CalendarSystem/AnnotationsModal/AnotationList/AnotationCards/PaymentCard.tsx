@@ -10,13 +10,15 @@ const { Title } = Typography;
 
 interface IPaymentCardProps {
     annotation: Annotation,
-    onRecived: () => Promise<void>
+    onRecived: () => Promise<void>,
+    onDelete: () => Promise<void>,
 }
 
 export default function PaymentCard(props: IPaymentCardProps): React.ReactElement {
     const [showEdit, setShowEdit] = React.useState(false);
 
     const onDelete = () => {
+        props.onDelete();
         console.log('delete', props.annotation.id);
     }
     const onRecived = () => {
