@@ -5,6 +5,8 @@
 ## Require to Develop Landing Page - next
 ## Require to delete Annotation - done
 
+# When Requires are completed we will try to implement deployment
+
 ## Need to Refresh Token if recive 401 unautorized from back if already logged in - done
 ## Need To create a global http error handling
 ## Need to implement custom hooks to handle usequery hooks - next
@@ -21,3 +23,4 @@
 ## Need to create a warning button to pop up notification modal
 ## Need to create loading icon on button on warningAnnotation
 ## Need to disblade arrow buttons when a warningList just have one item
+## Need to implement cache to work offline

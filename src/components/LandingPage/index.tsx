@@ -1,10 +1,22 @@
 import React from 'react';
 import Authentication from '../User/Authentication';
-export default function LandingPage() : React.ReactElement {
-    return (
-        <>
-        Welcome to TaskWise Finances
+import Banner from './Banner';
+import Features from './Features';
+import HeaderNavBar from './HeaderNavBar';
+import Introduction from './Introduction';
+import UseCases from './UseCases';
+import Footer from './Footer';
 
-        </>
+export default function LandingPage(): React.ReactElement {
+
+    return (
+        <div style={{display:'grid'}}>
+                <HeaderNavBar />
+                <Banner />
+                <Introduction />
+                <Features />
+                <UseCases />
+                <Footer />
+        </div>
     )
 }
