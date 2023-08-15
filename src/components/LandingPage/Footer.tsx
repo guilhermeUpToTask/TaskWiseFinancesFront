@@ -21,7 +21,7 @@ export default function Footer(): React.ReactElement {
         textAlign: 'center',
     }
     return (
-        <footer style={backgroundStyle}>
+        <footer style={backgroundStyle} id='footer'>
             <h1 style={titleStyle}>Contacts</h1>
             <article style={contactsStyle}>
                 <h2>Contact Phone</h2>

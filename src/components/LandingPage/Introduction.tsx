@@ -39,7 +39,7 @@ export default function Introduction(): React.ReactElement {
     }
 
     return (
-        <section style={backgroundStyle}>
+        <section style={backgroundStyle} id='introduction'>
             <img style={iconsStyle} alt='This represents a cat' src='https://i.imgur.com/Jy8XKfL.jpg' />
             <article style={articleStyle}>
                 <h1 style={titleStyle}>Introduction</h1>

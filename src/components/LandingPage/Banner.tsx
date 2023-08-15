@@ -1,7 +1,12 @@
 import React from 'react';
 import { GREEN } from '../../lib/constants/colors';
+import { Typography, Space, Button } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+
+const { Title } = Typography;
 
 export default function Banner(): React.ReactElement {
+
     const backgroundStyle: React.CSSProperties = {
         display: 'inline-flex',
         justifyContent: 'space-evenly',
@@ -13,7 +18,6 @@ export default function Banner(): React.ReactElement {
         left: 0,
         background: 'linear-gradient(to bottom left,  #59ece2, #5fe7df, #65e1db, #6bdcd8, #70d7d4, #83d8cb, #95d9c3, #a6d9be, #c7ddbc, #e2e1c4, #f5e7d4, #ffefe7)',
     }
-
     const articleStyle: React.CSSProperties = {
         display: 'flex',
         flexFlow: 'column',
@@ -23,21 +27,26 @@ export default function Banner(): React.ReactElement {
         maxWidth: '50svw',
         maxHeight: '100svh'
     }
-
     const calendarStyle: React.CSSProperties = {
         width: '30vw',
         height: '30vw',
         backgroundColor: GREEN,
         transform: 'rotate(9deg)',
     }
+
     return (
-        <section style={backgroundStyle}>
+        <section style={backgroundStyle} id='banner'>
             <article style={articleStyle}>
-                <h1 style={{ fontSize: '5.5vw' }}>Title Explaining the Banner</h1>
-                <section>
-                    <button>Button</button>
-                    <button>Button</button>
-                </section>
+
+                <Title level={1} style={{ fontSize: '5rem' }} > Title Explaining the Banner </Title>
+                <Space>
+                    <Button shape='round' size='large' type={'primary'} >
+                        Try out Now!
+                    </Button>
+                    <Button shape='round' size='large' icon={<DownOutlined />} >
+                        Learn More
+                    </Button>
+                </Space>
             </article>
             <section style={{
                 maxWidth: '45svw',

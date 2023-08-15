@@ -29,16 +29,13 @@ export default function UseCases(): React.ReactElement {
     const h3Style: React.CSSProperties = {
         fontSize: '2rem',
     }
-    const textStyle : React.CSSProperties = {
-
-    }
     const IconStyle: React.CSSProperties = {
         maxWidth: '50svw',
         maxHeight: '100svh',
     }
 
     return (
-        <section style={backgroundStyle}>
+        <section style={backgroundStyle} id='useful-cases'>
             <section style={articlesSectionStyle}>
                 <article style={articleStyle}>
                     <h2 style={h2Style}>Manager your money</h2>

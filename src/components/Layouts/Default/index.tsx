@@ -10,6 +10,7 @@ import NotificationModal from '../../NotificationModal';
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function DefaultLayout(props: any): React.ReactElement {
+    
     const {
         token: { colorBgContainer },
     } = theme.useToken();

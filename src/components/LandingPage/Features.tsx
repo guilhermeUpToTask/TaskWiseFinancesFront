@@ -46,7 +46,7 @@ export default function Features(): React.ReactElement {
     }
 
     return (
-        <section style={backgroundStyle}>
+        <section style={backgroundStyle} id='features'>
             <h2 style={titleStyle}>Features</h2>
             <section style={cardsListStyle}>
                 <article style={cardStyle}>
