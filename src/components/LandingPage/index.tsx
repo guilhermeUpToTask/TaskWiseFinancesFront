@@ -1,5 +1,4 @@
 import React from 'react';
-import Authentication from '../User/Authentication';
 import Banner from './Banner';
 import Features from './Features';
 import HeaderNavBar from './HeaderNavBar';

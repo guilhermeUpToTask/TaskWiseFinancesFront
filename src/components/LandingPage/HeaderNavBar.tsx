@@ -1,7 +1,15 @@
 import React from 'react';
 import { Anchor, Button, Space, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { AuthContext } from "../User/Authentication/context/AuthProvider";
+
 
 export default function HeaderNavBar(): React.ReactElement {
+    const navigate = useNavigate();
+    const context = useContext(AuthContext);
+
+
     const HeaderNavBarStyle: React.CSSProperties = {
         position: 'fixed',
         display: 'flex',
@@ -18,8 +26,33 @@ export default function HeaderNavBar(): React.ReactElement {
         fontWeight: 600,
         padding: '0.2rem',
         margin: '0',
-     }
+    }
 
+    const accessButton = () => {
+        if (context?.loading === false && context?.session) {
+            return (
+                <Button
+                    type='primary'
+                    size='middle'
+                    shape='round'
+                    onClick={() => { navigate('/dashboard') }}
+                >
+                    DashBoard
+                </Button>
+            )
+        } else {
+            return (
+                <Button
+                    type='primary'
+                    size='middle'
+                    shape='round'
+                    onClick={() => { navigate('/authentication') }}
+                >
+                    Sign In
+                </Button>
+            )
+        }
+    }
 
     return (
 
@@ -58,8 +91,7 @@ export default function HeaderNavBar(): React.ReactElement {
                 ]}
             />
             <Space>
-                <Button type='primary' size='middle' shape='round'>Sign In</Button>
-                <Button size='middle' shape='round'>Sign Up</Button>
+                {accessButton()}
             </Space>
         </header>
     )

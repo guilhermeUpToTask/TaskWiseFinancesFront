@@ -2,10 +2,13 @@ import React from 'react';
 import { GREEN } from '../../lib/constants/colors';
 import { Typography, Space, Button } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+
 
 const { Title } = Typography;
 
 export default function Banner(): React.ReactElement {
+    const navigate = useNavigate();
 
     const backgroundStyle: React.CSSProperties = {
         display: 'inline-flex',
@@ -40,10 +43,20 @@ export default function Banner(): React.ReactElement {
 
                 <Title level={1} style={{ fontSize: '5rem' }} > Title Explaining the Banner </Title>
                 <Space>
-                    <Button shape='round' size='large' type={'primary'} >
+                    <Button
+                        onClick={() => { navigate('/authentication') }}
+                        shape='round'
+                        size='large'
+                        type={'primary'}
+                    >
                         Try out Now!
                     </Button>
-                    <Button shape='round' size='large' icon={<DownOutlined />} >
+                    <Button
+                        onClick={() => { navigate('/#introduction')}}
+                        shape='round'
+                        size='large'
+                        icon={<DownOutlined />}
+                    >
                         Learn More
                     </Button>
                 </Space>
