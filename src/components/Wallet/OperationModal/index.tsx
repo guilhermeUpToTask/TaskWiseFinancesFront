@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Typography, Button, ConfigProvider } from 'antd';
+import { Modal, Typography, ConfigProvider } from 'antd';
 import ConnectedOperationForm from './Form/ConnectOperationForm';
 import { OperationType } from '../../../lib/types';
 
