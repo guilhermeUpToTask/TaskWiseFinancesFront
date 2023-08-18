@@ -1,6 +1,4 @@
 import React from 'react';
-import BillCard from './AnotationCards/BillCard';
-import PaymentCard from './AnotationCards/PaymentCard';
 import type { Annotation } from "../../../../lib/types";
 import dayjs, { Dayjs } from 'dayjs';
 import { useQuery } from 'react-query';

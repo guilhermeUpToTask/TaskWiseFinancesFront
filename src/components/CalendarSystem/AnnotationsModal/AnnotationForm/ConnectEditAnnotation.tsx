@@ -1,6 +1,6 @@
 import EditAnnotation from "./EditAnnotation";
 import axiosInstance from "../../../../axiosInstance";
-import { NewAnnotation, Annotation } from "../../../../lib/types";
+import { Annotation } from "../../../../lib/types";
 import React from 'react';
 import { useQuery } from "react-query";
 import dayjs from "dayjs";
@@ -15,6 +15,9 @@ export default function ConnectEditAnnotation(props: IConnectCreateAnnotation): 
     const [clearForm, setClearForm] = React.useState(false); // later we will implement it
     const year = dayjs(props.annotation.date).year();
     const month = dayjs(props.annotation.date).month() + 1;
+
+
+    console.log(clearForm); //just to build
 
 //need to add the refetch to the operation
     const { refetch }

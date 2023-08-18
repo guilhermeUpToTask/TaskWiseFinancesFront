@@ -15,7 +15,7 @@ export default function ConnectCreateAnnotation(props: IConnectCreateAnnotation)
     const year = props.selectedDate.year()
     const month = props.selectedDate.month() + 1;
 
-
+    console.log(clearForm); //just to build
     const { refetch }
         = useQuery<Annotation[]>({
             queryKey: ['annotations', year, month],

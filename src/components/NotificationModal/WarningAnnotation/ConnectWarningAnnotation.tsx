@@ -1,7 +1,7 @@
 import React from 'react';
 import axiosInstance from '../../../axiosInstance';
 import { useQuery } from 'react-query';
-import { Annotation, AnnotationType, WalletOperation } from '../../../lib/types';
+import { Annotation } from '../../../lib/types';
 import fetchWarnings from '../fetchWarnings';
 import WarningAnnotation from '.';
 

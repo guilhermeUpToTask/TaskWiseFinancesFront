@@ -1,5 +1,4 @@
 import { Button, Form, Input, InputNumber } from 'antd';
-import { Dayjs } from 'dayjs';
 import React from 'react';
 import { NewWalletOperation, OperationType } from '../../../../lib/types';
 

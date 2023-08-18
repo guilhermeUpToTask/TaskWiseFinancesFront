@@ -52,7 +52,7 @@ export default function CalendarSystem(): React.ReactElement {
   }
 
 
-  const onPanelChange = (date: Dayjs, mode: string) => {
+  const onPanelChange = (date: Dayjs) => {
     setSelectedDate(date);
     //setAnotations(data.filter(x => x.date.isSame(date, 'month')));
 

@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import { Annotation} from "../../lib/types";
 import * as ANN_CONSTANTS from "../../lib/constants/annotations";[
 

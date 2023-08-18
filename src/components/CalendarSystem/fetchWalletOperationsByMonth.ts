@@ -1,4 +1,3 @@
-import walletOperations from './fakeWalletOperations';
 import { WalletOperation } from '../../lib/types';
 import axiosInstance from '../../axiosInstance';
 

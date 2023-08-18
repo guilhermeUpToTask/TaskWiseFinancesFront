@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Modal, message, Button } from 'antd';
+import { Typography, Modal, Button } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { useQuery } from 'react-query';
 import type { Annotation } from '../../lib/types';

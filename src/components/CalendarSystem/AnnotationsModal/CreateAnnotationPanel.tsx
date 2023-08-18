@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Collapse } from 'antd';
 import ConnectCreateAnnotation from './AnnotationForm/ConnectCreateAnnotation';
 import { Dayjs } from 'dayjs';

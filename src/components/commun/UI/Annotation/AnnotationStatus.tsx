@@ -11,10 +11,6 @@ interface IAnnotationStatusProps {
 }
 
 export default function AnnotationStatus(props: IAnnotationStatusProps): React.ReactElement {
-    const pendentStyle: React.CSSProperties = {
-        fontWeight: 'bold',
-        color: 'yellow',
-    }
 
 
 

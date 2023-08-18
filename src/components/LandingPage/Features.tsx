@@ -36,10 +36,6 @@ export default function Features(): React.ReactElement {
     }
 
 
-    const buttomStyle: React.CSSProperties = {
-        display: 'block'
-    }
-
     return (
         <section style={backgroundStyle} id='features'>
             <Title style={titleStyle}>Features</Title>

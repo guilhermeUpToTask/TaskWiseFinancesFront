@@ -1,6 +1,5 @@
 import React from 'react';
 import { Modal, Typography } from 'antd';
-import CreateAnnotation from './AnnotationForm/CreateAnnotation';
 import AnotationList from './AnotationList';
 import OperationList from './OperationList';
 import { Dayjs } from 'dayjs';
