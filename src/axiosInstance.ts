@@ -1,11 +1,12 @@
 import axios from 'axios';
 import supabase from './supabaseClient';
 
-const API_URL = 'http://localhost:3000/';
+const API_URL = 'https://task-wise-finances-back.vercel.app/';
 
 //need to verify acesss token timeout and how to refresh token
-
 const { data } = await supabase.auth.getSession();
+
+console.log(process.env.NODE_ENV);
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
