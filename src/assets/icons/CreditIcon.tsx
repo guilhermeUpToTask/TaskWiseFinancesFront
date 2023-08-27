@@ -1,8 +1,11 @@
 import React from 'react';
+import { ICustomIconProps } from '../../lib/types';
 
-export default function CreditIcon(): React.ReactElement {
+export default function CreditIcon(props: ICustomIconProps): React.ReactElement {
     return (
-        <svg width="53" height="40" viewBox="0 0 53 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg 
+        style={props.style}
+        width="53" height="40" viewBox="0 0 53 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M47.7412 0H4.93875C2.22244 0 0 2.22244 0 4.93875V34.5712C0 37.2876 2.22244 39.51 4.93875 39.51H47.7412C50.4576 39.51 52.68 37.2876 52.68 34.5712V4.93875C52.68 2.22244 50.4576 0 47.7412 0ZM4.93875 3.2925H47.7412C48.6335 3.2925 49.3875 4.04648 49.3875 4.93875V9.8775H3.2925V4.93875C3.2925 4.04648 4.04648 3.2925 4.93875 3.2925ZM47.7412 36.2175H4.93875C4.04648 36.2175 3.2925 35.4635 3.2925 34.5712V19.755H49.3875V34.5712C49.3875 35.4635 48.6335 36.2175 47.7412 36.2175ZM6.585 26.34H9.8775V32.925H6.585V26.34ZM13.17 26.34H16.4625V32.925H13.17V26.34ZM19.755 26.34H23.0475V32.925H19.755V26.34Z" fill="black" />
         </svg>
     )

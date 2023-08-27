@@ -1,7 +1,8 @@
 import React from 'react';
 import { Typography } from 'antd';
+import { MailOutlined, GithubOutlined, LinkOutlined } from '@ant-design/icons';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 
 export default function Footer(): React.ReactElement {
@@ -24,7 +25,7 @@ export default function Footer(): React.ReactElement {
 
     }
 
-    const contactsStyle : React.CSSProperties = {
+    const contactsStyle: React.CSSProperties = {
         width: '45svw',
         textAlign: 'center',
     }
@@ -32,14 +33,12 @@ export default function Footer(): React.ReactElement {
         <footer style={backgroundStyle} id='footer'>
             <Title style={titleStyle}>Contacts</Title>
             <article style={contactsStyle}>
-                <Title level={2}>Contact Phone</Title>
-                <p>+38 (096) 123-45-67</p>
-                <Title level={2}>Email</Title>
-                <p>XXXXXXXXXXXXXXXX</p>
-                <Title level={2}>GitHub</Title>
-                <a>link</a>
-                <Title level={2}>Portifolio</Title>
-                <a>link</a>
+                <Title level={2}><MailOutlined /> Email</Title>
+                <Text style={{ fontSize: '1.2rem' }}>up.to.task.company@gmail.com</Text>
+                <Title level={2}><GithubOutlined /> GitHub</Title>
+                <Text style={{ fontSize: '1.2rem' }}>https://github.com/guilhermeUpToTask/TaskWiseFinancesFront</Text>
+                <Title level={2}><LinkOutlined /> Portifolio</Title>
+                <Text style={{ fontSize: '1.2rem' }}>link</Text>
             </article>
         </footer>
     )

@@ -3,6 +3,7 @@ import { Anchor, Button, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../User/Authentication/context/AuthProvider";
+import LogoIcon from '../../assets/icons/LogoIcon';
 
 
 export default function HeaderNavBar(): React.ReactElement {
@@ -58,7 +59,7 @@ export default function HeaderNavBar(): React.ReactElement {
 
 
         <header style={HeaderNavBarStyle}>
-            <>Icon - TaskWise Financial Calendar</>
+            <LogoIcon  style={{width:'160px'}}/>
             <Anchor
                 bounds={100}
                 direction="horizontal"

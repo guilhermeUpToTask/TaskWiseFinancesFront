@@ -47,3 +47,9 @@ export type WalletOperation = {
     operation_type: OperationType,
     operation_type_id?: number,
 }
+
+export interface ICustomIconProps {
+    color?: string;
+    size?: number;
+    style?: React.CSSProperties;
+}

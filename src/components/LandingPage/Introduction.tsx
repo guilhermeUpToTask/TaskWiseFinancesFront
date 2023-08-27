@@ -1,16 +1,16 @@
 import React from 'react';
-import {Typography } from 'antd';
+import { Typography } from 'antd';
 import IconsGroup from '../../assets/icons/IconsGroup';
 
 
-const {Title, Text} = Typography;
+const { Title, Text } = Typography;
 
 
 export default function Introduction(): React.ReactElement {
     const backgroundStyle: React.CSSProperties = {
         display: 'flex',
         height: '100vh',
-        paddingTop:'4rem',
+        paddingTop: '4rem',
         overflow: 'hidden',
         margin: 0,
         top: 0,
@@ -40,7 +40,7 @@ export default function Introduction(): React.ReactElement {
         height: '100svh',
         width: '50svw',
         padding: '1rem',
-        boxSizing:'border-box',
+        boxSizing: 'border-box',
     }
 
 
@@ -49,9 +49,9 @@ export default function Introduction(): React.ReactElement {
             <IconsGroup style={IconsGroupStyle} />
             <article style={articleStyle}>
                 <Title level={1} style={titleStyle}>Introduction</Title>
-                <Text>
-                    TaskWiseFinances is a simple project to demonstrate the use of React and TypeScript.
-                </Text> 
+                <Text style={{fontSize: '1.5rem', lineHeight: '1.5rem', marginBottom: '2rem', textAlign: 'justify'}}>
+                    Tackling personal finances can be overwhelming, especially for those unacquainted with financial management. But fear not, for we bring you a dynamic web application designed to transform the way you handle your finances. Imagine a tool that effortlessly melds efficiency with user-friendliness, offering a serene digital haven where tracking expenses, managing bills, and projecting your financial future become second nature.
+                </Text>
             </article>
         </section>
     )

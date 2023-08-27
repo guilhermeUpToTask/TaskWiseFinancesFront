@@ -46,16 +46,30 @@ export default function UseCases(): React.ReactElement {
                     <Title level={2}>Useful Cases</Title>
                     <ul style={{ listStyleType: 'circle' }}>
                         <li>
-                            <Text style={{ fontSize: '1.2rem' }}>one case</Text>
+                            <Text style={{ fontSize: '1.2rem' }}>
+                                <strong>Effortless Expense Analysis: </strong>
+                                Wallet system categorizes expenses; track trends, make wiser choices.
+
+                            </Text>
                         </li>
                         <li>
-                            <Text style={{ fontSize: '1.2rem' }}>one case</Text>
+                            <Text style={{ fontSize: '1.2rem' }}>
+                                <strong> Never Miss Bills:</strong>
+                                Calendar-synced bill control avoids late payments; view history.
+
+                            </Text>
                         </li>
                         <li>
-                            <Text style={{ fontSize: '1.2rem' }}>one case</Text>
+                            <Text style={{ fontSize: '1.2rem' }}>
+                                <strong>Goals with Precision:</strong>
+                                Future projection shapes savings goals; predict future finances.
+                            </Text>
                         </li>
                         <li>
-                            <Text style={{ fontSize: '1.2rem' }}>one case</Text>
+                            <Text style={{ fontSize: '1.2rem' }}>
+                                <strong>Visualize Financial Health:</strong>
+                                Relatory system offers reports and visuals for informed decisions.
+                            </Text>
                         </li>
                     </ul>
                 </article>
