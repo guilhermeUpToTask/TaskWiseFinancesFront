@@ -6,11 +6,12 @@ import Wallet from '../../Wallet';
 import { ConfigProvider } from 'antd';
 import { Outlet } from "react-router";
 import NotificationModal from '../../NotificationModal';
+import { MAIN_COLOR } from '../../../lib/constants/colors';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function DefaultLayout(): React.ReactElement {
-    
+
     const {
         token: { colorBgContainer },
     } = theme.useToken();
@@ -20,15 +21,17 @@ export default function DefaultLayout(): React.ReactElement {
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: '#00b96b',
+                    colorPrimary: MAIN_COLOR,
                 },
             }}
         >
             <NotificationModal />
             <Layout>
-                <Header style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
-                backgroundColor: '#00b96b',  }
-            }>
+                <Header style={{
+                    width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                    backgroundColor: MAIN_COLOR,
+                }
+                }>
                     <div className="demo-logo" />
                     <Wallet />
                     <UserAvatar />
@@ -39,7 +42,7 @@ export default function DefaultLayout(): React.ReactElement {
                         <SiderMenu />
                     </Sider>
                     <Content style={{ padding: '0 24px', minHeight: 280 }}>
-                        <Outlet/>
+                        <Outlet />
                     </Content>
                 </Layout>
 

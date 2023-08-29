@@ -7,6 +7,8 @@ import fetchAnnotationsByMonth from './fetchAnnotationsByMonth';
 import fetchWalletOperationsByMonth from './fetchWalletOperationsByMonth';
 import type { Annotation, WalletOperation } from "../../lib/types";
 import { useQuery } from 'react-query';
+import CalendarHeader from './CalendarHeader';
+
 
 
 //anotation is misspelleed the right name is annotation
@@ -20,9 +22,11 @@ import { useQuery } from 'react-query';
 export default function CalendarSystem(): React.ReactElement {
 
   const [open, setOpen] = useState(false);
+  const [monthValue, setMonthValue] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState(dayjs());
-  const year = selectedDate.year()
-  const month = selectedDate.month() + 1;
+
+  const year = monthValue.year();
+  const month = monthValue.month() + 1;
 
 
   const { data: annotationsData, isLoading: annonIsLoading }
@@ -44,19 +48,18 @@ export default function CalendarSystem(): React.ReactElement {
     setOpen(false);
   }
 
-
+  const moveMonthForward = () => {
+    setMonthValue(monthValue.add(1, 'month'));
+  }
+  const moveMonthBackward = () => {
+    setMonthValue(monthValue.subtract(1, 'month'));
+  }
 
   const onCellClickHandler = (date: Dayjs) => {
     setSelectedDate(date);
     showModal();
   }
 
-
-  const onPanelChange = (date: Dayjs) => {
-    setSelectedDate(date);
-    //setAnotations(data.filter(x => x.date.isSame(date, 'month')));
-
-  }
 
   const reducePropsForItems = (annotations: Annotation[], operations: WalletOperation[]) => {
     type itemType = { name: string, type: 'expanse' | 'income' | 'payment' | 'bill' }
@@ -81,11 +84,6 @@ export default function CalendarSystem(): React.ReactElement {
       return ('Loading...');
 
 
-
-    // one solution to not filther all the time is to create a object that each day on the month has a key or
-    // get from the server the anotations for that date alread filthered, as a object with the key as the date
-    // and the value as the anotations for that day.
-
     const cellAnnotations = annotationsData.filter(annotation => dayjs(annotation.date).isSame(date, 'day'));
     const cellOperations = operationsData.filter(operation => dayjs(operation.date).isSame(date, 'day'));
 
@@ -101,7 +99,18 @@ export default function CalendarSystem(): React.ReactElement {
 
   return (
     <>
-      <Calendar style={{ maxWidth: '800px' }} mode='month' onPanelChange={onPanelChange}
+      <Calendar
+        onPanelChange={(date) => setMonthValue(date)}
+        value={monthValue}
+        mode='month'
+        headerRender={
+          () =>
+            <CalendarHeader
+              currentMonth={monthValue}
+              moveMonthForward={moveMonthForward}
+              moveMonthBackward={moveMonthBackward}
+            />
+        }
         cellRender={cellRender} />
       <AnnotationsModal selectedDate={selectedDate} open={open} closeModal={closeModal} />
     </>

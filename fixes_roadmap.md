@@ -16,8 +16,8 @@
 ## Need to disable type change when a annotation is checked
 ## Need to show response messages to user 
 ## Need to change variable payed to paid
-## Need to style Calendar events cell
-## Need to implement calendar header
+## Need to style Calendar events cell - done
+## Need to implement calendar header - done
 ## Need to Change variable annon_type and op_type to just type
 ## Need to create enums for consts
 ## Need to create a warning button to pop up notification modal
