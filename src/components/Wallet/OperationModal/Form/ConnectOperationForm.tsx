@@ -4,7 +4,7 @@ import axiosInstance from '../../../../axiosInstance';
 import { NewWalletOperation, OperationType, WalletOperation } from '../../../../lib/types';
 import { useQuery } from 'react-query';
 import fetchWallet from '../../fetchWallet';
-import fetchWalletOperationsByMonth from '../../../CalendarSystem/fetchWalletOperationsByMonth';
+import useOperationsByMonth from '../../../../hooks/useOperationsByMonth';
 import dayjs from 'dayjs';
 
 interface IConnectOperationFormProps {
@@ -13,18 +13,16 @@ interface IConnectOperationFormProps {
 }
 
 export default function ConnectOperationFormProps(props: IConnectOperationFormProps): React.ReactElement {
-    const year = dayjs().year();
-    const month = dayjs().month() + 1;
+
     const { refetch: operationRefetch }
-        = useQuery<WalletOperation[]>({
-            queryKey: ['operations', year, month],
-            queryFn: () => fetchWalletOperationsByMonth(year, month),
-        });
+        = useOperationsByMonth(dayjs());
+
     const { refetch: walletRefetch }
         = useQuery<number>({
             queryKey: ['wallet'],
             queryFn: fetchWallet,
         });
+        
     const [clearForm, setClearForm] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 

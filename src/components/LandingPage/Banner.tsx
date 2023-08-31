@@ -41,7 +41,7 @@ export default function Banner(): React.ReactElement {
         <section style={backgroundStyle} id='banner'>
             <article style={articleStyle}>
 
-                <Title level={1} style={{ fontSize: '5rem' }} > Title Explaining the Banner </Title>
+                <Title level={1} style={{ fontSize: '5rem' }} > TaskWise Financial Calendar </Title>
                 <Space>
                     <Button
                         onClick={() => { navigate('/authentication') }}

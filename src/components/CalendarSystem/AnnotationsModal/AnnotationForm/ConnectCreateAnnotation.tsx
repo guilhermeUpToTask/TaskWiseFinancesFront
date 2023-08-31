@@ -1,10 +1,9 @@
 import CreateAnnotation from "./CreateAnnotation";
 import axiosInstance from "../../../../axiosInstance";
-import { NewAnnotation, Annotation } from "../../../../lib/types";
+import { NewAnnotation } from "../../../../lib/types";
 import React from 'react';
 import { Dayjs } from "dayjs";
-import { useQuery } from "react-query";
-import fetchAnnotationsByMonth from "../../fetchAnnotationsByMonth";
+import useAnnotationsByMonth from "../../../../hooks/useAnnotationsByMonth";
 
 interface IConnectCreateAnnotation {
     selectedDate: Dayjs
@@ -12,15 +11,10 @@ interface IConnectCreateAnnotation {
 
 export default function ConnectCreateAnnotation(props: IConnectCreateAnnotation): React.ReactElement {
     const [clearForm, setClearForm] = React.useState(false); // later we will implement it
-    const year = props.selectedDate.year()
-    const month = props.selectedDate.month() + 1;
 
     console.log(clearForm); //just to build
     const { refetch }
-        = useQuery<Annotation[]>({
-            queryKey: ['annotations', year, month],
-            queryFn: () => fetchAnnotationsByMonth(year, month),
-        });
+        = useAnnotationsByMonth(props.selectedDate);
 
 
     async function connect(newAnnotation: NewAnnotation) {

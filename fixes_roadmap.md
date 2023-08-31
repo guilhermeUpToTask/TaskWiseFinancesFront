@@ -24,7 +24,9 @@
 ## Need to create loading icon on button on warningAnnotation
 ## Need to disblade arrow buttons when a warningList just have one item
 ## Need to implement cache to work offline
-
+## Need to implement future money projection
+## Need to Redirect to calendar after sign in
+## Need to pass from EventsList to the modal of Events instead of Calendar
 
 ## Landing Page - Fixes
 

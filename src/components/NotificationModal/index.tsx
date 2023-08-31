@@ -10,8 +10,12 @@ const { Title } = Typography;
 
 export default function NotificationModal(): React.ReactElement {
     const { data: warningList, isLoading, error } = useQuery<Annotation[]>('warnings', fetchWarnings);
+
+
     const [open, setOpen] = useState(false);
 
+
+    //need to refactor this useEffect later
     useEffect(() => {
         console.log(warningList, 'list');
         if (warningList && warningList.length > 0 && !open && !isLoading) {

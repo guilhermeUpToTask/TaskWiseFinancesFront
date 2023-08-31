@@ -1,12 +1,12 @@
 import React from 'react';
 import axiosInstance from '../../../../../axiosInstance';
 import { useQuery } from 'react-query';
-import { Annotation, AnnotationType, WalletOperation } from '../../../../../lib/types';
+import { Annotation, AnnotationType } from '../../../../../lib/types';
 import BillCard from './BillCard';
 import PaymentCard from './PaymentCard';
-import fetchAnnotationsByMonth from '../../../fetchAnnotationsByMonth';
-import fetchWalletOperationsByMonth from '../../../fetchWalletOperationsByMonth';
 import fetchWallet from '../../../../Wallet/fetchWallet';
+import useAnnotationsByMonth from '../../../../../hooks/useAnnotationsByMonth';
+import useOperationsByMonth from '../../../../../hooks/useOperationsByMonth';
 
 import dayjs from 'dayjs';
 
@@ -16,19 +16,14 @@ interface IConnectAnnotationCard {
 }
 
 export default function ConnectAnnotationCard(props: IConnectAnnotationCard): React.ReactElement {
-    const year = dayjs(props.annotation.date).year()
-    const month = dayjs(props.annotation.date).month() + 1;
-
     const { refetch: AnnotationsRefetch }
-        = useQuery<Annotation[]>({
-            queryKey: ['annotations', year, month],
-            queryFn: () => fetchAnnotationsByMonth(year, month),
-        });
+        = useAnnotationsByMonth(dayjs(props.annotation.date));
+
     const { refetch: operationsRefetch }
-        = useQuery<WalletOperation[]>({
-            queryKey: ['operations', year, month],
-            queryFn: () => fetchWalletOperationsByMonth(year, month),
-        });
+        = useOperationsByMonth(dayjs(props.annotation.date));
+
+
+        //need to create custom hook for wallet use query
     const { refetch: walletRefetch }
         = useQuery<number>({
             queryKey: ['wallet'],

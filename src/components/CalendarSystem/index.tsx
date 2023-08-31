@@ -3,10 +3,9 @@ import { Calendar } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import AnnotationsModal from './AnnotationsModal';
 import Events from './CellEvents';
-import fetchAnnotationsByMonth from './fetchAnnotationsByMonth';
-import fetchWalletOperationsByMonth from './fetchWalletOperationsByMonth';
 import type { Annotation, WalletOperation } from "../../lib/types";
-import { useQuery } from 'react-query';
+import useAnnotationsByMonth from '../../hooks/useAnnotationsByMonth';
+import useOperationsByMonth from '../../hooks/useOperationsByMonth';
 import CalendarHeader from './CalendarHeader';
 
 
@@ -25,21 +24,12 @@ export default function CalendarSystem(): React.ReactElement {
   const [monthValue, setMonthValue] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState(dayjs());
 
-  const year = monthValue.year();
-  const month = monthValue.month() + 1;
-
-
   const { data: annotationsData, isLoading: annonIsLoading }
-    = useQuery<Annotation[]>({
-      queryKey: ['annotations', year, month],
-      queryFn: () => fetchAnnotationsByMonth(year, month),
-    });
-  const { data: operationsData, isLoading: operationsIsLoading }
-    = useQuery<WalletOperation[]>({
-      queryKey: ['operations', year, month],
-      queryFn: () => fetchWalletOperationsByMonth(year, month),
-    });
+    = useAnnotationsByMonth(monthValue);
 
+
+  const { data: operationsData, isLoading: operationsIsLoading }
+    = useOperationsByMonth(monthValue);
 
   const showModal = () => {
     setOpen(true);

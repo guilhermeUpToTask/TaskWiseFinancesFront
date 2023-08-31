@@ -1,10 +1,8 @@
 import React from 'react';
-import type { Annotation } from "../../../../lib/types";
 import dayjs, { Dayjs } from 'dayjs';
-import { useQuery } from 'react-query';
 import { Typography } from 'antd';
-import fetchAnnotations from '../../fetchAnnotationsByMonth';
 import ConnectAnnotationCard from './AnotationCards/ConnectAnnotationCard';
+import useAnnotationsByMonth from '../../../../hooks/useAnnotationsByMonth';
 
 
 const { Title } = Typography;
@@ -15,13 +13,7 @@ interface IAnnotationListProps {
 }
 
 export default function AnnotationList(props: IAnnotationListProps): React.ReactElement {
-    const year = props.selectedDate.year();
-    const month = props.selectedDate.month() + 1;
-
-    const { data: anotations, isLoading, error } = useQuery<Annotation[]>({
-        queryKey: ['annotations', year, month],
-        queryFn: () => fetchAnnotations(year, month)
-    });
+    const { data: anotations, isLoading, error } = useAnnotationsByMonth(props.selectedDate);
 
 
 

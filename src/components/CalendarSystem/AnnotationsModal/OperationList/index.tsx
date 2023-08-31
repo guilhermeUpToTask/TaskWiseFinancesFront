@@ -1,10 +1,9 @@
 import React from 'react';
-import type { WalletOperation } from '../../../../lib/types';
 import dayjs, { Dayjs } from 'dayjs';
-import { useQuery } from 'react-query';
 import OperationCard from './OperationCard';
 import { Typography } from 'antd';
-import fetchWalletOperationsByMonth from '../../fetchWalletOperationsByMonth';
+
+import useOperationsByMonth from '../../../../hooks/useOperationsByMonth';
 
 const { Title } = Typography;
 
@@ -14,14 +13,8 @@ interface OperationListProps {
 }
 
 export default function OperationList(props: OperationListProps): React.ReactElement {
-    const year = props.seletectedDate.year();
-    const month = props.seletectedDate.month() + 1;
 
-    const { data: operations, isLoading, error } = useQuery<WalletOperation[]>({
-        queryKey: ['operations', year, month],
-        queryFn: () => fetchWalletOperationsByMonth(year, month),
-      });
-
+    const { data: operations, isLoading, error } = useOperationsByMonth(props.seletectedDate);
 
 
     const displayOperations = () => {
