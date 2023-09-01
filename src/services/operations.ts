@@ -17,7 +17,7 @@ export  async function fetchWalletOperationsByMonth (year: number, month: number
 
 export async function createWalletOperation (walletOperation: WalletOperation): Promise<boolean> {
     try {
-        const { data: { data, error, message } } = await axiosInstance
+        const { data: { error } } = await axiosInstance
             .post(`/wallet_operation/create`, walletOperation);
         if (error) throw error;
 
