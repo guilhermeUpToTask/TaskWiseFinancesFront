@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import AnnotationForm from '../index';
 import { NewAnnotation } from '../../../../../lib/types';
 import { Dayjs } from 'dayjs';
