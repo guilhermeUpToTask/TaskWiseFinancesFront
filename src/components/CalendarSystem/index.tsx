@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar } from 'antd';
+import { Calendar, Skeleton } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import AnnotationsModal from './AnnotationsModal';
 import Events from './CellEvents';
@@ -71,7 +71,7 @@ export default function CalendarSystem(): React.ReactElement {
     //when using onclick, only inside the cell is triggreble not the whole cell
 
     if (annonIsLoading || !annotationsData || operationsIsLoading || !operationsData)
-      return ('Loading...');
+      return (<Skeleton active paragraph={{ rows: 2 }} title={false} />);
 
 
     const cellAnnotations = annotationsData.filter(annotation => dayjs(annotation.date).isSame(date, 'day'));

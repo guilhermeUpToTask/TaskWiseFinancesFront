@@ -13,6 +13,7 @@ const tailLayout = {
 interface IAnotationFormProps {
     formName: string;
     onFinish: (values: any) => void;
+    isLoading: boolean;
     values?: {
         name: string;
         description: string;
@@ -32,12 +33,17 @@ export default function AnnotationForm(props: IAnotationFormProps): React.ReactE
         form.resetFields();
     };
 
+    const resetOnFinish = (values: any) => {
+        props.onFinish(values);
+        onReset();
+    }
+
     return (
         <Form
             {...layout}
             form={form}
             name={props.formName}
-            onFinish={props.onFinish}
+            onFinish={resetOnFinish}
             style={{ maxWidth: 600 }}
             initialValues={{
                 annotation_name: (props.values) ? props.values.name : undefined,
@@ -67,7 +73,7 @@ export default function AnnotationForm(props: IAnotationFormProps): React.ReactE
                 <InputNumber />
             </Form.Item>
             <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" loading={props.isLoading}>
                     {(props.values) ? 'Update' : 'Create'}
                 </Button>
                 <Button htmlType="button" onClick={onReset}>

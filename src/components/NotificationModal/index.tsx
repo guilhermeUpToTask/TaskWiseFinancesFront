@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, Modal, Button } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { useQuery } from 'react-query';
-import type { Annotation } from '../../lib/types';
-import fetchWarnings from './fetchWarnings';
 import WarningAnnotations from './WarningAnnotations';
+import useWarningsQuery from '../../hooks/useWarningsQuery';
 
 const { Title } = Typography;
 
 export default function NotificationModal(): React.ReactElement {
-    const { data: warningList, isLoading, error } = useQuery<Annotation[]>('warnings', fetchWarnings);
+    const { data: warningList, isLoading, error } = useWarningsQuery();
 
 
     const [open, setOpen] = useState(false);
@@ -42,6 +40,7 @@ export default function NotificationModal(): React.ReactElement {
                 }
                 open={open}
                 onCancel={closeModal}
+                onOk={closeModal}
                 width={1000}
 
             >

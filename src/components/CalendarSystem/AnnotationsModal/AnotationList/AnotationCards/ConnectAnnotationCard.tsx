@@ -1,12 +1,11 @@
 import React from 'react';
 import axiosInstance from '../../../../../axiosInstance';
-import { useQuery } from 'react-query';
 import { Annotation, AnnotationType } from '../../../../../lib/types';
 import BillCard from './BillCard';
 import PaymentCard from './PaymentCard';
-import fetchWallet from '../../../../Wallet/fetchWallet';
 import useAnnotationsByMonth from '../../../../../hooks/useAnnotationsByMonth';
 import useOperationsByMonth from '../../../../../hooks/useOperationsByMonth';
+import useWalletQuery from '../../../../../hooks/useWalletQuery';
 
 import dayjs from 'dayjs';
 
@@ -25,10 +24,7 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
 
         //need to create custom hook for wallet use query
     const { refetch: walletRefetch }
-        = useQuery<number>({
-            queryKey: ['wallet'],
-            queryFn: fetchWallet,
-        });
+        = useWalletQuery();
 
 
     const refetchAll = (): void => {

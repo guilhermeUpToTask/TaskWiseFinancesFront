@@ -5,6 +5,7 @@ import type { Annotation } from '../../../../lib/types';
 interface IEditAnnotation {
     annotation: Annotation;
     connect: (newAnnotation: Annotation) => void;
+    isLoading: boolean;
 }
 
 export default function EditAnnotation(props: IEditAnnotation): React.ReactElement {
@@ -25,6 +26,6 @@ export default function EditAnnotation(props: IEditAnnotation): React.ReactEleme
 
     }
 
-    return <AnotationForm formName={`edit-anotation-${props.annotation.id}`}
+    return <AnotationForm formName={`edit-anotation-${props.annotation.id}`} isLoading={props.isLoading}
         onFinish={onFinish} values={props.annotation} />;
 }

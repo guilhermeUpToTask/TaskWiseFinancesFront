@@ -1,15 +1,19 @@
-import React from 'react';
-import AnotationForm from '.';
-import { NewAnnotation } from '../../../../lib/types';
+import React, {useState} from 'react';
+import AnnotationForm from '../index';
+import { NewAnnotation } from '../../../../../lib/types';
 import { Dayjs } from 'dayjs';
 
 
 interface ICreateAnnotation {
     selectedDate: Dayjs;
+    isLoading: boolean;
     connect: (newAnnotation: NewAnnotation) => void;
 }
 
 export default function CreateAnnotation(props: ICreateAnnotation): React.ReactElement {
+    
+
+
     const onFinish = (values: any) => {
         console.log('Success:', values);
 
@@ -22,10 +26,11 @@ export default function CreateAnnotation(props: ICreateAnnotation): React.ReactE
             date: props.selectedDate.format('YYYY-MM-DD'),
             repeat: 'never'
         }
+
         props.connect(newAnnotation);
     }
 
-    return <AnotationForm formName={'create-anotation'} onFinish={onFinish} />;
+    return <AnnotationForm formName={'create-anotation'} onFinish={onFinish}  isLoading={props.isLoading}/>;
 }
 
 

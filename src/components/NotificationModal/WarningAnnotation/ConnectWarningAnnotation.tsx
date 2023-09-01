@@ -1,9 +1,8 @@
 import React from 'react';
 import axiosInstance from '../../../axiosInstance';
-import { useQuery } from 'react-query';
 import { Annotation } from '../../../lib/types';
-import fetchWarnings from '../fetchWarnings';
 import WarningAnnotation from '.';
+import useWarningsQuery from '../../../hooks/useWarningsQuery';
 
 interface IConnectWarningAnnotation {
     annotation: Annotation;
@@ -14,10 +13,7 @@ interface IConnectWarningAnnotation {
 export default function ConnectWarningAnnotation(props: IConnectWarningAnnotation): React.ReactElement {
 
     const { refetch: warningsRefetch }
-        = useQuery<Annotation[]>({
-            queryKey: ['warnings'],
-            queryFn: fetchWarnings,
-        });
+        = useWarningsQuery();
 
 
     const onConfirmStatusHandler = async (): Promise<void> => {
