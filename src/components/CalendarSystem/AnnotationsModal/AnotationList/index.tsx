@@ -1,7 +1,7 @@
 import React from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { Typography } from 'antd';
-import ConnectAnnotationCard from './AnotationCards/ConnectAnnotationCard';
+import WithMsgAnnCard from './AnotationCards/WithMsgAnnCard';
 import useAnnotationsByMonth from '../../../../hooks/useAnnotationsByMonth';
 
 
@@ -35,7 +35,7 @@ export default function AnnotationList(props: IAnnotationListProps): React.React
         if (filtheredAnnotations.length > 0) {
             return filtheredAnnotations.map(annotation => {
 
-                return <ConnectAnnotationCard
+                return <WithMsgAnnCard
                     annotation={annotation}
                     key={annotation.id}
                     annon_type={annotation.annon_type}

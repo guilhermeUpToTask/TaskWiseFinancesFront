@@ -21,7 +21,7 @@ export default function ConnectCreateAnnotation(props: IConnectCreateAnnotation)
         = useAnnotationsByMonth(props.selectedDate);
 
 
-    async function connect(newAnnotation: NewAnnotation) {
+    async function connect(newAnnotation: NewAnnotation): Promise<boolean> {
         try {
             setIsLoading(true);
             props.messageFns.onLoading();
@@ -34,13 +34,13 @@ export default function ConnectCreateAnnotation(props: IConnectCreateAnnotation)
             refetch();
             setIsLoading(false);
             props.messageFns.onSuccess();
-
-
+            return true;
 
         } catch (e) {
             console.error(e);
             setIsLoading(false);
             props.messageFns.onError();
+            return false
 
         }
     }

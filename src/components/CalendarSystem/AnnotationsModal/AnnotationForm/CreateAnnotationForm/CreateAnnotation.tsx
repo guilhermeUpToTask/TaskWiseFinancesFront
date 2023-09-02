@@ -1,20 +1,33 @@
 import React from 'react';
-import AnnotationForm from '../index';
+import { Form, Input, InputNumber, Select, Button, } from 'antd';
 import { NewAnnotation } from '../../../../../lib/types';
 import { Dayjs } from 'dayjs';
 
 
+const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+};
+
+const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+};
+
 interface ICreateAnnotation {
     selectedDate: Dayjs;
     isLoading: boolean;
-    connect: (newAnnotation: NewAnnotation) => void;
+    connect: (newAnnotation: NewAnnotation) => Promise<boolean>
 }
 
 export default function CreateAnnotation(props: ICreateAnnotation): React.ReactElement {
-    
+    const [form] = Form.useForm();
 
 
-    const onFinish = (values: any) => {
+    const onReset = () => {
+        form.resetFields();
+    };
+
+    const onFinish = async (values: any) => {
         console.log('Success:', values);
 
         const newAnnotation: NewAnnotation = {
@@ -27,10 +40,51 @@ export default function CreateAnnotation(props: ICreateAnnotation): React.ReactE
             repeat: 'never'
         }
 
-        props.connect(newAnnotation);
+        const isSuccessful = await props.connect(newAnnotation);
+        if (isSuccessful) {
+            onReset();
+        }
+
     }
 
-    return <AnnotationForm formName={'create-anotation'} onFinish={onFinish}  isLoading={props.isLoading}/>;
+    return (
+        <Form
+            {...layout}
+            form={form}
+            name={'create_annotation'}
+            onFinish={onFinish}
+            style={{ maxWidth: 600 }}
+
+        >
+            <Form.Item name="annotation_name" label="Anotation Name" rules={[{ required: true }]}>
+                <Input />
+            </Form.Item>
+            <Form.Item name="annotation_description" label="Anotation Description" rules={[{ required: true }]}>
+                <Input />
+            </Form.Item>
+
+            <Form.Item name="annotation_type" label="Type of the Anotation" rules={[{ required: true }]}>
+                <Select
+                    placeholder="Select wich type the Annotation is"
+                    options={[
+                        { label: 'Payment', value: 'payment' },
+                        { label: 'Bill', value: 'bill' },
+                    ]} />
+            </Form.Item>
+            <Form.Item name="annotation_value" label="Value" rules={[{ required: true }]}>
+                <InputNumber />
+            </Form.Item>
+            <Form.Item {...tailLayout}>
+                <Button type="primary" htmlType="submit" loading={props.isLoading}>
+                    Create
+                </Button>
+                <Button htmlType="button" onClick={onReset}>
+                    Reset
+                </Button>
+            </Form.Item>
+        </Form>
+    );
 }
+
 
 

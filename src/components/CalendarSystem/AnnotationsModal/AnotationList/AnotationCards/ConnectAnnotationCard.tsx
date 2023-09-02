@@ -12,17 +12,19 @@ import dayjs from 'dayjs';
 interface IConnectAnnotationCard {
     annotation: Annotation;
     annon_type: AnnotationType;
+    messageFns: {
+        onLoading: (key: 'confirm' | 'delete') => void;
+        onSuccess: (key: 'confirm' | 'delete') => void;
+        onError: (key: 'confirm' | 'delete') => void;
+    };
 }
 
 export default function ConnectAnnotationCard(props: IConnectAnnotationCard): React.ReactElement {
+
     const { refetch: AnnotationsRefetch }
         = useAnnotationsByMonth(dayjs(props.annotation.date));
-
     const { refetch: operationsRefetch }
         = useOperationsByMonth(dayjs(props.annotation.date));
-
-
-        //need to create custom hook for wallet use query
     const { refetch: walletRefetch }
         = useWalletQuery();
 
@@ -43,46 +45,52 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
                 annon_type: props.annotation.annon_type,
             };
 
+            props.messageFns.onLoading('confirm');
             const { data: { data, error, message } } =
                 await axiosInstance.put('/annotation/confirm_status', payload);
             if (error) throw new Error(message);
 
             console.log('Successful status confirmed: ', data, message);
             refetchAll();
+            props.messageFns.onSuccess('confirm');
+
 
         } catch (error) {
-            console.log(error);
+            console.error(error);
+            props.messageFns.onError('confirm');
         }
     }
 
     const onDeleteAnnotationHandler = async (): Promise<void> => {
         try {
+            props.messageFns.onLoading('delete');
 
             const { data: { data, error, message } } =
                 await axiosInstance.delete(`/annotation/delete?annotation_id=${props.annotation.id}`);
-           
-                if (error) throw new Error(message);
+            if (error) throw new Error(message);
 
             console.log('Successful annotation deleted: ', data, message);
             refetchAll();
+            props.messageFns.onSuccess('delete');
 
         } catch (error) {
             console.log(error);
+            props.messageFns.onError('delete');
         }
     }
 
     if (props.annon_type === 'bill') {
-        return (<BillCard 
+        return (<BillCard
             annotation={props.annotation}
-             onPay={onConfirmStatusHandler}
-             onDelete={onDeleteAnnotationHandler}
-             />);
+            onPay={onConfirmStatusHandler}
+            onDelete={onDeleteAnnotationHandler}
+        />);
     }
     else {
-        return (<PaymentCard 
-            annotation={props.annotation} 
-            onRecived={onConfirmStatusHandler} 
+        return (<PaymentCard
+            annotation={props.annotation}
+            onRecived={onConfirmStatusHandler}
             onDelete={onDeleteAnnotationHandler}
-            />);
+        />);
     }
 }
