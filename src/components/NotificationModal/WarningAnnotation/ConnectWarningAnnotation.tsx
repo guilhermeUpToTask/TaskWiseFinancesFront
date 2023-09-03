@@ -16,6 +16,8 @@ export default function ConnectWarningAnnotation(props: IConnectWarningAnnotatio
         = useWarningsQuery();
 
 
+    const [isLoading, setIsLoading] = React.useState(false);
+
     const onConfirmStatusHandler = async (): Promise<void> => {
         try {
             const payload = {
@@ -26,6 +28,7 @@ export default function ConnectWarningAnnotation(props: IConnectWarningAnnotatio
                 annon_type: props.annotation.annon_type,
             };
 
+            setIsLoading(true);
             const { data: { data, error, message } } =
                 await axiosInstance.put('/annotation/confirm_status', payload);
             if (error) throw new Error(message);
@@ -34,9 +37,11 @@ export default function ConnectWarningAnnotation(props: IConnectWarningAnnotatio
             warningsRefetch();
             props.next();
 
+            setIsLoading(false);
 
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
         }
     }
 
@@ -45,5 +50,6 @@ export default function ConnectWarningAnnotation(props: IConnectWarningAnnotatio
         prev={props.prev}
         next={props.next}
         onConfirmStatus={onConfirmStatusHandler}
+        isLoading={isLoading}
     />);
 }

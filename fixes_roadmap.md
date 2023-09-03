@@ -8,10 +8,9 @@
 # When Requires are completed we will try to implement deployment - done
 
 ## Need to Refresh Token if recive 401 unautorized from back if already logged in - done
-## Need To create a global http error handling -- need to learn
 ## Need to implement custom hooks to handle usequery hooks - done
 ## Need to create skeleton loading - done
-## Need to create two differents forms for edit and create annotation
+## Need to create two differents forms for edit and create annotation -done 
 ## Need to clean annotation form when success happened - done
 ## Need to disable type change when a annotation is checked
 ## Need to show response messages to user - done

@@ -8,7 +8,8 @@ interface IAnnotationBttnProps {
     type: AnnotationType,
     style?: React.CSSProperties,
     onClick?: () => void,
-    disabled: boolean
+    disabled: boolean,
+    isLoading?: boolean
 }
 
 export default function AnnotationBttn(props: IAnnotationBttnProps): React.ReactElement {
@@ -33,6 +34,7 @@ export default function AnnotationBttn(props: IAnnotationBttnProps): React.React
             style={props.style} 
             onClick={props.onClick} 
             disabled={props.disabled}
+            loading={props.isLoading}
             icon={'$'} >
                 {props.disabled ? 'Recived' : 'Recive'}
             </Button>,

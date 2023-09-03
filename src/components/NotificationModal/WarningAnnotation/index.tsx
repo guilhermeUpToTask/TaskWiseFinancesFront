@@ -14,6 +14,7 @@ interface IWarningAnnotation {
     prev: () => void,
     next: () => void,
     onConfirmStatus: () => void,
+    isLoading: boolean
 }
 
 export default function WarningAnnotation(props: IWarningAnnotation): React.ReactElement {
@@ -49,6 +50,7 @@ export default function WarningAnnotation(props: IWarningAnnotation): React.Reac
                 <section style={{ textAlign: 'center' }}>
                     <Button onClick={props.prev} size='large' icon={<LeftOutlined />} style={arrowStyle} shape='circle' />
                     <AnnotationBtn
+                        isLoading={props.isLoading}
                         type={props.annotation.annon_type}
                         disabled={(props.annotation.status === 'recived' || props.annotation.status === 'payed')}
                         onClick={props.onConfirmStatus}
