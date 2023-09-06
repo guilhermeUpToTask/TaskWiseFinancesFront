@@ -1,11 +1,11 @@
 import React from 'react';
-import axiosInstance from '../../../../../axiosInstance';
 import { Annotation, AnnotationType } from '../../../../../lib/types';
 import BillCard from './BillCard';
 import PaymentCard from './PaymentCard';
 import useAnnotationsByMonth from '../../../../../hooks/useAnnotationsByMonth';
 import useOperationsByMonth from '../../../../../hooks/useOperationsByMonth';
 import useWalletQuery from '../../../../../hooks/useWalletQuery';
+import { confirmStatus, deleteAnnotation } from '../../../../../services/annotations';
 
 import dayjs from 'dayjs';
 
@@ -28,6 +28,7 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
     const { refetch: walletRefetch }
         = useWalletQuery();
 
+    const [isLoading, setIsLoading] = React.useState(false);
 
     const refetchAll = (): void => {
         AnnotationsRefetch();
@@ -45,19 +46,18 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
                 annon_type: props.annotation.annon_type,
             };
 
+            setIsLoading(true);
             props.messageFns.onLoading('confirm');
-            const { data: { data, error, message } } =
-                await axiosInstance.put('/annotation/confirm_status', payload);
-            if (error) throw new Error(message);
 
-            console.log('Successful status confirmed: ', data, message);
+            await confirmStatus(payload);
+
             refetchAll();
             props.messageFns.onSuccess('confirm');
-
+            setIsLoading(false);
 
         } catch (error) {
-            console.error(error);
             props.messageFns.onError('confirm');
+            setIsLoading(false);
         }
     }
 
@@ -65,16 +65,12 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
         try {
             props.messageFns.onLoading('delete');
 
-            const { data: { data, error, message } } =
-                await axiosInstance.delete(`/annotation/delete?annotation_id=${props.annotation.id}`);
-            if (error) throw new Error(message);
+            await deleteAnnotation(props.annotation.id);
 
-            console.log('Successful annotation deleted: ', data, message);
             refetchAll();
             props.messageFns.onSuccess('delete');
 
         } catch (error) {
-            console.log(error);
             props.messageFns.onError('delete');
         }
     }
@@ -84,6 +80,7 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
             annotation={props.annotation}
             onPay={onConfirmStatusHandler}
             onDelete={onDeleteAnnotationHandler}
+            isLoading={isLoading}
         />);
     }
     else {
@@ -91,6 +88,7 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
             annotation={props.annotation}
             onRecived={onConfirmStatusHandler}
             onDelete={onDeleteAnnotationHandler}
+            isLoading={isLoading}
         />);
     }
 }

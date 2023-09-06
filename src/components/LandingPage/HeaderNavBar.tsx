@@ -59,7 +59,7 @@ export default function HeaderNavBar(): React.ReactElement {
 
 
         <header style={HeaderNavBarStyle}>
-            <LogoIcon  style={{width:'160px'}}/>
+            <LogoIcon  style={{height:'40px', width: '160px'}}/>
             <Anchor
                 bounds={100}
                 direction="horizontal"

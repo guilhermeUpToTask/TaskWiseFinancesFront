@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Form from './index';
-import axiosInstance from '../../../../axiosInstance';
 import { NewWalletOperation, OperationType } from '../../../../lib/types';
 import useOperationsByMonth from '../../../../hooks/useOperationsByMonth';
-import dayjs from 'dayjs';
+import { createWalletOperation } from '../../../../services/operations';
 import useWalletQuery from '../../../../hooks/useWalletQuery';
+import dayjs from 'dayjs';
 
 
 interface IConnectOperationFormProps {
@@ -27,19 +27,16 @@ export default function ConnectOperationForm(props: IConnectOperationFormProps):
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+
     const onConnectHandler = async (newOperation: NewWalletOperation): Promise<boolean> => {
         try {
             setIsLoading(true);
             props.messageFns.onLoading();
-            const { data: { data, error, message } } =
-                await axiosInstance.post('wallet_operation/create', newOperation);
 
-            if (error) throw new Error(message);
+            await createWalletOperation(newOperation);
 
-            console.log('Sucessefully created Operation:', data, message);
             setIsLoading(false);
             props.messageFns.onSuccess();
-
 
             walletRefetch();
             operationRefetch();
@@ -50,7 +47,7 @@ export default function ConnectOperationForm(props: IConnectOperationFormProps):
 
         catch (e) {
             props.messageFns.onError();
-            console.error(e);
+            setIsLoading(false);
             return false;
         }
     }

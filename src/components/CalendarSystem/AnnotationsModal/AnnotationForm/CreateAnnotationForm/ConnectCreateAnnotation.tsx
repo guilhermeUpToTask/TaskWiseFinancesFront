@@ -1,9 +1,9 @@
 import CreateAnnotation from "./CreateAnnotation";
-import axiosInstance from "../../../../../axiosInstance";
 import { NewAnnotation } from "../../../../../lib/types";
 import React from 'react';
 import { Dayjs } from "dayjs";
 import useAnnotationsByMonth from "../../../../../hooks/useAnnotationsByMonth";
+import { createAnnotation } from "../../../../../services/annotations";
 
 interface IConnectCreateAnnotation {
     selectedDate: Dayjs,
@@ -26,9 +26,7 @@ export default function ConnectCreateAnnotation(props: IConnectCreateAnnotation)
             setIsLoading(true);
             props.messageFns.onLoading();
 
-            const { data: { error } } = await axiosInstance.post("/annotation/create", newAnnotation);
-
-            if (error) throw new Error(error);
+            await createAnnotation(newAnnotation);
 
             console.log("Annotation created");
             refetch();
@@ -37,11 +35,9 @@ export default function ConnectCreateAnnotation(props: IConnectCreateAnnotation)
             return true;
 
         } catch (e) {
-            console.error(e);
             setIsLoading(false);
             props.messageFns.onError();
-            return false
-
+            return false;
         }
     }
 

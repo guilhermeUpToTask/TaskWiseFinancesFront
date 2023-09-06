@@ -17,16 +17,18 @@ export default function WithMsgFeedBackForm(props: IMessageFeedBackProps): React
             key: `${props.operationType}_Operation`,
             type: 'loading',
             content:
-                `Creating ${props.operationType} Operation...`
+                `Creating ${props.operationType} Operation...`,
         });
     }
 
     const onSuccess = () => {
+        console.log('sucess!');
         messageApi.open({
             key: `${props.operationType}_Operation`,
             type: 'success',
             content:
-                `Successfully created ${props.operationType} Operation!`
+                `Successfully created ${props.operationType} Operation!`,
+            duration: 1,
         });
 
     }
@@ -36,7 +38,8 @@ export default function WithMsgFeedBackForm(props: IMessageFeedBackProps): React
             key: `${props.operationType}_Operation`,
             type: 'error',
             content:
-                `Failed to create ${props.operationType} Operation!`
+                `Failed to create ${props.operationType} Operation!`,
+            duration: 1,
         })
     }
 

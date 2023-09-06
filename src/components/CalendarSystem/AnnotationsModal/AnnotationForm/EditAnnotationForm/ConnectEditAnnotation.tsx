@@ -1,5 +1,5 @@
 import EditAnnotation from "./EditAnnotation";
-import axiosInstance from "../../../../../axiosInstance";
+import { updateAnnotation } from "../../../../../services/annotations";
 import { Annotation } from "../../../../../lib/types";
 import React from 'react';
 import useAnnotationsByMonth from "../../../../../hooks/useAnnotationsByMonth";
@@ -27,15 +27,13 @@ export default function ConnectEditAnnotation(props: IConnectCreateAnnotation): 
             setIsLoading(true);
             props.messageFns.onLoading();
 
-            const { data: { error } } = await axiosInstance.put("/annotation/update", updatedAnnotation);
-            if (error) throw new Error(error);
+            await updateAnnotation(updatedAnnotation);
 
             refetch();
             setIsLoading(false);
             props.messageFns.onSuccess();
 
         } catch (e) {
-            console.error(e);
             setIsLoading(false);
             props.messageFns.onError();
         }

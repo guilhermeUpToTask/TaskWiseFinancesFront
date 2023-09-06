@@ -10,6 +10,7 @@ const { Title } = Typography;
 
 interface IPaymentCardProps {
     annotation: Annotation,
+    isLoading: boolean,
     onRecived: () => Promise<void>,
     onDelete: () => Promise<void>,
 }
@@ -53,6 +54,7 @@ export default function PaymentCard(props: IPaymentCardProps): React.ReactElemen
                         onClick={onRecived}
                         type={props.annotation.annon_type}
                         disabled={(props.annotation.status === 'recived')}
+                        isLoading={props.isLoading}
                     />,
                     <DeleteButton onClick={onDelete} />,
                     ]} >

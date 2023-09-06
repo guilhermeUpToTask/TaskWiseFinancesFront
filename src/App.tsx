@@ -11,7 +11,7 @@ import AuthRoute from './components/AuthRoute';
 import LandingPage from './components/LandingPage';
 import Layouts from './components/Layouts';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider, Navigate } from 'react-router-dom';
 
 
 const queryClient = new QueryClient();
@@ -27,6 +27,7 @@ const App: React.FC = () => {
 
       <Route element={<AuthRoute />}>
         <Route path='dashboard' element={<DefaultLayout />}>
+          <Route index element={<Navigate to='calendar' replace={true} />} />
           <Route path='calendar' element={<CalendarSystem />} />
           <Route path='bills' element={<Bills />} />
           <Route path='relatory' element={<Relatory />} />

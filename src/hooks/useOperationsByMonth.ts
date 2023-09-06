@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { Dayjs } from 'dayjs';
 import type { WalletOperation } from '../lib/types';
-import fetchWalletOperationsByMonth from '../components/CalendarSystem/fetchWalletOperationsByMonth';
+import { fetchWalletOperationsByMonth } from '../services/operations';
 
 export default function useOperationsByMonth(currentMonth: Dayjs) {
     const year = currentMonth.year();

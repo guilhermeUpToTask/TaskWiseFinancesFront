@@ -1,8 +1,9 @@
 import React from 'react';
-import axiosInstance from '../../../axiosInstance';
+
 import { Annotation } from '../../../lib/types';
 import WarningAnnotation from '.';
 import useWarningsQuery from '../../../hooks/useWarningsQuery';
+import { confirmStatus } from '../../../services/annotations';
 
 interface IConnectWarningAnnotation {
     annotation: Annotation;
@@ -29,18 +30,15 @@ export default function ConnectWarningAnnotation(props: IConnectWarningAnnotatio
             };
 
             setIsLoading(true);
-            const { data: { data, error, message } } =
-                await axiosInstance.put('/annotation/confirm_status', payload);
-            if (error) throw new Error(message);
 
-            console.log('Successful status confirmed: ', data, message);
+            await confirmStatus(payload);
+
             warningsRefetch();
             props.next();
 
             setIsLoading(false);
 
         } catch (error) {
-            console.log(error);
             setIsLoading(false);
         }
     }

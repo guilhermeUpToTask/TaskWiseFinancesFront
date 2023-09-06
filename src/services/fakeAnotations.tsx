@@ -1,8 +1,8 @@
-import { Annotation} from "../../lib/types";
-import * as ANN_CONSTANTS from "../../lib/constants/annotations";[
+import { Annotation} from "../lib/types";
+import * as ANN_CONSTANTS from "../lib/constants/annotations";[
 
 ]
-const data : Annotation[] = [
+const fakeData : Annotation[] = [
     {
         name: 'Energy Bill',
         id:1,
@@ -11,7 +11,7 @@ const data : Annotation[] = [
         value: 100.00,
         date: '2023-06-01',
         repeat: 'never',
-        status: ANN_CONSTANTS.PENDENT_STATUS,
+        status: ANN_CONSTANTS.EXPIRED_STATUS,
     },
     {
       name: 'Daily Payment',
@@ -41,8 +41,8 @@ const data : Annotation[] = [
   value: 70,
   date: '2023-06-25',
   repeat: 'never',
-  status:ANN_CONSTANTS.PENDENT_STATUS,
+  status:ANN_CONSTANTS.PAYED_STATUS,
 },
 ]
 
-export default data;
+export default fakeData;

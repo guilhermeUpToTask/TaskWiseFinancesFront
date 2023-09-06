@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { GREEN } from '../../lib/constants/colors';
 import { Typography, Space, Button } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { DownOutlined, RightOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../User/Authentication/context/AuthProvider';
 
 
 const { Title } = Typography;
 
 export default function Banner(): React.ReactElement {
     const navigate = useNavigate();
+    const context = useContext(AuthContext);
 
     const backgroundStyle: React.CSSProperties = {
         display: 'inline-flex',
@@ -37,6 +39,14 @@ export default function Banner(): React.ReactElement {
         transform: 'rotate(9deg)',
     }
 
+
+    const scrollToIntroduction = () => {
+        const introSection = document.getElementById('introduction');
+        if (introSection) {
+            introSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     return (
         <section style={backgroundStyle} id='banner'>
             <article style={articleStyle}>
@@ -44,15 +54,19 @@ export default function Banner(): React.ReactElement {
                 <Title level={1} style={{ fontSize: '5rem' }} > TaskWise Financial Calendar </Title>
                 <Space>
                     <Button
-                        onClick={() => { navigate('/authentication') }}
+                        onClick={() => { 
+                            navigate((context?.loading === false && context?.session) 
+                            ? '/dashboard' :'/authentication') 
+                        }}
                         shape='round'
                         size='large'
                         type={'primary'}
+                        icon={<RightOutlined />}
                     >
                         Try out Now!
                     </Button>
                     <Button
-                        onClick={() => { navigate('/#introduction')}}
+                        onClick={scrollToIntroduction}
                         shape='round'
                         size='large'
                         icon={<DownOutlined />}

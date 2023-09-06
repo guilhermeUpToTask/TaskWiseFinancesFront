@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import fetchAnnotationsByMonth  from '../components/CalendarSystem/fetchAnnotationsByMonth';
+import { fetchAnnotationsByMonth } from '../services/annotations';
 import { Dayjs } from 'dayjs';
 import type { Annotation } from '../lib/types';
 

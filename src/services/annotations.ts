@@ -1,5 +1,6 @@
+import dayjs, { Dayjs } from 'dayjs';
 import axiosInstance from '../axiosInstance'
-import { Annotation } from '../lib/types';
+import type { Annotation, AnnConfirmPayload, NewAnnotation } from '../lib/types';
 
 export async function fetchAnnotationsByMonth(year: number, month: number): Promise<Annotation[]> {
     try {
@@ -9,25 +10,92 @@ export async function fetchAnnotationsByMonth(year: number, month: number): Prom
         console.log(message);
         console.log(data);
 
-        return data;
+        return data as Annotation[];
     }
     catch (e) {
-        console.error(e);
+        console.error('fetch annotations error:', e);
         return [];
     }
 }
 
-export async function createAnnotation(annotation: Annotation): Promise<Annotation | null> {
+export async function createAnnotation(newAnnotation: NewAnnotation): Promise<NewAnnotation | null> {
     try {
-        const { data: { error } } = await axiosInstance
-            .post(`/annotation/create`, annotation);
+        const { data: { data, error } } = await axiosInstance
+            .post(`/annotation/create`, newAnnotation);
         if (error) throw error;
 
-        return annotation;
+        return data as Annotation;
     }
     catch (e) {
-        console.error(e);
-        return null;
+        console.error('create annotation error:', e);
+        throw e;
     }
 }
 
+export async function updateAnnotation(updatedAnnotation: Annotation): Promise<Annotation | null> {
+    try {
+        const { data: { data, error } } = await axiosInstance.put("/annotation/update", updatedAnnotation);
+        if (error) throw new Error(error);
+
+        return data as Annotation;
+
+    } catch (e) {
+        console.error('update annotation error:', e);
+        throw e;
+    }
+}
+
+export async function deleteAnnotation(annotationId: number): Promise<Annotation | null> {
+    try {
+        const { data: { data, error, message } } =
+            await axiosInstance.delete(`/annotation/delete?annotation_id=${annotationId}`);
+        if (error) throw new Error(message);
+
+        return data as Annotation;
+
+    } catch (e) {
+        console.error('delete annotation error:', e);
+        throw e;
+    }
+}
+
+export async function confirmStatus(payload: AnnConfirmPayload): Promise<Annotation | null> {
+    try {
+        const { data: { data, error, message } } =
+            await axiosInstance.put('/annotation/confirm_status', payload);
+        if (error) throw new Error(message);
+
+        return data as Annotation;
+
+    } catch (e) {
+        console.error('confirm status annotation error:', e);
+        throw e;
+    }
+}
+
+function filterPendentsOrExpiredAnns(annotations: Annotation[]): Annotation[] {
+    return annotations.filter(annotation =>
+        annotation.status === 'pendent' ||
+        annotation.status === 'expired');
+}
+function filterAnnBeforeOrEqualToDate(annotations: Annotation[], date: Dayjs): Annotation[] {
+    return annotations.filter(annotation =>
+        dayjs(annotation.date).isBefore(date) || dayjs(annotation.date).isSame(date));
+}
+export function calculateFutureMoney(annotations: Annotation[], amount: number, day: Dayjs): number {
+    const pendentsAnnotations = filterPendentsOrExpiredAnns(annotations);
+    const annBeforeOrEqualToDate = filterAnnBeforeOrEqualToDate(pendentsAnnotations, day);
+
+    if (annBeforeOrEqualToDate.length === 0) return amount;
+
+    const reduceResult = annBeforeOrEqualToDate.reduce((acc, curr) => {
+        // Assuming 'value' is a property of the 'Annotation' object
+        return {
+            value: (curr.annon_type === 'payment') ? acc.value + curr.value :
+                acc.value - curr.value
+        };
+    }, { value: 0 });
+
+
+    return amount + reduceResult.value;
+}

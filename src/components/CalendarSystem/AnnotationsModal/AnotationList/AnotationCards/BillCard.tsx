@@ -11,6 +11,7 @@ const { Title } = Typography;
 
 interface BillCardProps {
     annotation: Annotation,
+    isLoading: boolean
     onPay: () => Promise<void>
     onDelete: () => Promise<void>
 }
@@ -56,6 +57,7 @@ export default function BillCard(props: BillCardProps): React.ReactElement {
                     <AnnotationBttn onClick={onPay}
                         type={props.annotation.annon_type}
                         disabled={(props.annotation.status === 'payed')}
+                        isLoading={props.isLoading}  
                     />,
                     <DeleteButton onClick={onDelete} />,
                     ]} >

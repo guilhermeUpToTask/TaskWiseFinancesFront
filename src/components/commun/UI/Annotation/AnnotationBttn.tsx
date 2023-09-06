@@ -21,21 +21,22 @@ export default function AnnotationBttn(props: IAnnotationBttnProps): React.React
                 size="large"
                 style={props.style}
                 onClick={props.onClick}
-                disabled={props.disabled} icon={<CheckOutlined />}>
-
+                disabled={props.disabled} icon={<CheckOutlined />}
+                loading={props.isLoading}
+            >
                 {props.disabled ? 'Payed' : 'Pay'}
 
             </Button>,
         [ANN_CONSTANTS.PAYMENT_TYPE]:
-            <Button 
-            type="primary" 
-            shape="round" 
-            size="large" 
-            style={props.style} 
-            onClick={props.onClick} 
-            disabled={props.disabled}
-            loading={props.isLoading}
-            icon={'$'} >
+            <Button
+                type="primary"
+                shape="round"
+                size="large"
+                style={props.style}
+                onClick={props.onClick}
+                disabled={props.disabled}
+                loading={props.isLoading}
+                icon={'$'} >
                 {props.disabled ? 'Recived' : 'Recive'}
             </Button>,
     }

@@ -1,6 +1,6 @@
 
 import { useQuery } from 'react-query';
-import fetchWallet from '../components/Wallet/fetchWallet';
+import { fetchWallet } from '../services/wallet';
 
 export default function useWalletQuery() {
     return useQuery<number>({

@@ -7,6 +7,7 @@ import OperationModal from './OperationModal';
 import { OperationType } from '../../lib/types';
 import useWalletQuery from '../../hooks/useWalletQuery';
 
+
 const { Title } = Typography;
 
 
@@ -22,6 +23,7 @@ export default function Wallet(): React.ReactElement {
     const openModal = (opType: OperationType) => {
         setOperationType(opType);
         setShowModal(true);
+    
     }
 
     if (error) {

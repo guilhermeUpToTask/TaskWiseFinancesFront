@@ -53,3 +53,11 @@ export interface ICustomIconProps {
     size?: number;
     style?: React.CSSProperties;
 }
+
+export type AnnConfirmPayload = {
+    id: number,
+    name: string,
+    status: AnnotationStatus,
+    value: number,
+    annon_type: AnnotationType,
+}

@@ -1,5 +1,5 @@
 import axiosInstance from "../axiosInstance";
-import { WalletOperation } from "../lib/types";
+import { NewWalletOperation, WalletOperation } from "../lib/types";
 
 export  async function fetchWalletOperationsByMonth (year: number, month: number): Promise<WalletOperation[]> {
     try {
@@ -10,21 +10,21 @@ export  async function fetchWalletOperationsByMonth (year: number, month: number
       return data;
     }
     catch (e) {
-      console.error(e);
+      console.error('error fetching wallet operations:', e);
       return [];
     }
   }
 
-export async function createWalletOperation (walletOperation: WalletOperation): Promise<boolean> {
+export async function createWalletOperation (walletOperation: NewWalletOperation): Promise<WalletOperation> {
     try {
-        const { data: { error } } = await axiosInstance
+        const { data: {data, error } } = await axiosInstance
             .post(`/wallet_operation/create`, walletOperation);
         if (error) throw error;
 
-        return true;
+        return data as WalletOperation;
     }
     catch (e) {
-        console.error(e);
-        return false;
+        console.error('error creating wallet operation:', e);
+        throw e;
     }
 }

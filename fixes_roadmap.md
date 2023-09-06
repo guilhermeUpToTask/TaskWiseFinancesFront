@@ -20,11 +20,10 @@
 ## Need to Change variable annon_type and op_type to just type
 ## Need to create enums for consts
 ## Need to create a warning button to pop up notification modal
-## Need to create loading icon on button on warningAnnotation 
+## Need to create loading icon on button on warningAnnotation - done
 ## Need to disblade arrow buttons when a warningList just have one item
 ## Need to implement cache to work offline
 ## Need to implement future money projection
-## Need to Redirect to calendar after sign in
 ## Need to pass from EventsList to the modal of Events instead of passing from Calendar
 
 ## Landing Page - Fixes
@@ -32,3 +31,4 @@
 
 ## Calendar Page - Fixes
 
+# insight - instead of creating a over complicated system to deal with a bulk annotations list, like a dayli payment, that will be a streess to manager, we shoudl just create a efficiente way to bul create, and a efficiete way to bulk delete annotations, by selecting all the ones you want to delete.
