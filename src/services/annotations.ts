@@ -4,11 +4,9 @@ import type { Annotation, AnnConfirmPayload, NewAnnotation } from '../lib/types'
 
 export async function fetchAnnotationsByMonth(year: number, month: number): Promise<Annotation[]> {
     try {
-        const { data: { data, error, message } } = await axiosInstance
+        const { data: { data, error} } = await axiosInstance
             .get(`/annotation/get_all_from_month?year=${year}&month=${month}`);
         if (error) throw error;
-        console.log(message);
-        console.log(data);
 
         return data as Annotation[];
     }
@@ -83,6 +81,7 @@ function filterAnnBeforeOrEqualToDate(annotations: Annotation[], date: Dayjs): A
         dayjs(annotation.date).isBefore(date) || dayjs(annotation.date).isSame(date));
 }
 export function calculateFutureMoney(annotations: Annotation[], amount: number, day: Dayjs): number {
+
     const pendentsAnnotations = filterPendentsOrExpiredAnns(annotations);
     const annBeforeOrEqualToDate = filterAnnBeforeOrEqualToDate(pendentsAnnotations, day);
 

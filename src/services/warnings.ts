@@ -15,3 +15,17 @@ export async function fetchWarnings(): Promise<Annotation[]> {
         return [];
     }
 }
+
+export async function fetchAllWarningsForPredDate(): Promise<Annotation[]>  {
+    try {
+        const { data: { data, error, message } } = await axiosInstance
+            .get(`annotation/get_all_warnings_for_prediction_date`);
+        if (error) throw new Error(message)
+
+        return data;
+
+    } catch (e) {
+        console.error(e);
+        return [];
+    }
+}

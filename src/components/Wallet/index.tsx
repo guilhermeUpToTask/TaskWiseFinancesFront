@@ -39,7 +39,7 @@ export default function Wallet(): React.ReactElement {
                     <WalletOutlined /> Wallet:
                     <MinusButton onClick={() => openModal('expanse')} />
 
-                    <span>${(isLoading) ? 'Loading...' : wallet}</span>
+                    <span>${(isLoading) ? 'Loading...' : (wallet || 0).toFixed(2)}</span>
                     <PlusButton onClick={() => openModal('income')} />
                 </Title>
             </section>
