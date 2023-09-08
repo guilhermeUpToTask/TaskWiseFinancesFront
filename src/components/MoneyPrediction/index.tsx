@@ -4,9 +4,11 @@ import { calculateFutureMoney } from '../../services/annotations';
 import useWarningsByDate from '../../hooks/useWarningsByPredDate';
 import usePredictionDateQuery from '../../hooks/usePredictionDateQuery';
 import useWalletQuery from '../../hooks/useWalletQuery';
-import ChangeDateModal from './ChangeDateModal';
-import { Button } from 'antd';
-import { SettingOutlined } from '@ant-design/icons'
+import WithMsgChangeDateModal from './ChangeDateModal/withMsgChangeDateModal';
+import { Button, Typography } from 'antd';
+import { SettingOutlined, ClockCircleOutlined } from '@ant-design/icons'
+
+const { Title } = Typography;
 
 export default function MoneyPrediction(): React.ReactElement {
     const { data: wallet, error: walletError } = useWalletQuery();
@@ -16,13 +18,11 @@ export default function MoneyPrediction(): React.ReactElement {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const getCalculatedPrediction = useCallback((): number => {
-
         if (warnings && wallet && predictionDate) {
             return calculateFutureMoney(warnings, wallet, dayjs(predictionDate));
         }
         return 0;
     }, [warnings, wallet, predictionDate]);
-
 
     const closeModal = () => {
         setIsModalOpen(false);
@@ -32,14 +32,17 @@ export default function MoneyPrediction(): React.ReactElement {
     }
 
     return (
-        <section>
-            <span style={{ color: '#9148bf' }}>
-                Prediction for {dayjs(predictionDate).format('DD/MM')}:
-            </span>
-            {
-                (walletError || warningsError || predictionDateError) ? 'Error...' :
-                    getCalculatedPrediction().toFixed(2)
-            }
+        <section style={{ display: 'flex', alignItems: 'center' }}>
+            <Title level={4} style={{ margin: '0px' }}>
+                <ClockCircleOutlined /> Prediction for {
+                    (predictionDate) ? dayjs(predictionDate).format('DD/MM') : '00/00'
+                }:{
+                    (walletError || warningsError || predictionDateError) ? 'Error...' :
+                        ` $${getCalculatedPrediction().toFixed(2)}`
+                }
+            </Title>
+
+
             <Button
                 onClick={openModal}
                 type="primary"
@@ -47,7 +50,9 @@ export default function MoneyPrediction(): React.ReactElement {
                 size="large"
                 icon={<SettingOutlined />}
             />
-            <ChangeDateModal
+
+
+            <WithMsgChangeDateModal
                 isOpen={isModalOpen}
                 closeModal={closeModal}
                 predictionDate={predictionDate || dayjs().format('YYYY-MM-DD')}
