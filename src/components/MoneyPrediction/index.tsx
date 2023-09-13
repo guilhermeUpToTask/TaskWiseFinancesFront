@@ -4,7 +4,7 @@ import { calculateFutureMoney } from '../../services/annotations';
 import useWarningsByDate from '../../hooks/useWarningsByPredDate';
 import usePredictionDateQuery from '../../hooks/usePredictionDateQuery';
 import useWalletQuery from '../../hooks/useWalletQuery';
-import WithMsgChangeDateModal from './ChangeDateModal/withMsgChangeDateModal';
+import WithMsgChangeDateModal from './ChangeDateModal/WithMsgChangeDateModal';
 import { Button, Typography } from 'antd';
 import { SettingOutlined, ClockCircleOutlined } from '@ant-design/icons'
 

@@ -4,7 +4,7 @@ export type OperationType = typeof OPERATION_CONSTANTS.INCOME_TYPE | typeof OPER
 
 export type AnnotationType = 'bill' | 'payment';
 export type AnnotationStatus = 'pendent' | 'expired' | 'payed' | 'recived';
-export type AnnotationRepeat = 'never' | 'daily' | 'weekly' | 'monthly';
+export type AnnotationRepeat = 'never' | 'day' | 'week' | 'month';
 
 
 //need to find a way to optionaly have id without have conflicts

@@ -2,14 +2,12 @@ import axios from 'axios';
 import supabase from './supabaseClient';
 
 const API_URL = 'https://task-wise-finances-back.vercel.app/';
-//const DEV_API_URL = 'http://localhost:3000/';
-
-//need to verify acesss token timeout and how to refresh token
-
-console.log(process.env.NODE_ENV);
+const DEV_API_URL = 'http://localhost:3000/';
 
 const axiosInstance = axios.create({
-  baseURL: API_URL,
+  baseURL: (process.env.NODE_ENV === 'development') ? DEV_API_URL:
+  API_URL,
+  // baseUrl: API_URL,
 });
 
 axiosInstance.interceptors.request.use(

@@ -3,7 +3,7 @@ import { NewAnnotation } from "../../../../../lib/types";
 import React from 'react';
 import { Dayjs } from "dayjs";
 import useAnnotationsByMonth from "../../../../../hooks/useAnnotationsByMonth";
-import { createAnnotation } from "../../../../../services/annotations";
+import { bulkCreateAnnotation, createAnnotation } from "../../../../../services/annotations";
 
 interface IConnectCreateAnnotation {
     selectedDate: Dayjs,
@@ -21,12 +21,13 @@ export default function ConnectCreateAnnotation(props: IConnectCreateAnnotation)
         = useAnnotationsByMonth(props.selectedDate);
 
 
-    async function connect(newAnnotation: NewAnnotation): Promise<boolean> {
+    async function connectCreate(newAnnotation: NewAnnotation, quantity: number): Promise<boolean> {
         try {
             setIsLoading(true);
             props.messageFns.onLoading();
 
-            await createAnnotation(newAnnotation);
+            (quantity <= 1) ?
+                await createAnnotation(newAnnotation) : await bulkCreateAnnotation(newAnnotation, quantity);
 
             console.log("Annotation created");
             refetch();
@@ -42,6 +43,6 @@ export default function ConnectCreateAnnotation(props: IConnectCreateAnnotation)
     }
 
     return (
-        <CreateAnnotation selectedDate={props.selectedDate} connect={connect} isLoading={isLoading} />
+        <CreateAnnotation selectedDate={props.selectedDate} connectCreate={connectCreate} isLoading={isLoading} />
     )
 }

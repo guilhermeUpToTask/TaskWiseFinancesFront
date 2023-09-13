@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { message } from 'antd';
-import ConnectChangeDateModal from './connectChangeDateModal';
+import ConnectChangeDateModal from './ConnectChangeDateModal';
 
 interface IWithMsgChangeDateModalProps {
     closeModal: () => void;

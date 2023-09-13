@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, InputNumber, Select, Button, } from 'antd';
+import { Form, Input, InputNumber, Select, Button, Radio } from 'antd';
 import { NewAnnotation } from '../../../../../lib/types';
 import { Dayjs } from 'dayjs';
 
@@ -16,12 +16,12 @@ const tailLayout = {
 interface ICreateAnnotation {
     selectedDate: Dayjs;
     isLoading: boolean;
-    connect: (newAnnotation: NewAnnotation) => Promise<boolean>
+    connectCreate: (newAnnotation: NewAnnotation, quantity: number) => Promise<boolean>
 }
 
 export default function CreateAnnotation(props: ICreateAnnotation): React.ReactElement {
     const [form] = Form.useForm();
-
+    const [currentRepeat, setCurrentRepeat] = React.useState<string>('never');
 
     const onReset = () => {
         form.resetFields();
@@ -37,10 +37,11 @@ export default function CreateAnnotation(props: ICreateAnnotation): React.ReactE
             value: values.annotation_value,
             status: 'pendent',
             date: props.selectedDate.format('YYYY-MM-DD'),
-            repeat: 'never'
+            repeat: values.annotation_repeat,
         }
 
-        const isSuccessful = await props.connect(newAnnotation);
+
+        const isSuccessful = await props.connectCreate(newAnnotation, values.annotation_quantity);
         if (isSuccessful) {
             onReset();
         }
@@ -56,24 +57,72 @@ export default function CreateAnnotation(props: ICreateAnnotation): React.ReactE
             style={{ maxWidth: 600 }}
 
         >
-            <Form.Item name="annotation_name" label="Anotation Name" rules={[{ required: true }]}>
-                <Input />
-            </Form.Item>
-            <Form.Item name="annotation_description" label="Anotation Description" rules={[{ required: true }]}>
-                <Input />
+            <Form.Item
+                name="annotation_name"
+                label="Anotation Name"
+                htmlFor="annotation_name"
+                rules={[{ required: true }]}
+            >
+                <Input id="annotation_name" />
             </Form.Item>
 
-            <Form.Item name="annotation_type" label="Type of the Anotation" rules={[{ required: true }]}>
+            <Form.Item
+                name="annotation_description"
+                htmlFor="annotation_description"
+                label="Anotation Description"
+                rules={[{ required: true }]}
+            >
+                <Input id="annotation_description" />
+            </Form.Item>
+
+            <Form.Item
+                name="annotation_type"
+                label="Type of the Anotation"
+                rules={[{ required: true }]}
+            >
                 <Select
                     placeholder="Select wich type the Annotation is"
                     options={[
                         { label: 'Payment', value: 'payment' },
                         { label: 'Bill', value: 'bill' },
-                    ]} />
+                    ]}
+                />
             </Form.Item>
-            <Form.Item name="annotation_value" label="Value" rules={[{ required: true }]}>
-                <InputNumber />
+
+            <Form.Item
+                name="annotation_repeat"
+                label="Repeat"
+                initialValue={'never'}
+                onReset={() => setCurrentRepeat('never')}
+            >
+                <Radio.Group onChange={(e) => setCurrentRepeat(e.target.value)}>
+
+                    <Radio.Button value="never" defaultChecked>Never</Radio.Button>
+                    <Radio.Button value="day">Daily</Radio.Button>
+                    <Radio.Button value="week">Weekly</Radio.Button>
+                    <Radio.Button value="month">Monthly</Radio.Button>
+
+                </Radio.Group>
             </Form.Item>
+
+            <Form.Item
+                name="annotation_quantity"
+                htmlFor="annotation_quantity"
+                label="Repeat Quantity"
+                initialValue={1}
+            >
+                <InputNumber value={1} disabled={currentRepeat === 'never'} id="annotation_quantity" />
+            </Form.Item>
+
+            <Form.Item
+                name="annotation_value"
+                htmlFor="annotation_value"
+                label="Value"
+                rules={[{ required: true }]}
+            >
+                <InputNumber id="annotation_value" />
+            </Form.Item>
+
             <Form.Item {...tailLayout}>
                 <Button type="primary" htmlType="submit" loading={props.isLoading}>
                     Create

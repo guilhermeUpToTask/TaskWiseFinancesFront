@@ -4,7 +4,7 @@ import type { Annotation, AnnConfirmPayload, NewAnnotation } from '../lib/types'
 
 export async function fetchAnnotationsByMonth(year: number, month: number): Promise<Annotation[]> {
     try {
-        const { data: { data, error} } = await axiosInstance
+        const { data: { data, error } } = await axiosInstance
             .get(`/annotation/get_all_from_month?year=${year}&month=${month}`);
         if (error) throw error;
 
@@ -20,6 +20,23 @@ export async function createAnnotation(newAnnotation: NewAnnotation): Promise<Ne
     try {
         const { data: { data, error } } = await axiosInstance
             .post(`/annotation/create`, newAnnotation);
+        if (error) throw error;
+
+        return data as Annotation;
+    }
+    catch (e) {
+        console.error('create annotation error:', e);
+        throw e;
+    }
+}
+
+export async function bulkCreateAnnotation(
+    newAnnotation: NewAnnotation, quantity: number
+): Promise<NewAnnotation | null> {
+    try {
+
+        const { data: { data, error } } = await axiosInstance
+            .post(`/annotation/bulk_create`, { ...newAnnotation, quantity });
         if (error) throw error;
 
         return data as Annotation;
@@ -47,6 +64,24 @@ export async function deleteAnnotation(annotationId: number): Promise<Annotation
     try {
         const { data: { data, error, message } } =
             await axiosInstance.delete(`/annotation/delete?annotation_id=${annotationId}`);
+        if (error) throw new Error(message);
+
+        return data as Annotation;
+
+    } catch (e) {
+        console.error('delete annotation error:', e);
+        throw e;
+    }
+}
+
+export async function bulkDeleteAnnotation(annotationIds: number[]): Promise<Annotation | null> {
+    try {
+        const encodedIds = encodeURIComponent(JSON.stringify(annotationIds));
+
+        const { data: { data, error, message } } =
+            await axiosInstance.delete(`/annotation/bulk_delete?annotation_ids=${encodedIds}`);
+
+        console.log('message succes', message);
         if (error) throw new Error(message);
 
         return data as Annotation;

@@ -23,7 +23,7 @@
 ## Need to create loading icon on button on warningAnnotation - done
 ## Need to disblade arrow buttons when a warningList just have one item
 ## Need to implement cache to work offline
-## Need to implement future money projection
+## Need to implement future money projection - done
 ## Need to pass from EventsList to the modal of Events instead of passing from Calendar
 
 ## Landing Page - Fixes
