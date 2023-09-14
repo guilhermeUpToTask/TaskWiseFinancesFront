@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
-import { Carousel } from 'antd';
+import { Carousel, Button } from 'antd';
 import { CarouselRef } from 'antd/es/carousel';
 import type { Annotation } from '../../lib/types';
 import ConnectWarningAnnotation from './WarningAnnotation/ConnectWarningAnnotation';
-
-
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 
 
@@ -27,14 +26,40 @@ export default function WarningAnnotations(props: IWarningAnnotations): React.Re
         }
     };
 
+    const carouselSectionStyle: React.CSSProperties = {
+        padding: '1rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '.5rem',
+        boxSizing: 'border-box',
+
+    }
+    console.log('current carousel', carouselRef.current);
     return (
-        <>
-        <Carousel ref={carouselRef}  dots={false} autoplay={false} className="warning-annotations">
-            {props.warningList.map((annotation) => (
-                <ConnectWarningAnnotation annotation={annotation} prev={prev} next={next} key={annotation.id} />
-            ))}
-        </Carousel>
-        </>
+        <section style={carouselSectionStyle}>
+            {}
+            <Button onClick={prev} size='large' icon={<LeftOutlined />} shape='circle' />
+
+            <section style={{ width: '90%' }}>
+                <Carousel
+                    ref={carouselRef}
+                    dots={false}
+                    autoplay={false}
+                    className="warning-annotations"
+
+                >
+                    {props.warningList.map((annotation) => (
+                        <ConnectWarningAnnotation
+                            annotation={annotation}
+                            key={annotation.id}
+                        />
+                    ))}
+                </Carousel>
+            </section>
+
+            <Button onClick={next} size='large' icon={<RightOutlined />} shape='circle' />
+        </section>
 
     );
 

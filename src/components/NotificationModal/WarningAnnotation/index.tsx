@@ -1,7 +1,6 @@
 import React from 'react';
 import { Annotation } from '../../../lib/types';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import { Button, Typography } from 'antd';
+import { Typography } from 'antd';
 import { ConfigProvider } from 'antd';
 import AnnotationBtn from '../../commun/UI/Annotation/AnnotationBttn';
 import AnnotationStatus from '../../commun/UI/Annotation/AnnotationStatus';
@@ -11,17 +10,11 @@ const { Title, Paragraph } = Typography;
 
 interface IWarningAnnotation {
     annotation: Annotation,
-    prev: () => void,
-    next: () => void,
     onConfirmStatus: () => void,
     isLoading: boolean
 }
 
 export default function WarningAnnotation(props: IWarningAnnotation): React.ReactElement {
-    const arrowStyle = {
-        margin: '0px 1rem',
-    }
-
     //we should fix the arrows behaver and the button on the carousel
     return (
         <ConfigProvider
@@ -32,7 +25,7 @@ export default function WarningAnnotation(props: IWarningAnnotation): React.Reac
             }}
         >
             <article style={{
-                border: '1px solid', borderColor: COLORS_TABLE[props.annotation.annon_type], padding: '10px'
+                border: '1px solid', borderColor: COLORS_TABLE[props.annotation.annon_type], padding: '10px',
             }}>
                 <Title style={{ textAlign: 'center', color: COLORS_TABLE[props.annotation.annon_type] }} level={3} >{props.annotation.name}</Title>
                 <Paragraph>{props.annotation.description}</Paragraph>
@@ -48,14 +41,12 @@ export default function WarningAnnotation(props: IWarningAnnotation): React.Reac
 
 
                 <section style={{ textAlign: 'center' }}>
-                    <Button onClick={props.prev} size='large' icon={<LeftOutlined />} style={arrowStyle} shape='circle' />
                     <AnnotationBtn
                         isLoading={props.isLoading}
                         type={props.annotation.annon_type}
                         disabled={(props.annotation.status === 'recived' || props.annotation.status === 'payed')}
                         onClick={props.onConfirmStatus}
                     />
-                    <Button onClick={props.next} size='large' icon={<RightOutlined />} style={arrowStyle} shape='circle' />
                 </section>
             </article>
         </ConfigProvider>

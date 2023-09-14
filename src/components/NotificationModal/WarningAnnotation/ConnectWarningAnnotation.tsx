@@ -7,8 +7,6 @@ import { confirmStatus } from '../../../services/annotations';
 
 interface IConnectWarningAnnotation {
     annotation: Annotation;
-    prev: () => void;
-    next: () => void;
 }
 
 export default function ConnectWarningAnnotation(props: IConnectWarningAnnotation): React.ReactElement {
@@ -34,7 +32,6 @@ export default function ConnectWarningAnnotation(props: IConnectWarningAnnotatio
             await confirmStatus(payload);
 
             warningsRefetch();
-            props.next();
 
             setIsLoading(false);
 
@@ -45,8 +42,6 @@ export default function ConnectWarningAnnotation(props: IConnectWarningAnnotatio
 
     return (<WarningAnnotation
         annotation={props.annotation}
-        prev={props.prev}
-        next={props.next}
         onConfirmStatus={onConfirmStatusHandler}
         isLoading={isLoading}
     />);

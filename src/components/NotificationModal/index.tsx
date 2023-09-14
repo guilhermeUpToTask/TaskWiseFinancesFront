@@ -1,35 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Typography, Modal, Button } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import WarningAnnotations from './WarningAnnotations';
 import useWarningsQuery from '../../hooks/useWarningsQuery';
+import ConnectWarningAnnotation from './WarningAnnotation/ConnectWarningAnnotation';
 
 const { Title } = Typography;
 
-export default function NotificationModal(): React.ReactElement {
+interface INotificationModal {
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function NotificationModal(props : INotificationModal): React.ReactElement {
     const { data: warningList, isLoading, error } = useWarningsQuery();
-
-
-    const [open, setOpen] = useState(false);
 
 
     //need to refactor this useEffect later
     useEffect(() => {
         console.log(warningList, 'list');
-        if (warningList && warningList.length > 0 && !open && !isLoading) {
-            setOpen(true);
+        if (warningList && warningList.length > 0 && !isLoading) {
+            props.setOpen(true);
         }
-    }, [isLoading]);
+    }, [isLoading, warningList]);
 
     const closeModal = () => {
-        setOpen(false);
+        props.setOpen(false);
     }
+
+    const displayWarningList = () => {
+        console.log('list', warningList);
+        if (warningList && warningList.length > 1) {
+            return (
+                <WarningAnnotations warningList={(warningList) ? warningList : []} />
+            )
+        } else if (warningList && warningList.length === 1 && warningList[0]) {
+            return <ConnectWarningAnnotation annotation={warningList[0]} />
+        }
+    }
+
 
     if (isLoading) {
         return <></>;
     }
 
-    if (!warningList || warningList.length === 0) {
+    if (!warningList || warningList.length === 0 && !warningList[0]) {
 
         return (
             <Modal
@@ -38,7 +53,7 @@ export default function NotificationModal(): React.ReactElement {
                         NO WARNINGS FOR NOW!
                     </Title>
                 }
-                open={open}
+                open={props.open}
                 onCancel={closeModal}
                 onOk={closeModal}
                 width={1000}
@@ -58,7 +73,7 @@ export default function NotificationModal(): React.ReactElement {
                         ERROR WHILE LOADING THE WARNINGS!
                     </Title>
                 }
-                open={open}
+                open={props.open}
                 onCancel={closeModal}
                 onOk={closeModal}
                 width={1000}
@@ -80,7 +95,7 @@ export default function NotificationModal(): React.ReactElement {
                     WARNING!
                 </Title>
             }
-            open={open}
+            open={props.open}
             onCancel={closeModal}
             onOk={closeModal}
             width={1000}
@@ -89,7 +104,7 @@ export default function NotificationModal(): React.ReactElement {
             <Title level={3} style={{ textAlign: 'center' }}>
                 These Annotations require your attention!
             </Title>
-            <WarningAnnotations warningList={(warningList) ? warningList : []} />
+            {displayWarningList()}
         </Modal>
     )
 }

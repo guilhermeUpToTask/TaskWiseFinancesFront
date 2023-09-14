@@ -19,7 +19,7 @@
 ## Need to implement calendar header - done
 ## Need to Change variable annon_type and op_type to just type
 ## Need to create enums for consts
-## Need to create a warning button to pop up notification modal
+## Need to create a warning button to pop up notification modal - done
 ## Need to create loading icon on button on warningAnnotation - done
 ## Need to disblade arrow buttons when a warningList just have one item
 ## Need to implement cache to work offline
