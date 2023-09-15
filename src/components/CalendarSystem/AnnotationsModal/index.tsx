@@ -15,11 +15,6 @@ interface IAnnotationModalProps {
 
 export default function AnnotationModal(props: IAnnotationModalProps): React.ReactElement {
 
-  /*interface anotationsBlock {
-    start: Date;
-    end: Date;
-  }*/
-
   return (
     <Modal
       title={
@@ -35,6 +30,7 @@ export default function AnnotationModal(props: IAnnotationModalProps): React.Rea
       <AnotationList selectedDate={props?.selectedDate} />
       <CreateAnnotationPanel selectedDate={props?.selectedDate} />
       <OperationList seletectedDate={props.selectedDate} />
+
 
     </Modal>
   )

@@ -27,11 +27,6 @@ const AuthProvider = ({ children }: any) => {
         } = supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_IN') {
                 setSession(session);
-                console.log(session?.access_token);
-                supabase.auth.getUser(session?.access_token).then(res =>
-                    console.log(res)
-                )
-            
             }
             if (event === 'SIGNED_OUT') {
                 setSession(null);

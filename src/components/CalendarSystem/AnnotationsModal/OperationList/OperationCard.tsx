@@ -21,7 +21,7 @@ export default function OperationCard(props: OperationCardProps): React.ReactEle
             <Card style={{ marginTop: 16, borderColor: color }}>
                 <Meta
                     title={<Title level={3} style={{ textAlign: 'center', color: color }}>
-                        {`${props.operation.name} Wallet Operation`}
+                        {`${props.operation.name} - Wallet Operation`}
                     </Title>}
                     description={props.operation.description}
                 />

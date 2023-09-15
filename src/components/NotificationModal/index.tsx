@@ -18,7 +18,6 @@ export default function NotificationModal(props : INotificationModal): React.Rea
 
     //need to refactor this useEffect later
     useEffect(() => {
-        console.log(warningList, 'list');
         if (warningList && warningList.length > 0 && !isLoading) {
             props.setOpen(true);
         }
@@ -29,7 +28,6 @@ export default function NotificationModal(props : INotificationModal): React.Rea
     }
 
     const displayWarningList = () => {
-        console.log('list', warningList);
         if (warningList && warningList.length > 1) {
             return (
                 <WarningAnnotations warningList={(warningList) ? warningList : []} />

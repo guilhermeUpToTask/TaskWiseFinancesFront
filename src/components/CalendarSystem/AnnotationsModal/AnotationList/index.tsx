@@ -45,9 +45,9 @@ export default function AnnotationList(props: IAnnotationListProps): React.React
     }
 
     return (
-        <>
+        <section style={{marginBottom: '1rem'}}>
             <Title level={2}> Annotations</Title>
             {displayAnotations()}
-        </>
+        </section>
     );
 }

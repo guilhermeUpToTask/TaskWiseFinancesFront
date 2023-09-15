@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import NotificationModal from '..';
 import { BellOutlined } from '@ant-design/icons';
 
@@ -13,16 +13,18 @@ export default function NotificationButton(): React.ReactElement {
 
     return (
         <>
+            <Tooltip title="Open Notifications" color='rgb(72, 191, 145)'>
                 <Button onClick={onClickHandler}
                     type="text"
                     shape="round"
                     size="large"
                     icon={<BellOutlined />}
-                    style={{fontWeight:'600', fontSize:'1.1rem'}}
+                    style={{ fontWeight: '600', fontSize: '1.1rem' }}
                 >
                     Notifications
                 </Button>
-                <NotificationModal open={openModal} setOpen={setOpenModal} />
+            </Tooltip>
+            <NotificationModal open={openModal} setOpen={setOpenModal} />
         </>
 
     )

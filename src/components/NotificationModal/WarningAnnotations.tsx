@@ -35,7 +35,7 @@ export default function WarningAnnotations(props: IWarningAnnotations): React.Re
         boxSizing: 'border-box',
 
     }
-    console.log('current carousel', carouselRef.current);
+    
     return (
         <section style={carouselSectionStyle}>
             {}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Anchor, Button, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from "react";
@@ -9,6 +9,13 @@ import LogoIcon from '../../assets/icons/LogoIcon';
 export default function HeaderNavBar(): React.ReactElement {
     const navigate = useNavigate();
     const context = useContext(AuthContext);
+
+
+    useEffect(() => {
+        if (context?.loading === false && context?.session) {
+            navigate('/dashboard');
+        }
+    }, [context?.loading, context?.session, navigate]);
 
 
     const HeaderNavBarStyle: React.CSSProperties = {
@@ -29,37 +36,12 @@ export default function HeaderNavBar(): React.ReactElement {
         margin: '0',
     }
 
-    const accessButton = () => {
-        if (context?.loading === false && context?.session) {
-            return (
-                <Button
-                    type='primary'
-                    size='middle'
-                    shape='round'
-                    onClick={() => { navigate('/dashboard') }}
-                >
-                    DashBoard
-                </Button>
-            )
-        } else {
-            return (
-                <Button
-                    type='primary'
-                    size='middle'
-                    shape='round'
-                    onClick={() => { navigate('/authentication') }}
-                >
-                    Sign In
-                </Button>
-            )
-        }
-    }
 
     return (
 
 
         <header style={HeaderNavBarStyle}>
-            <LogoIcon  style={{height:'40px', width: '160px'}}/>
+            <LogoIcon style={{ height: '40px', width: '160px' }} />
             <Anchor
                 bounds={100}
                 direction="horizontal"
@@ -92,7 +74,14 @@ export default function HeaderNavBar(): React.ReactElement {
                 ]}
             />
             <Space>
-                {accessButton()}
+                <Button
+                    type='primary'
+                    size='middle'
+                    shape='round'
+                    onClick={() => { navigate('/authentication') }}
+                >
+                    Sign In
+                </Button>
             </Space>
         </header>
     )

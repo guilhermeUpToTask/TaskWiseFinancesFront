@@ -5,7 +5,7 @@ import useWarningsByDate from '../../hooks/useWarningsByPredDate';
 import usePredictionDateQuery from '../../hooks/usePredictionDateQuery';
 import useWalletQuery from '../../hooks/useWalletQuery';
 import WithMsgChangeDateModal from './ChangeDateModal/WithMsgChangeDateModal';
-import { Button, Typography } from 'antd';
+import { Button, Typography, Tooltip } from 'antd';
 import { SettingOutlined, ClockCircleOutlined } from '@ant-design/icons'
 
 const { Title } = Typography;
@@ -42,14 +42,15 @@ export default function MoneyPrediction(): React.ReactElement {
                 }
             </Title>
 
-
-            <Button
-                onClick={openModal}
-                type="primary"
-                shape="circle"
-                size="large"
-                icon={<SettingOutlined />}
-            />
+            <Tooltip title="Change Prediction Date" color='rgb(72, 191, 145)'>
+                <Button
+                    onClick={openModal}
+                    type="text"
+                    shape="circle"
+                    size="large"
+                    icon={<SettingOutlined />}
+                />
+            </Tooltip>
 
 
             <WithMsgChangeDateModal

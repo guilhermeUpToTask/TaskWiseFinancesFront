@@ -24,7 +24,6 @@ const App: React.FC = () => {
       <Route index element={<LandingPage />} />
       <Route path='authentication' element={<Authentication />} />
 
-
       <Route element={<AuthRoute />}>
         <Route path='dashboard' element={<DefaultLayout />}>
           <Route index element={<Navigate to='calendar' replace={true} />} />
@@ -36,6 +35,7 @@ const App: React.FC = () => {
           <Route path='signout' element={<SignOut />} />
         </Route>
       </Route>
+      <Route path='*' element={<Navigate to='/' replace={true} />} />
     </Route>
 
   ));

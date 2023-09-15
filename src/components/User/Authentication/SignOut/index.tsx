@@ -5,7 +5,7 @@ export default function SignOut(): React.ReactElement {
     const navigate = useNavigate()
     useEffect(() => {
         supabase.auth.signOut();
-        navigate('/')
+        navigate('/authentication');
     }, []);
 
     return <></>

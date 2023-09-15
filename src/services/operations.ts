@@ -3,10 +3,8 @@ import { NewWalletOperation, WalletOperation } from "../lib/types";
 
 export  async function fetchWalletOperationsByMonth (year: number, month: number): Promise<WalletOperation[]> {
     try {
-    const {data:{data, error, message}} = await axiosInstance.get(`/wallet_operation/get_all_from_month?year=${year}&month=${month}`);
+    const {data:{data, error}} = await axiosInstance.get(`/wallet_operation/get_all_from_month?year=${year}&month=${month}`);
       if (error) throw error;
-      console.log(message);
-      console.log(data);
       return data;
     }
     catch (e) {

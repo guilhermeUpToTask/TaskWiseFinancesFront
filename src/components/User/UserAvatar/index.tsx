@@ -35,7 +35,7 @@ const context = useContext(AuthContext);
         <Dropdown menu={{ items }} trigger={['click']} placement="bottom">
             <Space>
                 <Button type='link' size='large'>
-                    <Avatar shape='circle' size={'large'} src={userAvatar} />
+                    <Avatar shape='circle' size={'large'} src={userAvatar} alt='user-avatar'/>
                     <DownOutlined />
                 </Button>
             </Space>
