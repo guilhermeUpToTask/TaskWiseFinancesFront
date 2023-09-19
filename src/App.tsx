@@ -1,7 +1,7 @@
 import React from 'react';
 import CalendarSystem from './components/CalendarSystem';
 import DefaultLayout from './components/Layouts/Default';
-import Bills from './components/Bills';
+import Annotations from './components/Annotations';
 import Relatory from './components/Relatory';
 import Authentication from './components/User/Authentication';
 import Profile from './components/User/Profile';
@@ -28,7 +28,7 @@ const App: React.FC = () => {
         <Route path='dashboard' element={<DefaultLayout />}>
           <Route index element={<Navigate to='calendar' replace={true} />} />
           <Route path='calendar' element={<CalendarSystem />} />
-          <Route path='bills' element={<Bills />} />
+          <Route path='annotations' element={<Annotations />} />
           <Route path='relatory' element={<Relatory />} />
           <Route path='profile' element={<Profile />} />
           <Route path='settings' element={<Settings />} />

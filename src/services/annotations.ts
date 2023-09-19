@@ -130,6 +130,5 @@ export function calculateFutureMoney(annotations: Annotation[], amount: number, 
         };
     }, { value: 0 });
 
-
     return amount + reduceResult.value;
 }

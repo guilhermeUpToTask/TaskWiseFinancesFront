@@ -5,6 +5,7 @@ import PaymentCard from './PaymentCard';
 import useAnnotationsByMonth from '../../../../../hooks/useAnnotationsByMonth';
 import useOperationsByMonth from '../../../../../hooks/useOperationsByMonth';
 import useWalletQuery from '../../../../../hooks/useWalletQuery';
+import useWarningsByDate from '../../../../../hooks/useWarningsByPredDate';
 import { confirmStatus, deleteAnnotation } from '../../../../../services/annotations';
 
 import dayjs from 'dayjs';
@@ -27,6 +28,9 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
         = useOperationsByMonth(dayjs(props.annotation.date));
     const { refetch: walletRefetch }
         = useWalletQuery();
+    const { refetch: warningsRefetch }
+    = useWarningsByDate();
+
 
     const [isLoading, setIsLoading] = React.useState(false);
 
@@ -34,7 +38,9 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
         AnnotationsRefetch();
         operationsRefetch();
         walletRefetch();
+        warningsRefetch();
     }
+    
 
     const onConfirmStatusHandler = async (): Promise<void> => {
         try {

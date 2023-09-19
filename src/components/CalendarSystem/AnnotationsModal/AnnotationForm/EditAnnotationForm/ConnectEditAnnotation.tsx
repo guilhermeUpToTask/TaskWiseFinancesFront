@@ -3,6 +3,7 @@ import { updateAnnotation } from "../../../../../services/annotations";
 import { Annotation } from "../../../../../lib/types";
 import React from 'react';
 import useAnnotationsByMonth from "../../../../../hooks/useAnnotationsByMonth";
+import useWarningsByDate from "../../../../../hooks/useWarningsByPredDate";
 import dayjs from "dayjs";
 
 interface IConnectCreateAnnotation {
@@ -18,9 +19,11 @@ export default function ConnectEditAnnotation(props: IConnectCreateAnnotation): 
     const [isLoading, setIsLoading] = React.useState(false);
 
 
-    const { refetch }
-        = useAnnotationsByMonth(dayjs(props.annotation.date));
 
+    const { refetch: annRefetch }
+        = useAnnotationsByMonth(dayjs(props.annotation.date));
+    const { refetch: warningsRefetch }
+        = useWarningsByDate();
 
     async function connect(updatedAnnotation: Annotation) {
         try {
@@ -29,7 +32,9 @@ export default function ConnectEditAnnotation(props: IConnectCreateAnnotation): 
 
             await updateAnnotation(updatedAnnotation);
 
-            refetch();
+            annRefetch();
+            warningsRefetch();
+
             setIsLoading(false);
             props.messageFns.onSuccess();
 

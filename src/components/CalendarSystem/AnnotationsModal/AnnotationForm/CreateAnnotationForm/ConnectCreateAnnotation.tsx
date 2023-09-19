@@ -4,6 +4,7 @@ import React from 'react';
 import { Dayjs } from "dayjs";
 import useAnnotationsByMonth from "../../../../../hooks/useAnnotationsByMonth";
 import { bulkCreateAnnotation, createAnnotation } from "../../../../../services/annotations";
+import useWarningsByDate from "../../../../../hooks/useWarningsByPredDate";
 
 interface IConnectCreateAnnotation {
     selectedDate: Dayjs,
@@ -17,9 +18,10 @@ interface IConnectCreateAnnotation {
 export default function ConnectCreateAnnotation(props: IConnectCreateAnnotation): React.ReactElement {
     const [isLoading, setIsLoading] = React.useState(false);
 
-    const { refetch }
+    const { refetch: annRefetch }
         = useAnnotationsByMonth(props.selectedDate);
-
+    const { refetch: warningsRefetch }
+        = useWarningsByDate();
 
     async function connectCreate(newAnnotation: NewAnnotation, quantity: number): Promise<boolean> {
         try {
@@ -29,8 +31,9 @@ export default function ConnectCreateAnnotation(props: IConnectCreateAnnotation)
             (quantity <= 1) ?
                 await createAnnotation(newAnnotation) : await bulkCreateAnnotation(newAnnotation, quantity);
 
-            console.log("Annotation created");
-            refetch();
+            annRefetch();
+            warningsRefetch();
+
             setIsLoading(false);
             props.messageFns.onSuccess();
             return true;

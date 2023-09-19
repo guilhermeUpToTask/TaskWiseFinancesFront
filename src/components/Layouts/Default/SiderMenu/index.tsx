@@ -13,9 +13,9 @@ export default function  SiderMenu() : React.ReactElement{
         label: <NavLink to={'/dashboard/calendar'}>Calendar</NavLink>,
       },
       {
-        key: 'bills',
+        key: 'Annotations',
         icon:<ProfileOutlined />,
-        label: <NavLink to={'/dashboard/bills'}>Bills</NavLink>,
+        label: <NavLink to={'/dashboard/annotations'}>Annotations</NavLink>,
       },
       {
         key: 'Relatory',

@@ -18,7 +18,7 @@ export default function MoneyPrediction(): React.ReactElement {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const getCalculatedPrediction = useCallback((): number => {
-        if (warnings && wallet && predictionDate) {
+        if (warnings && wallet !== undefined && predictionDate) {
             return calculateFutureMoney(warnings, wallet, dayjs(predictionDate));
         }
         return 0;
