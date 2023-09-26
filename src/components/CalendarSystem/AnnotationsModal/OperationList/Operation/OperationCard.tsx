@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, Typography } from 'antd';
-import { WalletOperation } from '../../../../lib/types';
-import { COLORS_TABLE } from '../../../../lib/constants/colors';
+import { Button, Card, ConfigProvider, Typography } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
+import { WalletOperation } from '../../../../../lib/types';
+import { COLORS_TABLE } from '../../../../../lib/constants/colors';
 import dayjs from 'dayjs';
 
 const { Meta } = Card;
@@ -9,20 +10,34 @@ const { Title } = Typography;
 
 interface OperationCardProps {
     operation: WalletOperation;
+    onDelete: (operation: WalletOperation) => void;
+    isLoading: boolean;
 }
 
 export default function OperationCard(props: OperationCardProps): React.ReactElement {
+
+
 
     const color = COLORS_TABLE[props.operation.operation_type]
     return (
         <section>
 
-
-            <Card style={{ marginTop: 16, borderColor: color }}>
+            <Card style={{ marginTop: 16, borderColor: color }}
+                title={<Title level={3} style={{ textAlign: 'center', color: color }}>
+                    {`${props.operation.name} - Wallet Operation`}
+                </Title>}
+                extra={
+                    <Button
+                        type="text"
+                        shape="circle"
+                        size='large'
+                        icon={<CloseOutlined />}
+                        loading={props.isLoading}
+                        onClick={() => props.onDelete(props.operation)}
+                    
+                    />
+                }>
                 <Meta
-                    title={<Title level={3} style={{ textAlign: 'center', color: color }}>
-                        {`${props.operation.name} - Wallet Operation`}
-                    </Title>}
                     description={props.operation.description}
                 />
                 <Title level={4}>

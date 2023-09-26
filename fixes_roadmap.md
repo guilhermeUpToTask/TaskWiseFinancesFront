@@ -26,6 +26,9 @@
 ## Need to implement future money projection - done
 ## Need to pass from EventsList to the modal of Events instead of passing from Calendar
 ## Remove automatic Pop Up of notifications
+## Reverse It back when delete a operation
+## Remove the description requiriness
+
 
 
 ## Landing Page - Fixes

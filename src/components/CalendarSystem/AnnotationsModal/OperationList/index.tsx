@@ -1,6 +1,6 @@
 import React from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import OperationCard from './OperationCard';
+import OperationCard from './Operation/OperationCard';
 import { Typography } from 'antd';
 
 import useOperationsByMonth from '../../../../hooks/useOperationsByMonth';
