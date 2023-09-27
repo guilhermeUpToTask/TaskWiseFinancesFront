@@ -1,6 +1,6 @@
 import React from 'react';
 import dayjs, { Dayjs } from 'dayjs';
-import OperationCard from './Operation/OperationCard';
+import WithMsgOperation from './Operation/WithMsgOperation';
 import { Typography } from 'antd';
 
 import useOperationsByMonth from '../../../../hooks/useOperationsByMonth';
@@ -30,7 +30,7 @@ export default function OperationList(props: OperationListProps): React.ReactEle
             return <div>No operations for this Day</div>
         }
         return filtheredOperations.map((operation) => {
-            return (<OperationCard operation={operation} key={operation.id} />)
+            return (<WithMsgOperation operation={operation} key={operation.id} />)
         })
     }
 

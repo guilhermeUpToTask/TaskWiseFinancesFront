@@ -1,6 +1,5 @@
 import React from 'react';
 import { WalletOperation } from '../../../../../lib/types';
-import { Dayjs } from 'dayjs';
 import { message } from 'antd';
 import ConnectOperation from './ConnectOperation';
 

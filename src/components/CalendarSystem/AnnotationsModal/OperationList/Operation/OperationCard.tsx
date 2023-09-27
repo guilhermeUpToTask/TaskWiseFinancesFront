@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, ConfigProvider, Typography } from 'antd';
+import { Button, Card, Typography } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { WalletOperation } from '../../../../../lib/types';
 import { COLORS_TABLE } from '../../../../../lib/constants/colors';
@@ -10,15 +10,15 @@ const { Title } = Typography;
 
 interface OperationCardProps {
     operation: WalletOperation;
-    onDelete: (operation: WalletOperation) => void;
+    onDelete: (operation_id: number) => Promise<void>;
     isLoading: boolean;
 }
 
 export default function OperationCard(props: OperationCardProps): React.ReactElement {
 
+    const color = COLORS_TABLE[props.operation.operation_type];
 
 
-    const color = COLORS_TABLE[props.operation.operation_type]
     return (
         <section>
 
@@ -33,7 +33,9 @@ export default function OperationCard(props: OperationCardProps): React.ReactEle
                         size='large'
                         icon={<CloseOutlined />}
                         loading={props.isLoading}
-                        onClick={() => props.onDelete(props.operation)}
+                        onClick={
+                            () => props.onDelete(props.operation.id)
+                        }
                     
                     />
                 }>
