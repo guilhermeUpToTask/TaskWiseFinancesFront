@@ -36,3 +36,9 @@ This project is licensed under the MIT License. Feel free to use, modify, and di
 ## Contact
 If you have any questions or inquiries, please contact us at [email protected]
 
+## Roadmap
+
+- **Make It Responsive** - ⏳ Pending
+- **Implement Tests** - ⏳ Pending
+- **Develop Lists of Annotations** - ⏳ Pending
+- **Send Alert Email When Bill is Due** - ⏳ Pending
