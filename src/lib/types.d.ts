@@ -1,3 +1,4 @@
+import Annotations from "../components/Annotations";
 import * as OPERATION_CONSTANTS from "./constants/walletOperations";
 
 export type OperationType = typeof OPERATION_CONSTANTS.INCOME_TYPE | typeof OPERATION_CONSTANTS.EXPANSE_TYPE;
@@ -18,6 +19,9 @@ export type Annotation = {
     status: AnnotationStatus,
     annon_type: AnnotationType,
     annon_type_id?: number,
+}
+export type AnnotationWithKey  = Annotation & {
+    key:number
 }
 export type NewAnnotation = {
     name: string;
