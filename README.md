@@ -42,3 +42,4 @@ If you have any questions or inquiries, please contact us at [email protected]
 - **Implement Tests** - ⏳ Pending
 - **Develop Lists of Annotations** - ⏳ Pending
 - **Send Alert Email When Bill is Due** - ⏳ Pending
+- **Move Predictions to its Own Section** - ⏳ Pending
