@@ -1,11 +1,16 @@
 import { Annotation } from "../lib/types";
-import * as ANN_CONSTANTS from "../lib/constants/annotations";[
+import * as ANN_CONSTANTS from "../lib/constants/annotations";
 
-]
+function generateUniqueId() {
+  const timestamp = Date.now(); // Current timestamp in milliseconds
+  const randomNum = Math.floor(Math.random() * 100000); // Random number between 0 and 99999
+  return parseInt(`${timestamp}${randomNum}`);
+}
+
 const fakeData: Annotation[] = [
   {
     name: 'Energy Bill',
-    id: 1,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 100.00,
@@ -15,7 +20,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Daily Payment',
-    id: 2,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.PAYMENT_TYPE,
     value: 90.00,
@@ -25,7 +30,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Water Bill',
-    id: 3,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 110.00,
@@ -35,7 +40,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Energy Bill',
-    id: 4,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 70,
@@ -45,7 +50,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Energy Bill',
-    id: 21,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 100.00,
@@ -55,7 +60,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Daily Payment',
-    id: 2231,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.PAYMENT_TYPE,
     value: 90.00,
@@ -65,7 +70,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Water Bill',
-    id: 3123,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 110.00,
@@ -75,7 +80,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Energy Bill',
-    id: 412,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 70,
@@ -85,7 +90,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Gas Bill',
-    id: 512,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 80,
@@ -95,7 +100,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Internet Payment',
-    id: 6123,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.PAYMENT_TYPE,
     value: 50,
@@ -105,7 +110,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Electricity Bill',
-    id: 7123,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 120,
@@ -115,7 +120,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Energy Bill',
-    id: 1,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 100.00,
@@ -125,7 +130,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Daily Payment',
-    id: 2,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.PAYMENT_TYPE,
     value: 90.00,
@@ -135,7 +140,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Water Bill',
-    id: 3,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 110.00,
@@ -145,7 +150,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Energy Bill',
-    id: 4,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 70,
@@ -155,7 +160,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Energy Bill',
-    id: 21,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 100.00,
@@ -165,7 +170,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Daily Payment',
-    id: 2231,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.PAYMENT_TYPE,
     value: 90.00,
@@ -175,7 +180,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Water Bill',
-    id: 3123,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 110.00,
@@ -185,7 +190,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Energy Bill',
-    id: 412,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 70,
@@ -195,7 +200,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Gas Bill',
-    id: 512,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 80,
@@ -205,7 +210,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Internet Payment',
-    id: 6123,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.PAYMENT_TYPE,
     value: 50,
@@ -215,7 +220,7 @@ const fakeData: Annotation[] = [
   },
   {
     name: 'Electricity Bill',
-    id: 7123,
+    id:generateUniqueId(),
     description: '',
     annon_type: ANN_CONSTANTS.BILL_TYPE,
     value: 120,

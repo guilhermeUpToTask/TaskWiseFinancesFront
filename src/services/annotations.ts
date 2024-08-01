@@ -15,10 +15,10 @@ export async function fetchAnnotationsByMonth(year: number, month: number): Prom
     }
 }
 
-export async function fetchAnnotationsByPagination(page:number, size:number): Promise<Annotation[]>{
+export async function fetchAllAnnotations(): Promise<Annotation[]>{
     try{
         const { data: { data, error } } = await axiosInstance
-            .get(`/annotation/get_by_page?page=${page}&size=${size}`)
+            .get(`/annotation/all`)
         if (error) throw error;
             return data as Annotation[];
     }catch(e){
@@ -27,6 +27,17 @@ export async function fetchAnnotationsByPagination(page:number, size:number): Pr
     }
 }
 
+export async function fetchAnnotationsByPagination(page:number, size:number): Promise<Annotation[]>{
+    try{
+        const { data: { data, error } } = await axiosInstance
+            .get(`/annotation/get_by_page?page=${page}&size=${size}`)
+        if (error) throw error;
+            return data as Annotation[];
+    }catch(e){
+        console.error('fetch Annotations by pagination Error:', e)
+        return []
+    }
+}
 
 export async function createAnnotation(newAnnotation: NewAnnotation): Promise<NewAnnotation | null> {
     try {

@@ -1,7 +1,8 @@
-import { Space, TableProps, Tag } from 'antd';
+import { Tag } from 'antd';
 import { AnnotationWithKey } from '../../../lib/types';
 import { ColumnsType } from 'antd/es/table';
 import type { Sorts, Filters } from '.';
+import ColumnsAction from './Actions/ColumnsActions';
 
 type TableFilter = { text: string, value: string }
 
@@ -36,7 +37,7 @@ const annonTypeFilter: TableFilter[] = [
 ]
 
 
-const getColumns = (filteredInfo: Filters, sortedInfo: Sorts)
+const columnsFactory = (filteredInfo: Filters, sortedInfo: Sorts)
     : ColumnsType<AnnotationWithKey> => [
         {
             key: 'name',
@@ -99,14 +100,7 @@ const getColumns = (filteredInfo: Filters, sortedInfo: Sorts)
         {
             key: 'actions',
             title: 'Actions',
-            render: (_: unknown, record: AnnotationWithKey) => {
-                return (
-                    <Space>
-                        <a>Edit</a>
-                        <a>Delete</a>
-                        <a>Verify - {record.name}</a>
-                    </Space>)
-            }
+            render: ColumnsAction
         }
     ]
-export default getColumns
+export default columnsFactory
