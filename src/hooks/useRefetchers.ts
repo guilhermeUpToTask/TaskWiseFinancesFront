@@ -1,6 +1,6 @@
 
 import { useMemo } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 import useAnnotationsByMonth from './useAnnotationsByMonth';
 import useOperationsByMonth from './useOperationsByMonth';
 import useWalletQuery from './useWalletQuery';
