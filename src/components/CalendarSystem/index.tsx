@@ -4,9 +4,12 @@ import dayjs, { Dayjs } from 'dayjs';
 import AnnotationsModal from './AnnotationsModal';
 import Events from './CellEvents';
 import type { Annotation, WalletOperation } from "../../lib/types";
-import useAnnotationsByMonth from '../../hooks/useAnnotationsByMonth';
+//import useAnnotationsByMonth from '../../hooks/useAnnotationsByMonth';
+import AnnotationService from '../../client/services/annotationService';
+import useDataQuery from '../../hooks/useDataQuery';
 import useOperationsByMonth from '../../hooks/useOperationsByMonth';
 import CalendarHeader from './CalendarHeader';
+import { Annotations } from '../../client/models/annotationModel';
 
 
 
@@ -24,9 +27,16 @@ export default function CalendarSystem(): React.ReactElement {
   const [monthValue, setMonthValue] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState(dayjs());
 
-  const { data: annotationsData, isLoading: annonIsLoading }
-    = useAnnotationsByMonth(monthValue);
+  //const { data: annotationsData, isLoading: annonIsLoading }
+  //= useAnnotationsByMonth(monthValue);
 
+  const { data: annotationsData, isLoading: annonIsLoading }
+    = useDataQuery(
+      ['annotations', monthValue],
+      () => AnnotationService.readAnnotationsByMonth({
+        year: monthValue.year(), month: monthValue.month()+1,
+      })
+    );
 
   const { data: operationsData, isLoading: operationsIsLoading }
     = useOperationsByMonth(monthValue);
@@ -51,11 +61,11 @@ export default function CalendarSystem(): React.ReactElement {
   }
 
 
-  const reducePropsForItems = (annotations: Annotation[], operations: WalletOperation[]) => {
+  const reducePropsForItems = (annotations: Annotations, operations: WalletOperation[]) => {
     type itemType = { name: string, type: 'expanse' | 'income' | 'payment' | 'bill' }
 
     const itens: itemType[] = annotations.map(annotation => {
-      return { name: annotation.name, type: annotation.annon_type }
+      return { name: annotation.name, type: annotation.type }
     })
 
     itens.push(...operations.map(operation => {
