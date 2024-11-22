@@ -1,0 +1,73 @@
+import React from "react";
+import { Card, ConfigProvider, Typography } from 'antd';
+import { Annotation } from "../../../../client/models/annotationModel";
+import { DeleteButton, EditButton } from "./AnotationCards/CardsActions";
+import AnnotationBttn from "../../../commun/UI/Annotation/AnnotationBttn";
+import AnnotationStatus from "../../../commun/UI/Annotation/AnnotationStatus";
+const { Meta } = Card;
+const { Title } = Typography;
+
+interface IAnnotationCard {
+    annotation: Annotation,
+}
+
+export default function AnnotationCard(props: IAnnotationCard): React.ReactElement {
+    const mainColor = props.annotation.type === 'bill' ? 'red' : 'green';
+
+    const [showEdit, setShowEdit] = React.useState(false);
+
+    console.log('annotation card',props.annotation)
+
+    const onDelete = () => {
+       // props.onDelete();
+        console.log('delete', props.annotation.id);
+    }
+    const onRecived = () => {
+        //props.onRecived();
+
+        console.log('payed', props.annotation.id);
+    }
+
+    const onEdit = () => {
+        setShowEdit(!showEdit);
+    }
+
+    const displayEditForm = () => {
+        //     return (showEdit) ?
+        //       <WithMsgEditAnn annotation={props.annotation} />
+        //     : null;
+    }
+
+    return (
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimary: mainColor,
+                },
+            }}
+        >
+            <Card style={{ marginTop: 16, borderColor: mainColor }}
+
+                actions={
+                    [< EditButton onClick={onEdit} />,
+                    <AnnotationBttn
+                        onClick={onRecived}
+                        type={props.annotation.type}
+                        disabled={false}
+                       // isLoading={props.isLoading}
+                    />,
+                    <DeleteButton onClick={onDelete} />,
+                    ]} >
+                <Meta
+                    title={<Title level={3} style={{ textAlign: 'center', color: mainColor }}>{props.annotation.name}</Title>}
+                    description={props.annotation.description}
+                />
+                <Title level={4}>Current {props.annotation.type}: <span style={{ color: mainColor, fontWeight: 'bold' }}>${props.annotation.value}</span></Title>
+                <Title level={4}>Current Status: <AnnotationStatus status={props.annotation.status} /></Title>
+            </Card>
+
+            {/*displayEditForm()*/}
+
+        </ConfigProvider>
+    )
+}

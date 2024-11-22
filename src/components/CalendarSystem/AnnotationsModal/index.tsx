@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Typography } from 'antd';
-import AnotationList from './AnotationList';
+import AnnotationList from './AnnotationList';
 import OperationList from './OperationList';
 import { Dayjs } from 'dayjs';
 import CreateAnnotationPanel from './CreateAnnotationPanel';
@@ -30,8 +30,8 @@ export default function AnnotationModal(props: IAnnotationModalProps): React.Rea
       onOk={props.closeModal}
       width={1000}
     >
-
-      <AnotationList annotations={props.annotationsFromDate? props.annotationsFromDate : []} />
+      {props.annotationsFromDate ? <AnnotationList annotations={props.annotationsFromDate}/>: <>No Annotations</>}
+      
       <CreateAnnotationPanel selectedDate={props?.selectedDate} />
       <OperationList seletectedDate={props.selectedDate} />
 

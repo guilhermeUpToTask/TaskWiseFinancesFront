@@ -9,7 +9,7 @@ export type AnnotationRepeat = 'never' | 'day' | 'week' | 'month';
 
 
 //need to find a way to optionaly have id without have conflicts
-export type Annotation = {
+/*export type Annotation = {
     id: number,
     name: string,
     description: string,
@@ -19,7 +19,7 @@ export type Annotation = {
     status: AnnotationStatus,
     annon_type: AnnotationType,
     annon_type_id?: number,
-}
+}*/
 export type AnnotationWithKey  = Annotation & {
     key:number
 }
