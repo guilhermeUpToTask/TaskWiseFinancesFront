@@ -1,5 +1,6 @@
 import React from 'react';
-import { Annotation, AnnotationType } from '../../../../../lib/types';
+import { AnnotationType } from '../../../../../lib/types';
+import { Annotation } from '../../../../../client/models/annotationModel';
 import BillCard from './BillCard';
 import PaymentCard from './PaymentCard';
 import useAnnotationsByMonth from '../../../../../hooks/useAnnotationsByMonth';
@@ -49,7 +50,7 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
                 name: props.annotation.name,
                 status: props.annotation.status,
                 value: props.annotation.value,
-                annon_type: props.annotation.annon_type,
+                annon_type: props.annotation.type,
             };
 
             setIsLoading(true);
@@ -81,6 +82,7 @@ export default function ConnectAnnotationCard(props: IConnectAnnotationCard): Re
         }
     }
 
+    //need to reafactor to a generic card
     if (props.annon_type === 'bill') {
         return (<BillCard
             annotation={props.annotation}

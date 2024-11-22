@@ -3,42 +3,32 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Typography } from 'antd';
 import WithMsgAnnCard from './AnotationCards/WithMsgAnnCard';
 import useAnnotationsByMonth from '../../../../hooks/useAnnotationsByMonth';
+import { Annotations } from '../../../../client/models/annotationModel';
 
 
 const { Title } = Typography;
 
 
 interface IAnnotationListProps {
-    selectedDate: Dayjs;
+    annotations: Annotations
 }
 
 export default function AnnotationList(props: IAnnotationListProps): React.ReactElement {
-    const { data: anotations, isLoading, error } = useAnnotationsByMonth(props.selectedDate);
 
 
 
     const displayAnotations = () => {
-        if (isLoading) {
-            return <div>Loading...</div>
-        }
-        if (error) {
-            console.error(error);
-            return <div>Error...</div>
-        }
-        const filtheredAnnotations = (anotations && props.selectedDate) ?
-            anotations.filter(annotation => dayjs(annotation.date).isSame(props.selectedDate, 'day')) :
-            [];
 
-        if (!filtheredAnnotations || filtheredAnnotations.length === 0) {
+        if (props.annotations.length === 0) {
             return <div>No Annotations</div>
         }
-        if (filtheredAnnotations.length > 0) {
-            return filtheredAnnotations.map(annotation => {
+        if (props.annotations.length > 0) {
+            return props.annotations.map(annotation => {
 
                 return <WithMsgAnnCard
                     annotation={annotation}
                     key={annotation.id}
-                    annon_type={annotation.annon_type}
+                    annon_type={annotation.type}
                 />
             })
         }

@@ -1,6 +1,6 @@
 import { Button, Form, Input, InputNumber, Select } from 'antd';
 import React from 'react';
-import type { Annotation } from '../../../../../lib/types';
+import { Annotation } from '../../../../../client/models/annotationModel';
 
 interface IEditAnnotation {
     annotation: Annotation;
@@ -34,7 +34,7 @@ export default function EditAnnotation(props: IEditAnnotation): React.ReactEleme
             date: props.annotation.date, // for now we will not edit the date
             status: props.annotation.status, // we need a option to change the status
             repeat: props.annotation.repeat,
-            annon_type: values.annotation_type,
+            type: values.annotation_type,
             value: values.annotation_value,
         }
         props.connect(updatedAnnotation);
@@ -50,7 +50,7 @@ export default function EditAnnotation(props: IEditAnnotation): React.ReactEleme
             initialValues={{
                 annotation_name: props.annotation.name,
                 annotation_description: props.annotation.description,
-                annotation_type: props.annotation.annon_type,
+                annotation_type: props.annotation.type,
                 annotation_value: props.annotation.value,
 
             }}

@@ -58,6 +58,7 @@ export default function CalendarSystem(): React.ReactElement {
   }
 
   const onCellClickHandler = (date: Dayjs) => {
+    console.log("clicked")
     setSelectedDate(date);
     showModal();
   }
@@ -72,11 +73,17 @@ export default function CalendarSystem(): React.ReactElement {
     const dateKey = date.format('YYYY-MM-DD');
     const items = groupedAnnotations?.[dateKey] || []; // Access grouped data directly
 
-    if (!items.length) {
-      return null; // No events to display
-    }
-
-    return <Events itens={items} onCellClick={() => onCellClickHandler(date)} />;
+    return (
+      <div
+        onClick={() => onCellClickHandler(date)}
+      >
+        {items.length > 0 ? (
+          <Events itens={items} />
+        ) : (
+          <span style={{ color: '#bfbfbf' }}>+ Add Annotation</span>
+        )}
+      </div>
+    );
   };
 
 
@@ -95,7 +102,7 @@ export default function CalendarSystem(): React.ReactElement {
             />
         }
         cellRender={cellRender} />
-      <AnnotationsModal selectedDate={selectedDate} open={open} closeModal={closeModal} />
+      <AnnotationsModal selectedDate={selectedDate} open={open} closeModal={closeModal} annotationsFromDate={groupedAnnotations?.[selectedDate.format('YYYY-MM-DD')]}/>
     </>
   )
 }

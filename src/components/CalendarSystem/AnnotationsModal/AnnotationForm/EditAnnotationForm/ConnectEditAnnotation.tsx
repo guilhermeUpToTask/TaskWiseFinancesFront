@@ -1,6 +1,6 @@
 import EditAnnotation from "./EditAnnotation";
 import { updateAnnotation } from "../../../../../services/annotations";
-import { Annotation } from "../../../../../lib/types";
+import { Annotation } from "../../../../../client/models/annotationModel";
 import React from 'react';
 import useAnnotationsByMonth from "../../../../../hooks/useAnnotationsByMonth";
 import useWarningsByDate from "../../../../../hooks/useWarningsByPredDate";
@@ -30,7 +30,7 @@ export default function ConnectEditAnnotation(props: IConnectCreateAnnotation): 
             setIsLoading(true);
             props.messageFns.onLoading();
 
-            await updateAnnotation(updatedAnnotation);
+           // await updateAnnotation(updatedAnnotation);
 
             annRefetch();
             warningsRefetch();

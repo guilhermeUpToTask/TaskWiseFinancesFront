@@ -3,7 +3,7 @@ import { Card, ConfigProvider, Typography } from 'antd';
 import { EditButton, DeleteButton } from "./CardsActions";
 import AnnotationBttn from "../../../../commun/UI/Annotation/AnnotationBttn";
 import AnnotationStatus from "../../../../commun/UI/Annotation/AnnotationStatus";
-import type { Annotation } from "../../../../../lib/types";
+import { Annotation } from "../../../../../client/models/annotationModel";
 import WithMsgEditAnn from "../../AnnotationForm/EditAnnotationForm/WithMsgEditAnn";
 
 const { Meta } = Card;
@@ -55,7 +55,7 @@ export default function BillCard(props: BillCardProps): React.ReactElement {
                 actions={
                     [< EditButton onClick={onEdit} />,
                     <AnnotationBttn onClick={onPay}
-                        type={props.annotation.annon_type}
+                        type={props.annotation.type}
                         disabled={(props.annotation.status === 'payed')}
                         isLoading={props.isLoading}  
                     />,

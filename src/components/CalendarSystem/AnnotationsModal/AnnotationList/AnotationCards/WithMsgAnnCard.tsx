@@ -1,5 +1,6 @@
 import React from 'react';
-import { Annotation, AnnotationType } from '../../../../../lib/types';
+import {AnnotationType } from '../../../../../lib/types';
+import { Annotation } from '../../../../../client/models/annotationModel';
 import { message } from 'antd';
 import ConnectAnnotationCard from './ConnectAnnotationCard';
 

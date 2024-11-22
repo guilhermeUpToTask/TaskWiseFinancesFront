@@ -4,6 +4,7 @@ import AnotationList from './AnotationList';
 import OperationList from './OperationList';
 import { Dayjs } from 'dayjs';
 import CreateAnnotationPanel from './CreateAnnotationPanel';
+import { Annotations } from '../../../client/models/annotationModel';
 
 const { Title } = Typography;
 
@@ -11,9 +12,11 @@ interface IAnnotationModalProps {
   open: boolean;
   closeModal: () => void;
   selectedDate: Dayjs;
+  annotationsFromDate: Annotations | undefined
 }
 
 export default function AnnotationModal(props: IAnnotationModalProps): React.ReactElement {
+  console.log('new way',props.annotationsFromDate)
 
   return (
     <Modal
@@ -27,7 +30,8 @@ export default function AnnotationModal(props: IAnnotationModalProps): React.Rea
       onOk={props.closeModal}
       width={1000}
     >
-      <AnotationList selectedDate={props?.selectedDate} />
+
+      <AnotationList annotations={props.annotationsFromDate? props.annotationsFromDate : []} />
       <CreateAnnotationPanel selectedDate={props?.selectedDate} />
       <OperationList seletectedDate={props.selectedDate} />
 

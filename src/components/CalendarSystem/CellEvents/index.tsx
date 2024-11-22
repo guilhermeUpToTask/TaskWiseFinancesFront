@@ -23,7 +23,6 @@ const IconTable: IconTableType = {
 
 interface ICellEventsProps {
     itens: { name: string, type: itemType }[]
-    onCellClick: () => void
 }
 
 export default function CellEvents(props: ICellEventsProps): React.ReactElement {
@@ -72,7 +71,7 @@ export default function CellEvents(props: ICellEventsProps): React.ReactElement 
     }
 
     return (
-        <section style={{ height: '100%' }} onClick={props.onCellClick}>
+        <section style={{ height: '100%' }}>
             <article style={CellEventsStyle}>
                 {renderItems()}
             </article>
