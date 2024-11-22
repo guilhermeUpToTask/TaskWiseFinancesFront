@@ -38,3 +38,7 @@ export type UpdateAnnotationStatus ={
 export type DeleteAnnotation = {
     id: number;
 }
+
+export type GroupedAnnotations = {
+    [date: string]: Annotation[];
+}

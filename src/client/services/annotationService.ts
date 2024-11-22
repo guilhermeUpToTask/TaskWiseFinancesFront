@@ -1,4 +1,4 @@
-import { Annotations, Annotation, CreateAnnotation, UpdateAnnotation } from "../models/annotationModel"
+import { Annotations, Annotation, CreateAnnotation, UpdateAnnotation, GroupedAnnotations } from "../models/annotationModel"
 import axiosInstance from "../../axiosInstance"
 import { request as __request } from "../core/request"
 
@@ -43,17 +43,19 @@ export default class AnnotationService {
         const {id} = data
         return __request({
             method:'GET',
-            url:'/annotation/${id}',
+            url:'/annotation/{id}',
             path:{id}
         }, axiosInstance)
     }
 
-    public static readAnnotationsByMonth(data:TDataReadAnnotationsByMonth):Promise<Annotations>{
+
+    //needs to return the data from req not the the entire axios response
+    public static readAnnotationsByMonth(data:TDataReadAnnotationsByMonth):Promise<GroupedAnnotations>{
         const {year, month} = data
         return __request({
             method:'GET',
-            url:'/annotation/get_all_from_month?year=${year}&month=${month}',
-            path:{year, month}
+            url:'/annotation/get_all_from_month',
+            query:{year, month}
         }, axiosInstance)
     }
 
@@ -69,7 +71,7 @@ export default class AnnotationService {
         const {id, body} = data
         return __request({
             method:'PUT',
-            url:'/annotation/${id}',
+            url:'/annotation/{id}',
             path:{id},
             body:body
         }, axiosInstance)
@@ -78,7 +80,7 @@ export default class AnnotationService {
         const {id} = data
         return __request({
             method:'DELETE',
-            url:'/annotation/${id}',
+            url:'/annotation/{id}',
             path:{id}
         }, axiosInstance)
     }

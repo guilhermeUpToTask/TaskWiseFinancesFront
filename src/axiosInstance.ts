@@ -1,7 +1,7 @@
 import axios from 'axios';
 import supabase from './supabaseClient';
 
-const API_URL = 'https://task-wise-finances-back.vercel.app/';
+const API_URL = 'http://localhost:3000';
 //const DEV_API_URL = 'http://localhost:3000/';
 
 const axiosInstance = axios.create({

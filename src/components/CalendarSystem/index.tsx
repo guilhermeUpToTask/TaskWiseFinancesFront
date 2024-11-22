@@ -30,7 +30,7 @@ export default function CalendarSystem(): React.ReactElement {
   //const { data: annotationsData, isLoading: annonIsLoading }
   //= useAnnotationsByMonth(monthValue);
 
-  const { data: annotationsData, isLoading: annonIsLoading }
+  const { data: groupedAnnotations, isLoading: groupedAnnotationsIsLoading }
     = useDataQuery(
       ['annotations', monthValue],
       () => AnnotationService.readAnnotationsByMonth({
@@ -38,8 +38,10 @@ export default function CalendarSystem(): React.ReactElement {
       })
     );
 
-  const { data: operationsData, isLoading: operationsIsLoading }
-    = useOperationsByMonth(monthValue);
+
+  //need to group the date of operations aswell
+  //const { data: operationsData, isLoading: operationsIsLoading }
+    //= useOperationsByMonth(monthValue);
 
   const showModal = () => {
     setOpen(true);
@@ -60,40 +62,21 @@ export default function CalendarSystem(): React.ReactElement {
     showModal();
   }
 
-
-  const reducePropsForItems = (annotations: Annotations, operations: WalletOperation[]) => {
-    type itemType = { name: string, type: 'expanse' | 'income' | 'payment' | 'bill' }
-
-    const itens: itemType[] = annotations.map(annotation => {
-      return { name: annotation.name, type: annotation.type }
-    })
-
-    itens.push(...operations.map(operation => {
-
-      return { name: operation.name, type: operation.operation_type }
-    }));
-
-    return itens;
-  }
-
+  // Render events for a given day using the pre-grouped data
   const cellRender = (date: Dayjs) => {
-    //here we will show the anotations for that day
-    //when using onclick, only inside the cell is triggreble not the whole cell
-
-    if (annonIsLoading || !annotationsData || operationsIsLoading || !operationsData)
-      return (<Skeleton active paragraph={{ rows: 2 }} title={false} />);
-
-
-    const cellAnnotations = annotationsData.filter(annotation => dayjs(annotation.date).isSame(date, 'day'));
-    const cellOperations = operationsData.filter(operation => dayjs(operation.date).isSame(date, 'day'));
-
-    if (!cellAnnotations || !cellOperations) {
-      return null;
+    if (groupedAnnotationsIsLoading) {
+      return <Skeleton active paragraph={{ rows: 2 }} title={false} />;
     }
 
-    return (
-      <Events itens={reducePropsForItems(cellAnnotations, cellOperations)} onCellClick={() => onCellClickHandler(date)} />
-    );
+
+    const dateKey = date.format('YYYY-MM-DD');
+    const items = groupedAnnotations?.[dateKey] || []; // Access grouped data directly
+
+    if (!items.length) {
+      return null; // No events to display
+    }
+
+    return <Events itens={items} onCellClick={() => onCellClickHandler(date)} />;
   };
 
 
