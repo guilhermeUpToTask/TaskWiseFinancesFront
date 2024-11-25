@@ -11,6 +11,7 @@ interface IAnnotationCard {
     annotation: Annotation,
 }
 
+
 export default function AnnotationCard(props: IAnnotationCard): React.ReactElement {
     const mainColor = props.annotation.type === 'bill' ? 'red' : 'green';
 
@@ -53,7 +54,7 @@ export default function AnnotationCard(props: IAnnotationCard): React.ReactEleme
                     <AnnotationBttn
                         onClick={onRecived}
                         type={props.annotation.type}
-                        disabled={false}
+                        disabled={props.annotation.status === 'recived' || props.annotation.status === 'payed'}
                        // isLoading={props.isLoading}
                     />,
                     <DeleteButton onClick={onDelete} />,

@@ -25,7 +25,6 @@ export default function AnnotationList(props: IAnnotationListProps): React.React
         }
         if (props.annotations.length > 0) {
             return props.annotations.map(annotation => {
-                console.log('each annotation',annotation)
                 return <AnnotationCard
                     annotation={annotation}
                     key={annotation.id}/>
