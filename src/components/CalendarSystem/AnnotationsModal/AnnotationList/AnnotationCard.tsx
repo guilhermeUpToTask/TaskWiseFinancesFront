@@ -1,9 +1,13 @@
 import React from "react";
 import { Card, ConfigProvider, Typography } from 'antd';
-import { Annotation } from "../../../../client/models/annotationModel";
+import { Annotation, DeleteAnnotation } from "../../../../client/models/annotationModel";
 import { DeleteButton, EditButton } from "./AnotationCards/CardsActions";
 import AnnotationBttn from "../../../commun/UI/Annotation/AnnotationBttn";
 import AnnotationStatus from "../../../commun/UI/Annotation/AnnotationStatus";
+import { useMutationWithMessage } from "../../../../hooks/useMutationWithMessage";
+import AnnotationService from "../../../../client/services/annotationService";
+
+
 const { Meta } = Card;
 const { Title } = Typography;
 
@@ -14,6 +18,8 @@ interface IAnnotationCard {
 
 export default function AnnotationCard(props: IAnnotationCard): React.ReactElement {
     const mainColor = props.annotation.type === 'bill' ? 'red' : 'green';
+    const {mutate} = useMutationWithMessage<DeleteAnnotation, Annotation>(AnnotationService.deleteAnnotation);
+
 
     const [showEdit, setShowEdit] = React.useState(false);
 
@@ -21,6 +27,7 @@ export default function AnnotationCard(props: IAnnotationCard): React.ReactEleme
 
     const onDelete = () => {
        // props.onDelete();
+       mutate(props.annotation.id)
         console.log('delete', props.annotation.id);
     }
     const onRecived = () => {
