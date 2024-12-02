@@ -1,11 +1,11 @@
 import React from "react";
 import { Card, ConfigProvider, Typography } from 'antd';
-import { Annotation, DeleteAnnotation } from "../../../../client/models/annotationModel";
+import { Annotation } from "../../../../client/models/annotationModel";
 import { DeleteButton, EditButton } from "./AnotationCards/CardsActions";
 import AnnotationBttn from "../../../commun/UI/Annotation/AnnotationBttn";
 import AnnotationStatus from "../../../commun/UI/Annotation/AnnotationStatus";
 import { useMutationWithMessage } from "../../../../hooks/useMutationWithMessage";
-import AnnotationService from "../../../../client/services/annotationService";
+import AnnotationService, { TDataDeleteAnnotation } from "../../../../client/services/annotationService";
 
 
 const { Meta } = Card;
@@ -18,7 +18,8 @@ interface IAnnotationCard {
 
 export default function AnnotationCard(props: IAnnotationCard): React.ReactElement {
     const mainColor = props.annotation.type === 'bill' ? 'red' : 'green';
-    const {mutate} = useMutationWithMessage<DeleteAnnotation, Annotation>({
+
+    const {mutate, isLoading} = useMutationWithMessage<TDataDeleteAnnotation, Annotation>({
         serviceFunction:AnnotationService.deleteAnnotation,
         queryKey:'annotations'
     });
@@ -26,12 +27,8 @@ export default function AnnotationCard(props: IAnnotationCard): React.ReactEleme
 
     const [showEdit, setShowEdit] = React.useState(false);
 
-    console.log('annotation card',props.annotation)
-
     const onDelete = () => {
-       // props.onDelete();
        mutate({id:props.annotation.id})
-        console.log('delete', props.annotation.id);
     }
     const onRecived = () => {
         //props.onRecived();
@@ -65,7 +62,7 @@ export default function AnnotationCard(props: IAnnotationCard): React.ReactEleme
                         onClick={onRecived}
                         type={props.annotation.type}
                         disabled={props.annotation.status === 'recived' || props.annotation.status === 'payed'}
-                       // isLoading={props.isLoading}
+                        isLoading={isLoading}
                     />,
                     <DeleteButton onClick={onDelete} />,
                     ]} >
