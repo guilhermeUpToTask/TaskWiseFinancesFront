@@ -24,10 +24,8 @@ export default function CreateAnnotationForm(props: ICreateAnnotationForm): Reac
     const [currentRepeat, setCurrentRepeat] = React.useState<string>('never');
     const {mutate, isLoading, isSuccess} = useMutationWithMessage<TDataCreateAnnotation, Annotation>({
         serviceFunction:AnnotationService.createAnnotation,
-        queryKey:'annotation'
+        queryKey:'annotations'
     })
-
-
 
 
     const onReset = () => {
@@ -35,7 +33,6 @@ export default function CreateAnnotationForm(props: ICreateAnnotationForm): Reac
     };
 
     const onFinish = async (values: any) => {
-        console.log('Success:', values);
 
         const newAnnotation: CreateAnnotation = {
             name: values.annotation_name,
