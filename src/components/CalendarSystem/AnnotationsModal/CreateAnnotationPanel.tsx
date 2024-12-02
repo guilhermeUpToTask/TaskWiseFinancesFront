@@ -1,6 +1,7 @@
 import React from 'react';
 import { Collapse } from 'antd';
 import WithMsgCreateAnn from './AnnotationForm/CreateAnnotationForm/WithMsgCreateAnn';
+import CreateAnnotationForm from './AnnotationForm/CreateAnnotationForm';
 import { Dayjs } from 'dayjs';
 
 const { Panel } = Collapse;
@@ -16,7 +17,7 @@ export default function CreateAnnotationPanel(props: ICreateAnnotationPanelProps
 
         <Collapse size="large" >
             <Panel header="Create new Anotation for this Date" key="1" >
-                <WithMsgCreateAnn selectedDate={props.selectedDate} />
+                <CreateAnnotationForm selectedDate={props.selectedDate} />
             </Panel>
         </Collapse>
     )
