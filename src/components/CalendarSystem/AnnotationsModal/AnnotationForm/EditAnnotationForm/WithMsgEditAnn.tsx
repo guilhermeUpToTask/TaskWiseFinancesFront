@@ -1,5 +1,5 @@
 import React from 'react';
-import { Annotation } from '../../../../../lib/types';
+import { Annotation } from '../../../../../client/models/annotationModel';
 import { message } from 'antd';
 import ConnectEditAnnotation from './ConnectEditAnnotation';
 

@@ -83,10 +83,10 @@ export async function updateAnnotation(updatedAnnotation: Annotation): Promise<A
     }
 }
 
-export async function deleteAnnotation(annotationId: number): Promise<Annotation | null> {
+export async function deleteAnnotation(TData:{annotationId: number}): Promise<Annotation | null> {
     try {
         const { data: { data, error, message } } =
-            await axiosInstance.delete(`/annotation/delete?annotation_id=${annotationId}`);
+            await axiosInstance.delete(`/annotation/delete?annotation_id=${TData.annotationId}`);
         if (error) throw new Error(message);
 
         return data as Annotation;

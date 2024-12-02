@@ -18,7 +18,10 @@ interface IAnnotationCard {
 
 export default function AnnotationCard(props: IAnnotationCard): React.ReactElement {
     const mainColor = props.annotation.type === 'bill' ? 'red' : 'green';
-    const {mutate} = useMutationWithMessage<DeleteAnnotation, Annotation>(AnnotationService.deleteAnnotation);
+    const {mutate} = useMutationWithMessage<DeleteAnnotation, Annotation>({
+        serviceFunction:AnnotationService.deleteAnnotation,
+        queryKey:'annotations'
+    });
 
 
     const [showEdit, setShowEdit] = React.useState(false);
@@ -27,7 +30,7 @@ export default function AnnotationCard(props: IAnnotationCard): React.ReactEleme
 
     const onDelete = () => {
        // props.onDelete();
-       mutate(props.annotation.id)
+       mutate({id:props.annotation.id})
         console.log('delete', props.annotation.id);
     }
     const onRecived = () => {

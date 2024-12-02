@@ -63,7 +63,7 @@ export default class AnnotationService {
         const {body} = data
         return __request({
             method:'POST',
-            url:'/annotation/',
+            url:'/annotation/create',
             body:body
         }, axiosInstance)
     }
@@ -71,17 +71,18 @@ export default class AnnotationService {
         const {id, body} = data
         return __request({
             method:'PUT',
-            url:'/annotation/{id}',
-            path:{id},
-            body:body
+            url:'/annotation/',
+            //this is hideous code, we need to refactor the backend endpoints asp
+            body:{id, ...body}
         }, axiosInstance)
     }
     public static deleteAnnotation(data:TDataDeleteAnnotation):Promise<Annotation>{
         const {id} = data
+        const annotation_id = id
         return __request({
             method:'DELETE',
-            url:'/annotation/{id}',
-            path:{id}
+            url:'/annotation/delete',
+            query:{annotation_id}
         }, axiosInstance)
     }
 }
