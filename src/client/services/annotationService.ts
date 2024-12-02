@@ -71,7 +71,7 @@ export default class AnnotationService {
         const {id, body} = data
         return __request({
             method:'PUT',
-            url:'/annotation/',
+            url:'/annotation/update',
             //this is hideous code, we need to refactor the backend endpoints asp
             body:{id, ...body}
         }, axiosInstance)
