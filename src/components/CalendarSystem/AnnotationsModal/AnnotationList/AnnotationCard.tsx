@@ -6,6 +6,7 @@ import AnnotationBttn from "../../../commun/UI/Annotation/AnnotationBttn";
 import AnnotationStatus from "../../../commun/UI/Annotation/AnnotationStatus";
 import { useMutationWithMessage } from "../../../../hooks/useMutationWithMessage";
 import AnnotationService, { TDataDeleteAnnotation } from "../../../../client/services/annotationService";
+import EditAnnotationForm from "../AnnotationForm/EditAnnotationForm";
 
 
 const { Meta } = Card;
@@ -41,9 +42,9 @@ export default function AnnotationCard(props: IAnnotationCard): React.ReactEleme
     }
 
     const displayEditForm = () => {
-        //     return (showEdit) ?
-        //       <WithMsgEditAnn annotation={props.annotation} />
-        //     : null;
+        return (showEdit) ?
+               <EditAnnotationForm annotation={props.annotation} />
+         : null;
     }
 
     return (
@@ -74,7 +75,7 @@ export default function AnnotationCard(props: IAnnotationCard): React.ReactEleme
                 <Title level={4}>Current Status: <AnnotationStatus status={props.annotation.status} /></Title>
             </Card>
 
-            {/*displayEditForm()*/}
+            {displayEditForm()}
 
         </ConfigProvider>
     )
