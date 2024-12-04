@@ -1,6 +1,5 @@
 import React from 'react';
 import { Collapse } from 'antd';
-import WithMsgCreateAnn from './AnnotationForm/CreateAnnotationForm/WithMsgCreateAnn';
 import CreateAnnotationForm from './AnnotationForm/CreateAnnotationForm';
 import { Dayjs } from 'dayjs';
 

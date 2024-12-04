@@ -23,7 +23,6 @@ export default function EditAnnotationForm(props: IEditAnnotationForm): React.Re
     const [form] = Form.useForm();
     const {mutate, isLoading} = useMutationWithMessage<TDataUpdateAnnotation,Annotation>({
         serviceFunction:AnnotationService.updateAnnotation,
-        queryKey:'annotations'
     })
 
 

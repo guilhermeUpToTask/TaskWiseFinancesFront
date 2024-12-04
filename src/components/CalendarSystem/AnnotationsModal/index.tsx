@@ -31,7 +31,6 @@ export default function AnnotationModal(props: IAnnotationModalProps): React.Rea
       width={1000}
     >
       {props.annotationsFromDate ? <AnnotationList annotations={props.annotationsFromDate}/>: <>No Annotations</>}
-      
       <CreateAnnotationPanel selectedDate={props?.selectedDate} />
       <OperationList seletectedDate={props.selectedDate} />
 

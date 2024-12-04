@@ -1,11 +1,12 @@
 import React from "react";
 import { Card, ConfigProvider, Typography } from 'antd';
-import { Annotation } from "../../../../client/models/annotationModel";
+import { Annotation, UpdateAnnotation } from "../../../../client/models/annotationModel";
 import { DeleteButton, EditButton } from "./AnotationCards/CardsActions";
 import AnnotationBttn from "../../../commun/UI/Annotation/AnnotationBttn";
 import AnnotationStatus from "../../../commun/UI/Annotation/AnnotationStatus";
+import { AnnotationStatus as AnnotationStatusType } from "../../../../lib/types";
 import { useMutationWithMessage } from "../../../../hooks/useMutationWithMessage";
-import AnnotationService, { TDataDeleteAnnotation } from "../../../../client/services/annotationService";
+import AnnotationService, { TDataDeleteAnnotation, TDataUpdateAnnotation } from "../../../../client/services/annotationService";
 import EditAnnotationForm from "../AnnotationForm/EditAnnotationForm";
 
 
@@ -16,14 +17,24 @@ interface IAnnotationCard {
     annotation: Annotation,
 }
 
+const AnnotationTypeToStatus:{[key: string]:AnnotationStatusType} = {
+    'bill': 'payed',
+    'payment': 'recived'
+}
+const AnnotationTypeToColor = {
+    'bill': 'red',
+    'payment': 'green'
+}
 
 export default function AnnotationCard(props: IAnnotationCard): React.ReactElement {
-    const mainColor = props.annotation.type === 'bill' ? 'red' : 'green';
+    const mainColor = AnnotationTypeToColor[props.annotation.type]
 
-    const {mutate, isLoading} = useMutationWithMessage<TDataDeleteAnnotation, Annotation>({
+    const {mutate} = useMutationWithMessage<TDataDeleteAnnotation, Annotation>({
         serviceFunction:AnnotationService.deleteAnnotation,
-        queryKey:'annotations'
     });
+    const {mutate:confirmMutate, isLoading: onConfirmIsLoading} = useMutationWithMessage<TDataUpdateAnnotation, Annotation>({
+        serviceFunction: AnnotationService.updateAnnotation,
+    })
 
 
     const [showEdit, setShowEdit] = React.useState(false);
@@ -31,10 +42,13 @@ export default function AnnotationCard(props: IAnnotationCard): React.ReactEleme
     const onDelete = () => {
        mutate({id:props.annotation.id})
     }
-    const onRecived = () => {
-        //props.onRecived();
 
-        console.log('payed', props.annotation.id);
+    const onConfirm = () =>{
+        const status = AnnotationTypeToStatus[props.annotation.type]
+        if (status) {
+        const newAnnotation: UpdateAnnotation ={...props.annotation, status}
+        confirmMutate({id:props.annotation.id,body:newAnnotation})
+    }
     }
 
     const onEdit = () => {
@@ -60,10 +74,10 @@ export default function AnnotationCard(props: IAnnotationCard): React.ReactEleme
                 actions={
                     [< EditButton onClick={onEdit} />,
                     <AnnotationBttn
-                        onClick={onRecived}
+                        onClick={onConfirm}
                         type={props.annotation.type}
                         disabled={props.annotation.status === 'recived' || props.annotation.status === 'payed'}
-                        isLoading={isLoading}
+                        isLoading={onConfirmIsLoading}
                     />,
                     <DeleteButton onClick={onDelete} />,
                     ]} >

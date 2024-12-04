@@ -1,12 +1,12 @@
 import React from 'react';
-import { AnnotationStatus } from '../../../../lib/types';
+import { AnnotationStatus as AnnotationStatusType } from '../../../../lib/types';
 import * as ANN_CONSTANTS from '../../../../lib/constants/annotations';
 import { YELLOW, RED, GREEN } from '../../../../lib/constants/colors';
 import { WarningOutlined, WarningFilled, CheckCircleFilled, CheckCircleOutlined } from '@ant-design/icons';
 import { Dayjs } from 'dayjs';
 
 interface IAnnotationStatusProps {
-    status: AnnotationStatus,
+    status: AnnotationStatusType,
     checked_date?: Dayjs // for later implementations
 }
 

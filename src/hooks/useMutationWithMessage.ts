@@ -42,6 +42,8 @@ export const useMutationWithMessage = <TVariables, TData>(
             // Invalidate the query cache to trigger a refetch
             if (queryKey) {
               queryClient.refetchQueries(queryKey)
+            }else{
+              queryClient.refetchQueries()
             }
           },
           onError: (error) => {
