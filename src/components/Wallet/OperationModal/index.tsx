@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Typography, ConfigProvider } from 'antd';
 import WithMsgFeedBackForm from './Form/WithMsgFeedBackForm';
+import OperationForm from './OperationForm';
 import { OperationType } from '../../../lib/types';
 
 const { Title } = Typography;
@@ -42,7 +43,7 @@ export default function WalletModal(props: IWalletModalProps): React.ReactElemen
                 width={800}
                 footer={<></>}
             >
-                <WithMsgFeedBackForm operationType={props.operationType} closeModal= {onCancelHandler} />
+            <OperationForm operationType={props.operationType}/>
             </Modal>
 
         </ConfigProvider>
