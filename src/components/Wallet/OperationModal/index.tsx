@@ -1,6 +1,5 @@
 import React from 'react';
 import { Modal, Typography, ConfigProvider } from 'antd';
-import WithMsgFeedBackForm from './Form/WithMsgFeedBackForm';
 import OperationForm from './OperationForm';
 import { OperationType } from '../../../lib/types';
 

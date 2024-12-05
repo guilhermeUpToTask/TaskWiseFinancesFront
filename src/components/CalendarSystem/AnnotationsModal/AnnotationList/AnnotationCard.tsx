@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, ConfigProvider, Typography } from 'antd';
 import { Annotation, UpdateAnnotation } from "../../../../client/models/annotationModel";
-import { DeleteButton, EditButton } from "./AnotationCards/CardsActions";
+import { DeleteButton, EditButton } from "./CardsActions";
 import AnnotationBttn from "../../../commun/UI/Annotation/AnnotationBttn";
 import AnnotationStatus from "../../../commun/UI/Annotation/AnnotationStatus";
 import { AnnotationStatus as AnnotationStatusType } from "../../../../lib/types";

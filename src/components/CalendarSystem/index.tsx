@@ -9,6 +9,7 @@ import useDataQuery from '../../hooks/useDataQuery';
 import useOperationsByMonth from '../../hooks/useOperationsByMonth';
 import CalendarHeader from './CalendarHeader';
 import { Annotations } from '../../client/models/annotationModel';
+import OperationService from '../../client/services/operationService';
 
 
 
@@ -33,14 +34,22 @@ export default function CalendarSystem(): React.ReactElement {
     = useDataQuery(
       ['annotations', monthValue],
       () => AnnotationService.readAnnotationsByMonth({
-        year: monthValue.year(), month: monthValue.month()+1,
+        year: monthValue.year(), month: monthValue.month() + 1,
       })
     );
+
+  const { data: groupedOperations }
+    = useDataQuery(
+      ['operations', monthValue],
+      () => OperationService.readOperationsByMonth({
+        year: monthValue.year(), month: monthValue.month() + 1,
+      })
+    )
 
 
   //need to group the date of operations aswell
   //const { data: operationsData, isLoading: operationsIsLoading }
-    //= useOperationsByMonth(monthValue);
+  //= useOperationsByMonth(monthValue);
 
   const showModal = () => {
     setOpen(true);
@@ -68,19 +77,25 @@ export default function CalendarSystem(): React.ReactElement {
       return <Skeleton active paragraph={{ rows: 2 }} title={false} />;
     }
 
-
     const dateKey = date.format('YYYY-MM-DD');
-    const items = groupedAnnotations?.[dateKey] || []; // Access grouped data directly
+    
+    const annotationsFromDate = groupedAnnotations?.[dateKey] || []; // Access grouped data directly
+    const operationsFromDate = groupedOperations?.[dateKey] || [];
+
+    const hasAnnotations = annotationsFromDate.length > 0;
+    const hasOperations = operationsFromDate.length > 0;
 
     return (
       <div
         onClick={() => onCellClickHandler(date)}
       >
-        {items.length > 0 ? (
-          <Events itens={items} />
+        {hasAnnotations ? (
+          <Events itens={annotationsFromDate} />
         ) : (
           <span style={{ color: '#bfbfbf' }}>+ Add Annotation</span>
         )}
+        {hasOperations && <Events itens={operationsFromDate} />}
+
       </div>
     );
   };
@@ -101,7 +116,7 @@ export default function CalendarSystem(): React.ReactElement {
             />
         }
         cellRender={cellRender} />
-      <AnnotationsModal selectedDate={selectedDate} open={open} closeModal={closeModal} annotationsFromDate={groupedAnnotations?.[selectedDate.format('YYYY-MM-DD')]}/>
+      <AnnotationsModal selectedDate={selectedDate} open={open} closeModal={closeModal} annotationsFromDate={groupedAnnotations?.[selectedDate.format('YYYY-MM-DD')]} />
     </>
   )
 }

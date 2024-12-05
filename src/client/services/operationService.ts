@@ -1,4 +1,4 @@
-import { CreateOperation, Operation, Operations } from "../models/operationModel";
+import { CreateOperation, GroupedOperations, Operation, Operations } from "../models/operationModel";
 import axiosInstance from "../../axiosInstance"
 import { request as __request } from "../core/request"
 
@@ -32,7 +32,7 @@ export default class OperationService {
             }
         }, axiosInstance)
     }
-    public static readOperationsByMonth(data:TDataReadOperationsByMonth):Promise<Operations>{
+    public static readOperationsByMonth(data:TDataReadOperationsByMonth):Promise<GroupedOperations>{
         const { year, month } = data
        return __request({
             method:'GET',

@@ -1,8 +1,5 @@
 import React from 'react';
-import dayjs, { Dayjs } from 'dayjs';
 import { Typography } from 'antd';
-import WithMsgAnnCard from './AnotationCards/WithMsgAnnCard';
-import useAnnotationsByMonth from '../../../../hooks/useAnnotationsByMonth';
 import { Annotations } from '../../../../client/models/annotationModel';
 import AnnotationCard from './AnnotationCard';
 
