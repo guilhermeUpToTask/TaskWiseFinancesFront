@@ -24,6 +24,10 @@ export type TDataUpdateAnnotation = {
 export type TDataDeleteAnnotation = {
     id:number
 }
+export type TDataReadWarningAnnotation = {
+    time_interval: number
+}
+
 
 
 export default class AnnotationService {
@@ -85,4 +89,14 @@ export default class AnnotationService {
             query:{annotation_id}
         }, axiosInstance)
     }
+
+    public static readWarnings(data:TDataReadWarningAnnotation):Promise<Annotations>{
+        const {time_interval} = data
+        return __request({
+            method:'GET',
+            url:'/annotation/get_all_warnings',
+            query:{time_interval}
+        }, axiosInstance)
+    }
 }
+

@@ -1,36 +1,22 @@
 import React from 'react';
-import dayjs, { Dayjs } from 'dayjs';
 import WithMsgOperation from './Operation/WithMsgOperation';
+import OperationCard from './OperationCard';
 import { Typography } from 'antd';
-
-import useOperationsByMonth from '../../../../hooks/useOperationsByMonth';
+import { Operations } from '../../../../client/models/operationModel';
 
 const { Title } = Typography;
 
 interface OperationListProps {
-    seletectedDate: Dayjs;
-
+    operations: Operations
 }
 
 export default function OperationList(props: OperationListProps): React.ReactElement {
 
-    const { data: operations, isLoading, error } = useOperationsByMonth(props.seletectedDate);
-
 
     const displayOperations = () => {
-        if (isLoading) return <div>Loading...</div>
-        if (error) return <div>Error...</div>
-        if (!operations || operations.length <= 0) return <div>No operations found</div>
 
-        const filtheredOperations = operations.filter((operation) => {
-            return dayjs(operation.date).isSame(props.seletectedDate, 'day')
-        })
-
-        if (!filtheredOperations || filtheredOperations.length === 0) {
-            return <div>No operations for this Day</div>
-        }
-        return filtheredOperations.map((operation) => {
-            return (<WithMsgOperation operation={operation} key={operation.id} />)
+        return props.operations.map((operation) => {
+            return (<OperationCard operation={operation} key={operation.id} />)
         })
     }
 

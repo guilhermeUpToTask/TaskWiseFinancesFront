@@ -67,7 +67,7 @@ export default class OperationService {
             method:'DELETE',
             url:'/operation/delete',
             query:{
-                id
+                operation_id:id
             }
         }, axiosInstance)
     }

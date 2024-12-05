@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+/*import React, { useCallback, useState } from 'react';
 import dayjs from 'dayjs';
 import { calculateFutureMoney } from '../../services/annotations';
 import useWarningsByDate from '../../hooks/useWarningsByPredDate';
@@ -60,4 +60,4 @@ export default function MoneyPrediction(): React.ReactElement {
             />
         </section>
     )
-}
+} */

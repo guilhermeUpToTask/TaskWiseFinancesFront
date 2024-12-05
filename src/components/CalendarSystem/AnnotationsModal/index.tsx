@@ -5,6 +5,9 @@ import OperationList from './OperationList';
 import { Dayjs } from 'dayjs';
 import CreateAnnotationPanel from './CreateAnnotationPanel';
 import { Annotations } from '../../../client/models/annotationModel';
+import { Operations } from '../../../client/models/operationModel';
+
+//rewrite the filename to calendarcelllmodal to better meaning
 
 const { Title } = Typography;
 
@@ -13,6 +16,7 @@ interface IAnnotationModalProps {
   closeModal: () => void;
   selectedDate: Dayjs;
   annotationsFromDate: Annotations | undefined
+  operationsFromDate: Operations | undefined
 }
 
 export default function AnnotationModal(props: IAnnotationModalProps): React.ReactElement {
@@ -32,7 +36,7 @@ export default function AnnotationModal(props: IAnnotationModalProps): React.Rea
     >
       {props.annotationsFromDate ? <AnnotationList annotations={props.annotationsFromDate}/>: <>No Annotations</>}
       <CreateAnnotationPanel selectedDate={props?.selectedDate} />
-      <OperationList seletectedDate={props.selectedDate} />
+      {props.operationsFromDate? <OperationList operations={props.operationsFromDate} /> : <>No Operations</>}
 
 
     </Modal>

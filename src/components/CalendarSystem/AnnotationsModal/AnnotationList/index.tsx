@@ -16,17 +16,11 @@ export default function AnnotationList(props: IAnnotationListProps): React.React
 
 
     const displayAnotations = () => {
-
-        if (props.annotations.length === 0) {
-            return <div>No Annotations</div>
-        }
-        if (props.annotations.length > 0) {
-            return props.annotations.map(annotation => {
-                return <AnnotationCard
-                    annotation={annotation}
-                    key={annotation.id}/>
-            })
-        }
+        return props.annotations.map(annotation => {
+            return <AnnotationCard
+                annotation={annotation}
+                key={annotation.id} />
+        })
     }
 
     return (

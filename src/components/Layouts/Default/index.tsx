@@ -6,7 +6,7 @@ import Wallet from '../../Wallet';
 import { ConfigProvider } from 'antd';
 import { Outlet } from "react-router";
 import { MAIN_COLOR } from '../../../lib/constants/colors';
-import MoneyPrediction from '../../MoneyPrediction';
+//import MoneyPrediction from '../../MoneyPrediction';
 import NotificationButton from '../../NotificationModal/NotificationButton';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -35,7 +35,6 @@ export default function DefaultLayout(): React.ReactElement {
                     <div className="demo-logo" />
                     <NotificationButton/>
                     <Wallet />
-                    <MoneyPrediction/>
                     <UserAvatar />
                 </Header>
 

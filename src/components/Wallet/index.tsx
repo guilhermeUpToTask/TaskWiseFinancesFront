@@ -5,7 +5,8 @@ import MinusButton from './MinusButton';
 import PlusButton from './PlusButton';
 import OperationModal from './OperationModal';
 import { OperationType } from '../../lib/types';
-import useWalletQuery from '../../hooks/useWalletQuery';
+import WalletService from '../../client/services/walletService';
+import useDataQuery from '../../hooks/useDataQuery';
 
 const { Title } = Typography;
 
@@ -13,8 +14,7 @@ const { Title } = Typography;
 export default function Wallet(): React.ReactElement {
     const [showModal, setShowModal] = useState(false);
     const [operationType, setOperationType] = useState<OperationType>('income');
-
-    const { isLoading, error, data: wallet } = useWalletQuery();
+    const {data:wallet, isLoading, error} = useDataQuery('wallet',WalletService.readWallet)
 
     const closeModal = () => {
         setShowModal(false);

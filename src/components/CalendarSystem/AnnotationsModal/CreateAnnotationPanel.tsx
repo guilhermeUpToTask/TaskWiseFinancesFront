@@ -12,8 +12,6 @@ interface ICreateAnnotationPanelProps {
 export default function CreateAnnotationPanel(props: ICreateAnnotationPanelProps): React.ReactElement {
     return (
 
-        //another option is to just clear the form and show a succes message
-
         <Collapse size="large" >
             <Panel header="Create new Anotation for this Date" key="1" >
                 <CreateAnnotationForm selectedDate={props.selectedDate} />

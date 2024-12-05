@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 //import dayjs from 'dayjs';
 import List from './List';
 import { Space } from 'antd';
@@ -25,4 +25,4 @@ export default function Annotations(): React.ReactElement {
             <List annotations={annotationsData ? annotationsData : []} />
         </Space>
     )
-}
+}*/

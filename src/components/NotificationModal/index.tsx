@@ -1,108 +1,98 @@
-import React, { useEffect } from 'react';
-import { Typography, Modal, Button } from 'antd';
+import React from 'react';
+import { Typography, Modal, Button, Spin } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import WarningAnnotations from './WarningAnnotations';
-import useWarningsQuery from '../../hooks/useWarningsQuery';
-import ConnectWarningAnnotation from './WarningAnnotation/ConnectWarningAnnotation';
+import AnnotationList from '../CalendarSystem/AnnotationsModal/AnnotationList';
+import useDataQuery from '../../hooks/useDataQuery';
+import AnnotationService from '../../client/services/annotationService';
+import { WARNING_TIME_INTERVAL } from '../../lib/constants';
 
 const { Title } = Typography;
 
 interface INotificationModal {
     open: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function NotificationModal(props : INotificationModal): React.ReactElement {
-    const { data: warningList, isLoading, error } = useWarningsQuery();
+export default function NotificationModal(props: INotificationModal): React.ReactElement {
+    //const { data: warningList, isLoading, error } = useWarningsQuery();
+    const TdataWarnings = {time_interval:WARNING_TIME_INTERVAL}
 
+    const {data: warningList, isLoading, error} = useDataQuery(
+        ['warnings',TdataWarnings],
+        () => AnnotationService.readWarnings(TdataWarnings))
 
-    //need to refactor this useEffect later
-    useEffect(() => {
-        if (warningList && warningList.length > 0 && !isLoading) {
-            props.setOpen(true);
-        }
-    }, [isLoading, warningList]);
 
     const closeModal = () => {
         props.setOpen(false);
-    }
+    };
 
-    const displayWarningList = () => {
-        if (warningList && warningList.length > 1) {
+    const renderModalContent = () => {
+        if (isLoading) {
             return (
-                <WarningAnnotations warningList={(warningList) ? warningList : []} />
-            )
-        } else if (warningList && warningList.length === 1 && warningList[0]) {
-            return <ConnectWarningAnnotation annotation={warningList[0]} />
+                <div style={{ textAlign: 'center', padding: '20px' }}>
+                    <Spin size="large" />
+                </div>
+            );
         }
-    }
 
+        if (error) {
+            console.error(error);
+            return (
+                <>
+                    <Title level={3} style={{ textAlign: 'center' }}>
+                        ERROR While Loading Warnings!
+                    </Title>
+                </>
+            );
+        }
 
-    if (isLoading) {
-        return <></>;
-    }
-
-    if (!warningList || warningList.length === 0 && !warningList[0]) {
+        if (!warningList || warningList.length === 0) {
+            return (
+                <Title level={3} style={{ textAlign: 'center' }}>
+                    No Warnings for now
+                </Title>
+            );
+        }
 
         return (
-            <Modal
-                title={
-                    <Title level={2} style={{ textAlign: 'center' }}>
-                        NO WARNINGS FOR NOW!
-                    </Title>
-                }
-                open={props.open}
-                onCancel={closeModal}
-                onOk={closeModal}
-                width={1000}
-
-            >
-            </Modal>
-        )
-    }
-
-    if (error) {
-        console.error(error);
-
-        return (
-            <Modal
-                title={
-                    <Title level={2} style={{ textAlign: 'center' }}>
-                        ERROR WHILE LOADING THE WARNINGS!
-                    </Title>
-                }
-                open={props.open}
-                onCancel={closeModal}
-                onOk={closeModal}
-                width={1000}
-                footer={
-                    <Button size='large' shape='round' onClick={closeModal} icon={<ArrowRightOutlined />}>
-                        Skip
-                    </Button>
-                }
-            >
-            </Modal>)
-    }
-
-
+            <>
+                <Title level={3} style={{ textAlign: 'center' }}>
+                    These Annotations require your attention!
+                </Title>
+                <AnnotationList annotations={warningList} />
+            </>
+        );
+    };
 
     return (
         <Modal
             title={
                 <Title level={2} style={{ textAlign: 'center' }}>
-                    WARNING!
+                    {isLoading
+                        ? 'Loading...'
+                        : error
+                        ? 'ERROR!'
+                        : !warningList || warningList.length === 0
+                        ? 'No Warnings'
+                        : 'WARNING!'}
                 </Title>
             }
             open={props.open}
             onCancel={closeModal}
             onOk={closeModal}
             width={1000}
-            footer={<Button size='large' shape='round' onClick={closeModal} icon={<ArrowRightOutlined />}>Skip</Button>}
+            footer={
+                    <Button
+                        size="large"
+                        shape="round"
+                        onClick={closeModal}
+                        icon={<ArrowRightOutlined />}
+                    >
+                        Skip
+                    </Button>
+            }
         >
-            <Title level={3} style={{ textAlign: 'center' }}>
-                These Annotations require your attention!
-            </Title>
-            {displayWarningList()}
+            {renderModalContent()}
         </Modal>
-    )
+    );
 }

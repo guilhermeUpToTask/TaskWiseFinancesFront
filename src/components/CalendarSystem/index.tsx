@@ -3,12 +3,9 @@ import { Calendar, Skeleton } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import AnnotationsModal from './AnnotationsModal';
 import Events from './CellEvents';
-//import useAnnotationsByMonth from '../../hooks/useAnnotationsByMonth';
 import AnnotationService from '../../client/services/annotationService';
 import useDataQuery from '../../hooks/useDataQuery';
-import useOperationsByMonth from '../../hooks/useOperationsByMonth';
 import CalendarHeader from './CalendarHeader';
-import { Annotations } from '../../client/models/annotationModel';
 import OperationService from '../../client/services/operationService';
 
 
@@ -116,7 +113,13 @@ export default function CalendarSystem(): React.ReactElement {
             />
         }
         cellRender={cellRender} />
-      <AnnotationsModal selectedDate={selectedDate} open={open} closeModal={closeModal} annotationsFromDate={groupedAnnotations?.[selectedDate.format('YYYY-MM-DD')]} />
+      <AnnotationsModal 
+      selectedDate={selectedDate} 
+      open={open} 
+      closeModal={closeModal} 
+      annotationsFromDate={groupedAnnotations?.[selectedDate.format('YYYY-MM-DD')]} 
+      operationsFromDate={groupedOperations?.[selectedDate.format('YYYY-MM-DD')]}
+      />
     </>
   )
 }
