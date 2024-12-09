@@ -35,7 +35,7 @@ export default class AnnotationService {
         const { limit = 100, skip = 0 } = data
        return __request({
             method:'GET',
-            url:'/annotation/',
+            url:'/annotation/get_all',
             query:{
                 skip,
                 limit

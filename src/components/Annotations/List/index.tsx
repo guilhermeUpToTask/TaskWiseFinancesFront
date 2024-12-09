@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {Space, Table } from 'antd';
 import type { TableProps } from 'antd';
-import { Annotation, AnnotationWithKey } from "../../../lib/types";
+import type { Annotations, AnnotationWithKey } from "../../../client/models/annotationModel";
 import columnsFactory from "./columns";
 import ClearActions from "./Actions/ClearActions";
 import SelectedActions from "./Actions/SelectActions";
@@ -14,10 +14,10 @@ export type Sorts = GetSingle<Parameters<OnChange>[2]>;
 type TableRowSelection<T> = TableProps<T>['rowSelection'];
 
 interface IListProps {
-    annotations: Annotation[]
+    annotations: Annotations
 }
 
-function addKeyProperty(annotations: Annotation[]): AnnotationWithKey[] {
+function addKeyProperty(annotations: Annotations): AnnotationWithKey[] {
     return annotations.map(annotation => ({
         ...annotation,
         key: annotation.id,

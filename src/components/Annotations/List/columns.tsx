@@ -60,21 +60,21 @@ const columnsFactory = (filteredInfo: Filters, sortedInfo: Sorts)
             sortOrder: sortedInfo.columnKey === 'value' ? sortedInfo.order : null
         },
         {
-            key: 'annon_type',
+            key: 'type',
             title: 'Type',
-            dataIndex: 'annon_type',
-            filteredValue: filteredInfo.annon_type || null,
+            dataIndex: 'type',
+            filteredValue: filteredInfo.type || null,
             filters: annonTypeFilter,
-            onFilter: (value, record) => record.annon_type === value,
+            onFilter: (value, record) => record.type === value,
             sorter: {
-                compare: (a, b) => a.annon_type.length - b.annon_type.length,
+                compare: (a, b) => a.type.length - b.type.length,
                 multiple: 1
             },
-            sortOrder: sortedInfo.columnKey === 'annon_type' ? sortedInfo.order : null,
+            sortOrder: sortedInfo.columnKey === 'type' ? sortedInfo.order : null,
             render: (_: unknown, record: AnnotationWithKey) => {
                 return (
-                    <Tag color={'red'} key={record.annon_type}>
-                        {record.annon_type.toUpperCase()}
+                    <Tag color={'red'} key={record.type}>
+                        {record.type.toUpperCase()}
                     </Tag>
                 )
             }

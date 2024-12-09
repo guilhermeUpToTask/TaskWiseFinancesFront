@@ -1,4 +1,3 @@
-import Annotations from "../components/Annotations";
 import * as OPERATION_CONSTANTS from "./constants/walletOperations";
 
 export type OperationType = typeof OPERATION_CONSTANTS.INCOME_TYPE | typeof OPERATION_CONSTANTS.EXPANSE_TYPE;
