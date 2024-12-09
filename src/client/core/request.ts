@@ -22,8 +22,6 @@ const getUrl = (options: ApiRequestOptions): string => {
       }
       return substring
     })
-  console.log('url', options.url)
-  console.log(' url with path', urlWithPath)
   return options.query ? urlWithPath + getQueryString(options.query) : urlWithPath
 }
 
@@ -77,12 +75,9 @@ export const sendRequest = async <T>(
     method: options.method,
     url: url,
   }
-  console.log('INSIDE THE SENDREQUEST Function')
-  console.log('req config', requestConfig)
-  console.log('req options:', options)
+
   try {
     const result = axiosClient.request(requestConfig);
-    console.log('requesting...', result)
 
     return await result
   } catch (error) {
@@ -156,13 +151,10 @@ export const request = async <T>(
 ): Promise<T> => {
   const url = getUrl(options);
   const body = getRequestBody(options);
-  console.log('inside the REQUEST function')
 
   try {
     const response = await sendRequest<T>(options, url, body, axiosClient);
-    console.log('response:', response)
     const responseBody = getResponseBody(response);
-    console.log('response body', responseBody)
 
     const result: ApiResult = {
       url,
@@ -171,7 +163,6 @@ export const request = async <T>(
       statusText: response.statusText,
       body: responseBody,
     };
-    console.log('result:', result)
 
     //treat response errors code
     catchErrorCodes(options, result)

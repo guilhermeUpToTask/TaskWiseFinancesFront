@@ -1,5 +1,4 @@
 import React from 'react';
-import WithMsgOperation from './Operation/WithMsgOperation';
 import OperationCard from './OperationCard';
 import { Typography } from 'antd';
 import { Operations } from '../../../../client/models/operationModel';

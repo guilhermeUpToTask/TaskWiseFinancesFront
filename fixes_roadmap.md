@@ -38,7 +38,7 @@
 ## A Syntax error happened on prediction date on first login in the system
 ## Wallet get sum of the money on create payments
 ## When Wallet have 0 value does not calculate the predicton value - fixed
-## When Delete A Oendent Bill, its give monye to the wallet - fixed
+## When Delete A Pendent Bill, its give monye to the wallet - fixed
 ## Did not refetch the calculated value when add bills - fixed
 
 

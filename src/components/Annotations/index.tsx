@@ -1,8 +1,9 @@
-/*import React from 'react';
+import React from 'react';
 //import dayjs from 'dayjs';
 import List from './List';
 import { Space } from 'antd';
-import useAllAnnotations from '../../hooks/useAllAnnotations';
+import AnnotationService from '../../client/services/annotationService';
+import useDataQuery from '../../hooks/useDataQuery';
 
 
 //const currentDate = dayjs()
@@ -10,10 +11,13 @@ import useAllAnnotations from '../../hooks/useAllAnnotations';
 
 
 export default function Annotations(): React.ReactElement {
-    const { data: annotationsData, isLoading: annonIsLoading }
-        = useAllAnnotations();
 
-    if (annonIsLoading)
+    const { data: annotations, isLoading }
+    = useDataQuery(
+      ['annotations'],
+      () => AnnotationService.readAnnotations()
+    )
+    if (isLoading)
         return (
             <>
                 Annotation List is Loading
@@ -22,7 +26,7 @@ export default function Annotations(): React.ReactElement {
     return (
         <Space direction='vertical' align='center'>
             Annotations Page
-            <List annotations={annotationsData ? annotationsData : []} />
+            <List annotations={annotations ? annotations : []} />
         </Space>
     )
-}*/
+}

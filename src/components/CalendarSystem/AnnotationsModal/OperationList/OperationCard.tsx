@@ -22,7 +22,6 @@ export default function OperationCard(props: OperationCardProps): React.ReactEle
 
 
     const onDeleteHandler = () => {
-        console.log('delete operation');
         mutateDelete({id:props.operation.id})
 
     }

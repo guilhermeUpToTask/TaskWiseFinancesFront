@@ -23,8 +23,7 @@ interface IOperationFormProps {
 export default function OperationForm(props: IOperationFormProps): React.ReactElement {
     const [form] = Form.useForm();
     const { mutate, isLoading, isSuccess } = useMutationWithMessage<TDataCreateOperation, Operation>({
-        serviceFunction:OperationService.createOperation,
-        queryKey:'operations'
+        serviceFunction:OperationService.createOperation
     })
 
     const onReset = () => {

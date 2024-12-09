@@ -20,7 +20,6 @@ interface IAnnotationModalProps {
 }
 
 export default function AnnotationModal(props: IAnnotationModalProps): React.ReactElement {
-  console.log('new way',props.annotationsFromDate)
 
   return (
     <Modal

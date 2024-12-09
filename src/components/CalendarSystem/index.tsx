@@ -63,7 +63,6 @@ export default function CalendarSystem(): React.ReactElement {
   }
 
   const onCellClickHandler = (date: Dayjs) => {
-    console.log("clicked")
     setSelectedDate(date);
     showModal();
   }

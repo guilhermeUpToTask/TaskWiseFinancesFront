@@ -43,11 +43,12 @@ export const useMutationWithMessage = <TVariables, TData>(
             if (queryKey) {
               queryClient.refetchQueries(queryKey)
             }else{
+              console.log('refetching all queries')
               queryClient.refetchQueries()
             }
           },
           onError: (error) => {
-            console.log('errror')
+            console.log('error')
             if (loadingMessage) loadingMessage(); // Close the loading message
             message.error(
               typeof errorMessage === 'function' ? errorMessage(error) : errorMessage
